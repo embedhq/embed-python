@@ -1,6 +1,6 @@
 # Embed Python API library
 
-[![PyPI version](https://img.shields.io/pypi/v/embed.svg)](https://pypi.org/project/embed/)
+[![PyPI version](https://img.shields.io/pypi/v/embedhq.svg)](https://pypi.org/project/embedhq/)
 
 The Embed Python library provides convenient access to the Embed REST API from any Python 3.7+
 application. The library includes type definitions for all request params and response fields,
@@ -15,12 +15,12 @@ The REST API documentation can be found [on docs.useembed.com](https://docs.usee
 ## Installation
 
 ```sh
-# install from this staging repo
-pip install git+ssh://git@github.com/stainless-sdks/embed-python.git
+# install from the production repo
+pip install git+ssh://git@github.com/embedhq/embed-python.git
 ```
 
 > [!NOTE]
-> Once this package is [published to PyPI](https://app.stainlessapi.com/docs/guides/publish), this will become: `pip install --pre embed`
+> Once this package is [published to PyPI](https://app.stainlessapi.com/docs/guides/publish), this will become: `pip install --pre embedhq`
 
 ## Usage
 
@@ -28,7 +28,7 @@ The full API of this library can be found in [api.md](api.md).
 
 ```python
 import os
-from embed import Embed
+from embedhq import Embed
 
 client = Embed(
     # This is the default and can be omitted
@@ -53,7 +53,7 @@ Simply import `AsyncEmbed` instead of `Embed` and use `await` with each API call
 ```python
 import os
 import asyncio
-from embed import AsyncEmbed
+from embedhq import AsyncEmbed
 
 client = AsyncEmbed(
     # This is the default and can be omitted
@@ -84,16 +84,16 @@ Typed requests and responses provide autocomplete and documentation within your 
 
 ## Handling errors
 
-When the library is unable to connect to the API (for example, due to network connection problems or a timeout), a subclass of `embed.APIConnectionError` is raised.
+When the library is unable to connect to the API (for example, due to network connection problems or a timeout), a subclass of `embedhq.APIConnectionError` is raised.
 
 When the API returns a non-success status code (that is, 4xx or 5xx
-response), a subclass of `embed.APIStatusError` is raised, containing `status_code` and `response` properties.
+response), a subclass of `embedhq.APIStatusError` is raised, containing `status_code` and `response` properties.
 
-All errors inherit from `embed.APIError`.
+All errors inherit from `embedhq.APIError`.
 
 ```python
-import embed
-from embed import Embed
+import embedhq
+from embedhq import Embed
 
 client = Embed()
 
@@ -101,12 +101,12 @@ try:
     client.integrations.create(
         provider_key="github",
     )
-except embed.APIConnectionError as e:
+except embedhq.APIConnectionError as e:
     print("The server could not be reached")
     print(e.__cause__)  # an underlying Exception, likely raised within httpx.
-except embed.RateLimitError as e:
+except embedhq.RateLimitError as e:
     print("A 429 status code was received; we should back off a bit.")
-except embed.APIStatusError as e:
+except embedhq.APIStatusError as e:
     print("Another non-200-range status code was received")
     print(e.status_code)
     print(e.response)
@@ -134,7 +134,7 @@ Connection errors (for example, due to a network connectivity problem), 408 Requ
 You can use the `max_retries` option to configure or disable retry settings:
 
 ```python
-from embed import Embed
+from embedhq import Embed
 
 # Configure the default for all requests:
 client = Embed(
@@ -154,7 +154,7 @@ By default requests time out after 1 minute. You can configure this with a `time
 which accepts a float or an [`httpx.Timeout`](https://www.python-httpx.org/advanced/#fine-tuning-the-configuration) object:
 
 ```python
-from embed import Embed
+from embedhq import Embed
 
 # Configure the default for all requests:
 client = Embed(
@@ -206,7 +206,7 @@ if response.my_field is None:
 The "raw" Response object can be accessed by prefixing `.with_raw_response.` to any HTTP method call, e.g.,
 
 ```py
-from embed import Embed
+from embedhq import Embed
 
 client = Embed()
 response = client.integrations.with_raw_response.create(
@@ -218,9 +218,9 @@ integration = response.parse()  # get the object that `integrations.create()` wo
 print(integration.id)
 ```
 
-These methods return an [`APIResponse`](https://github.com/stainless-sdks/embed-python/tree/main/src/embed/_response.py) object.
+These methods return an [`APIResponse`](https://github.com/embedhq/embed-python/tree/main/src/embedhq/_response.py) object.
 
-The async client returns an [`AsyncAPIResponse`](https://github.com/stainless-sdks/embed-python/tree/main/src/embed/_response.py) with the same structure, the only difference being `await`able methods for reading the response content.
+The async client returns an [`AsyncAPIResponse`](https://github.com/embedhq/embed-python/tree/main/src/embedhq/_response.py) with the same structure, the only difference being `await`able methods for reading the response content.
 
 #### `.with_streaming_response`
 
@@ -284,7 +284,7 @@ You can directly override the [httpx client](https://www.python-httpx.org/api/#c
 - Additional [advanced](https://www.python-httpx.org/advanced/#client-instances) functionality
 
 ```python
-from embed import Embed, DefaultHttpxClient
+from embedhq import Embed, DefaultHttpxClient
 
 client = Embed(
     # Or use the `EMBED_BASE_URL` env var
@@ -310,7 +310,7 @@ This package generally follows [SemVer](https://semver.org/spec/v2.0.0.html) con
 
 We take backwards-compatibility seriously and work hard to ensure you can rely on a smooth upgrade experience.
 
-We are keen for your feedback; please open an [issue](https://www.github.com/stainless-sdks/embed-python/issues) with questions, bugs, or suggestions.
+We are keen for your feedback; please open an [issue](https://www.github.com/embedhq/embed-python/issues) with questions, bugs, or suggestions.
 
 ## Requirements
 

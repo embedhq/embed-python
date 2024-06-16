@@ -16,11 +16,16 @@ import pytest
 from respx import MockRouter
 from pydantic import ValidationError
 
-from embed import Embed, AsyncEmbed, APIResponseValidationError
-from embed._models import BaseModel, FinalRequestOptions
-from embed._constants import RAW_RESPONSE_HEADER
-from embed._exceptions import EmbedError, APIStatusError, APITimeoutError, APIResponseValidationError
-from embed._base_client import DEFAULT_TIMEOUT, HTTPX_DEFAULT_TIMEOUT, BaseClient, make_request_options
+from embedhq import Embed, AsyncEmbed, APIResponseValidationError
+from embedhq._models import BaseModel, FinalRequestOptions
+from embedhq._constants import RAW_RESPONSE_HEADER
+from embedhq._exceptions import EmbedError, APIStatusError, APITimeoutError, APIResponseValidationError
+from embedhq._base_client import (
+    DEFAULT_TIMEOUT,
+    HTTPX_DEFAULT_TIMEOUT,
+    BaseClient,
+    make_request_options,
+)
 
 from .utils import update_env
 
@@ -219,10 +224,10 @@ class TestEmbed:
                         # to_raw_response_wrapper leaks through the @functools.wraps() decorator.
                         #
                         # removing the decorator fixes the leak for reasons we don't understand.
-                        "embed/_legacy_response.py",
-                        "embed/_response.py",
+                        "embedhq/_legacy_response.py",
+                        "embedhq/_response.py",
                         # pydantic.BaseModel.model_dump || pydantic.BaseModel.dict leak memory for some reason.
-                        "embed/_compat.py",
+                        "embedhq/_compat.py",
                         # Standard library leaks we don't care about.
                         "/logging/__init__.py",
                     ]
@@ -694,7 +699,7 @@ class TestEmbed:
         calculated = client._calculate_retry_timeout(remaining_retries, options, headers)
         assert calculated == pytest.approx(timeout, 0.5 * 0.875)  # pyright: ignore[reportUnknownMemberType]
 
-    @mock.patch("embed._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
+    @mock.patch("embedhq._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     def test_retrying_timeout_errors_doesnt_leak(self, respx_mock: MockRouter) -> None:
         respx_mock.post("/integrations").mock(side_effect=httpx.TimeoutException("Test timeout error"))
@@ -709,7 +714,7 @@ class TestEmbed:
 
         assert _get_open_connections(self.client) == 0
 
-    @mock.patch("embed._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
+    @mock.patch("embedhq._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     def test_retrying_status_errors_doesnt_leak(self, respx_mock: MockRouter) -> None:
         respx_mock.post("/integrations").mock(return_value=httpx.Response(500))
@@ -900,10 +905,10 @@ class TestAsyncEmbed:
                         # to_raw_response_wrapper leaks through the @functools.wraps() decorator.
                         #
                         # removing the decorator fixes the leak for reasons we don't understand.
-                        "embed/_legacy_response.py",
-                        "embed/_response.py",
+                        "embedhq/_legacy_response.py",
+                        "embedhq/_response.py",
                         # pydantic.BaseModel.model_dump || pydantic.BaseModel.dict leak memory for some reason.
-                        "embed/_compat.py",
+                        "embedhq/_compat.py",
                         # Standard library leaks we don't care about.
                         "/logging/__init__.py",
                     ]
@@ -1389,7 +1394,7 @@ class TestAsyncEmbed:
         calculated = client._calculate_retry_timeout(remaining_retries, options, headers)
         assert calculated == pytest.approx(timeout, 0.5 * 0.875)  # pyright: ignore[reportUnknownMemberType]
 
-    @mock.patch("embed._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
+    @mock.patch("embedhq._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     async def test_retrying_timeout_errors_doesnt_leak(self, respx_mock: MockRouter) -> None:
         respx_mock.post("/integrations").mock(side_effect=httpx.TimeoutException("Test timeout error"))
@@ -1404,7 +1409,7 @@ class TestAsyncEmbed:
 
         assert _get_open_connections(self.client) == 0
 
-    @mock.patch("embed._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
+    @mock.patch("embedhq._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     async def test_retrying_status_errors_doesnt_leak(self, respx_mock: MockRouter) -> None:
         respx_mock.post("/integrations").mock(return_value=httpx.Response(500))

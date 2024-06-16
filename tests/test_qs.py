@@ -4,7 +4,7 @@ from urllib.parse import unquote
 
 import pytest
 
-from embed._qs import Querystring, stringify
+from embedhq._qs import Querystring, stringify
 
 
 def test_empty() -> None:

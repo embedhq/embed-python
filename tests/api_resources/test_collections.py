@@ -7,14 +7,14 @@ from typing import Any, cast
 
 import pytest
 
-from embed import Embed, AsyncEmbed
-from embed.types import (
+from embedhq import Embed, AsyncEmbed
+from tests.utils import assert_matches_type
+from embedhq.types import (
     Collection,
     CollectionListResponse,
     CollectionQueryResponse,
     CollectionDisableResponse,
 )
-from tests.utils import assert_matches_type
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 

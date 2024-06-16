@@ -1,5 +1,5 @@
 [project]
-name = "embed"
+name = "embedhq"
 version = "0.0.1-alpha.0"
 description = "The official Python library for the Embed API"
 dynamic = ["readme"]
@@ -39,8 +39,8 @@ classifiers = [
 
 
 [project.urls]
-Homepage = "https://github.com/stainless-sdks/embed-python"
-Repository = "https://github.com/stainless-sdks/embed-python"
+Homepage = "https://github.com/embedhq/embed-python"
+Repository = "https://github.com/embedhq/embed-python"
 
 
 
@@ -84,7 +84,7 @@ typecheck = { chain = [
   "typecheck:mypy"
 ]}
 "typecheck:pyright" = "pyright"
-"typecheck:verify-types" = "pyright --verifytypes embed --ignoreexternal"
+"typecheck:verify-types" = "pyright --verifytypes embedhq --ignoreexternal"
 "typecheck:mypy" = "mypy ."
 
 [build-system]
@@ -97,7 +97,7 @@ include = [
 ]
 
 [tool.hatch.build.targets.wheel]
-packages = ["src/embed"]
+packages = ["src/embedhq"]
 
 [tool.hatch.metadata.hooks.fancy-pypi-readme]
 content-type = "text/markdown"
@@ -108,7 +108,7 @@ path = "README.md"
 [[tool.hatch.metadata.hooks.fancy-pypi-readme.substitutions]]
 # replace relative links with absolute links
 pattern = '\[(.+?)\]\(((?!https?://)\S+?)\)'
-replacement = '[\1](https://github.com/stainless-sdks/embed-python/tree/main/\g<2>)'
+replacement = '[\1](https://github.com/embedhq/embed-python/tree/main/\g<2>)'
 
 [tool.black]
 line-length = 120
@@ -187,7 +187,7 @@ length-sort = true
 length-sort-straight = true
 combine-as-imports = true
 extra-standard-library = ["typing_extensions"]
-known-first-party = ["embed", "tests"]
+known-first-party = ["embedhq", "tests"]
 
 [tool.ruff.per-file-ignores]
 "bin/**.py" = ["T201", "T203"]
