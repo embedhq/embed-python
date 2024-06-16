@@ -7,14 +7,14 @@ from typing import TYPE_CHECKING, Iterator, AsyncIterator
 
 import pytest
 
-from embed import Embed, AsyncEmbed
+from embedhq import Embed, AsyncEmbed
 
 if TYPE_CHECKING:
     from _pytest.fixtures import FixtureRequest
 
 pytest.register_assert_rewrite("tests.utils")
 
-logging.getLogger("embed").setLevel(logging.DEBUG)
+logging.getLogger("embedhq").setLevel(logging.DEBUG)
 
 
 @pytest.fixture(scope="session")

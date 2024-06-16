@@ -7,9 +7,9 @@ import pytest
 import pydantic
 from pydantic import Field
 
-from embed._utils import PropertyInfo
-from embed._compat import PYDANTIC_V2, parse_obj, model_dump, model_json
-from embed._models import BaseModel, construct_type
+from embedhq._utils import PropertyInfo
+from embedhq._compat import PYDANTIC_V2, parse_obj, model_dump, model_json
+from embedhq._models import BaseModel, construct_type
 
 
 class BasicModel(BaseModel):

@@ -7,9 +7,9 @@ from typing import Any, cast
 
 import pytest
 
-from embed import Embed, AsyncEmbed
+from embedhq import Embed, AsyncEmbed
 from tests.utils import assert_matches_type
-from embed.types.collections import CollectionSchema, SchemaListResponse
+from embedhq.types.collections import CollectionSchema, SchemaListResponse
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 

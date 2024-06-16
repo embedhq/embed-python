@@ -5,8 +5,8 @@ from typing import Iterator, AsyncIterator
 import httpx
 import pytest
 
-from embed import Embed, AsyncEmbed
-from embed._streaming import Stream, AsyncStream, ServerSentEvent
+from embedhq import Embed, AsyncEmbed
+from embedhq._streaming import Stream, AsyncStream, ServerSentEvent
 
 
 @pytest.mark.asyncio

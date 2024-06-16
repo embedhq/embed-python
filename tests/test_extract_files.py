@@ -4,8 +4,8 @@ from typing import Sequence
 
 import pytest
 
-from embed._types import FileTypes
-from embed._utils import extract_files
+from embedhq._types import FileTypes
+from embedhq._utils import extract_files
 
 
 def test_removes_files_from_input() -> None:

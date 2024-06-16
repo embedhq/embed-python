@@ -8,15 +8,15 @@ from typing_extensions import Required, Annotated, TypedDict
 
 import pytest
 
-from embed._types import Base64FileInput
-from embed._utils import (
+from embedhq._types import Base64FileInput
+from embedhq._utils import (
     PropertyInfo,
     transform as _transform,
     parse_datetime,
     async_transform as _async_transform,
 )
-from embed._compat import PYDANTIC_V2
-from embed._models import BaseModel
+from embedhq._compat import PYDANTIC_V2
+from embedhq._models import BaseModel
 
 _T = TypeVar("_T")
 
