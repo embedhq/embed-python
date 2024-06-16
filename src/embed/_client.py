@@ -59,12 +59,12 @@ class Embed(SyncAPIClient):
     with_streaming_response: EmbedWithStreamedResponse
 
     # client options
-    bearer_token: str
+    api_key: str
 
     def __init__(
         self,
         *,
-        bearer_token: str | None = None,
+        api_key: str | None = None,
         base_url: str | httpx.URL | None = None,
         timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
         max_retries: int = DEFAULT_MAX_RETRIES,
@@ -86,15 +86,15 @@ class Embed(SyncAPIClient):
     ) -> None:
         """Construct a new synchronous Embed client instance.
 
-        This automatically infers the `bearer_token` argument from the `EMBED_BEARER_TOKEN` environment variable if it is not provided.
+        This automatically infers the `api_key` argument from the `EMBED_API_KEY` environment variable if it is not provided.
         """
-        if bearer_token is None:
-            bearer_token = os.environ.get("EMBED_BEARER_TOKEN")
-        if bearer_token is None:
+        if api_key is None:
+            api_key = os.environ.get("EMBED_API_KEY")
+        if api_key is None:
             raise EmbedError(
-                "The bearer_token client option must be set either by passing bearer_token to the client or by setting the EMBED_BEARER_TOKEN environment variable"
+                "The api_key client option must be set either by passing api_key to the client or by setting the EMBED_API_KEY environment variable"
             )
-        self.bearer_token = bearer_token
+        self.api_key = api_key
 
         if base_url is None:
             base_url = os.environ.get("EMBED_BASE_URL")
@@ -132,8 +132,8 @@ class Embed(SyncAPIClient):
     @property
     @override
     def auth_headers(self) -> dict[str, str]:
-        bearer_token = self.bearer_token
-        return {"Authorization": f"Bearer {bearer_token}"}
+        api_key = self.api_key
+        return {"Authorization": f"Bearer {api_key}"}
 
     @property
     @override
@@ -147,7 +147,7 @@ class Embed(SyncAPIClient):
     def copy(
         self,
         *,
-        bearer_token: str | None = None,
+        api_key: str | None = None,
         base_url: str | httpx.URL | None = None,
         timeout: float | Timeout | None | NotGiven = NOT_GIVEN,
         http_client: httpx.Client | None = None,
@@ -181,7 +181,7 @@ class Embed(SyncAPIClient):
 
         http_client = http_client or self._client
         return self.__class__(
-            bearer_token=bearer_token or self.bearer_token,
+            api_key=api_key or self.api_key,
             base_url=base_url or self.base_url,
             timeout=self.timeout if isinstance(timeout, NotGiven) else timeout,
             http_client=http_client,
@@ -243,12 +243,12 @@ class AsyncEmbed(AsyncAPIClient):
     with_streaming_response: AsyncEmbedWithStreamedResponse
 
     # client options
-    bearer_token: str
+    api_key: str
 
     def __init__(
         self,
         *,
-        bearer_token: str | None = None,
+        api_key: str | None = None,
         base_url: str | httpx.URL | None = None,
         timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
         max_retries: int = DEFAULT_MAX_RETRIES,
@@ -270,15 +270,15 @@ class AsyncEmbed(AsyncAPIClient):
     ) -> None:
         """Construct a new async Embed client instance.
 
-        This automatically infers the `bearer_token` argument from the `EMBED_BEARER_TOKEN` environment variable if it is not provided.
+        This automatically infers the `api_key` argument from the `EMBED_API_KEY` environment variable if it is not provided.
         """
-        if bearer_token is None:
-            bearer_token = os.environ.get("EMBED_BEARER_TOKEN")
-        if bearer_token is None:
+        if api_key is None:
+            api_key = os.environ.get("EMBED_API_KEY")
+        if api_key is None:
             raise EmbedError(
-                "The bearer_token client option must be set either by passing bearer_token to the client or by setting the EMBED_BEARER_TOKEN environment variable"
+                "The api_key client option must be set either by passing api_key to the client or by setting the EMBED_API_KEY environment variable"
             )
-        self.bearer_token = bearer_token
+        self.api_key = api_key
 
         if base_url is None:
             base_url = os.environ.get("EMBED_BASE_URL")
@@ -316,8 +316,8 @@ class AsyncEmbed(AsyncAPIClient):
     @property
     @override
     def auth_headers(self) -> dict[str, str]:
-        bearer_token = self.bearer_token
-        return {"Authorization": f"Bearer {bearer_token}"}
+        api_key = self.api_key
+        return {"Authorization": f"Bearer {api_key}"}
 
     @property
     @override
@@ -331,7 +331,7 @@ class AsyncEmbed(AsyncAPIClient):
     def copy(
         self,
         *,
-        bearer_token: str | None = None,
+        api_key: str | None = None,
         base_url: str | httpx.URL | None = None,
         timeout: float | Timeout | None | NotGiven = NOT_GIVEN,
         http_client: httpx.AsyncClient | None = None,
@@ -365,7 +365,7 @@ class AsyncEmbed(AsyncAPIClient):
 
         http_client = http_client or self._client
         return self.__class__(
-            bearer_token=bearer_token or self.bearer_token,
+            api_key=api_key or self.api_key,
             base_url=base_url or self.base_url,
             timeout=self.timeout if isinstance(timeout, NotGiven) else timeout,
             http_client=http_client,
