@@ -32,7 +32,7 @@ from embed import Embed
 
 client = Embed(
     # This is the default and can be omitted
-    bearer_token=os.environ.get("EMBED_BEARER_TOKEN"),
+    api_key=os.environ.get("EMBED_API_KEY"),
 )
 
 integration = client.integrations.create(
@@ -41,10 +41,10 @@ integration = client.integrations.create(
 print(integration.id)
 ```
 
-While you can provide a `bearer_token` keyword argument,
+While you can provide an `api_key` keyword argument,
 we recommend using [python-dotenv](https://pypi.org/project/python-dotenv/)
-to add `EMBED_BEARER_TOKEN="My Bearer Token"` to your `.env` file
-so that your Bearer Token is not stored in source control.
+to add `EMBED_API_KEY="My API Key"` to your `.env` file
+so that your API Key is not stored in source control.
 
 ## Async usage
 
@@ -57,7 +57,7 @@ from embed import AsyncEmbed
 
 client = AsyncEmbed(
     # This is the default and can be omitted
-    bearer_token=os.environ.get("EMBED_BEARER_TOKEN"),
+    api_key=os.environ.get("EMBED_API_KEY"),
 )
 
 
