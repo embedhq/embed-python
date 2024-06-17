@@ -41,7 +41,6 @@ from ..._base_client import (
 from ...types.action import Action
 from ...types.action_list_response import ActionListResponse
 from ...types.actions.action_schema import ActionSchema
-from ...types.action_disable_response import ActionDisableResponse
 from ...types.action_trigger_response import ActionTriggerResponse
 
 __all__ = ["ActionsResource", "AsyncActionsResource"]
@@ -148,7 +147,7 @@ class ActionsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ActionDisableResponse:
+    ) -> Action:
         """
         Disables an action.
 
@@ -174,7 +173,7 @@ class ActionsResource(SyncAPIResource):
                 timeout=timeout,
                 query=maybe_transform({"integration_id": integration_id}, action_disable_params.ActionDisableParams),
             ),
-            cast_to=ActionDisableResponse,
+            cast_to=Action,
         )
 
     def enable(
@@ -416,7 +415,7 @@ class AsyncActionsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ActionDisableResponse:
+    ) -> Action:
         """
         Disables an action.
 
@@ -444,7 +443,7 @@ class AsyncActionsResource(AsyncAPIResource):
                     {"integration_id": integration_id}, action_disable_params.ActionDisableParams
                 ),
             ),
-            cast_to=ActionDisableResponse,
+            cast_to=Action,
         )
 
     async def enable(

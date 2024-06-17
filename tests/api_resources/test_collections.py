@@ -13,7 +13,6 @@ from embedhq.types import (
     Collection,
     CollectionListResponse,
     CollectionQueryResponse,
-    CollectionDisableResponse,
 )
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
@@ -155,7 +154,7 @@ class TestCollections:
             "issues",
             integration_id="github-123",
         )
-        assert_matches_type(CollectionDisableResponse, collection, path=["response"])
+        assert_matches_type(Collection, collection, path=["response"])
 
     @parametrize
     def test_raw_response_disable(self, client: Embed) -> None:
@@ -167,7 +166,7 @@ class TestCollections:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         collection = response.parse()
-        assert_matches_type(CollectionDisableResponse, collection, path=["response"])
+        assert_matches_type(Collection, collection, path=["response"])
 
     @parametrize
     def test_streaming_response_disable(self, client: Embed) -> None:
@@ -179,7 +178,7 @@ class TestCollections:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             collection = response.parse()
-            assert_matches_type(CollectionDisableResponse, collection, path=["response"])
+            assert_matches_type(Collection, collection, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -432,7 +431,7 @@ class TestAsyncCollections:
             "issues",
             integration_id="github-123",
         )
-        assert_matches_type(CollectionDisableResponse, collection, path=["response"])
+        assert_matches_type(Collection, collection, path=["response"])
 
     @parametrize
     async def test_raw_response_disable(self, async_client: AsyncEmbed) -> None:
@@ -444,7 +443,7 @@ class TestAsyncCollections:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         collection = await response.parse()
-        assert_matches_type(CollectionDisableResponse, collection, path=["response"])
+        assert_matches_type(Collection, collection, path=["response"])
 
     @parametrize
     async def test_streaming_response_disable(self, async_client: AsyncEmbed) -> None:
@@ -456,7 +455,7 @@ class TestAsyncCollections:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             collection = await response.parse()
-            assert_matches_type(CollectionDisableResponse, collection, path=["response"])
+            assert_matches_type(Collection, collection, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
