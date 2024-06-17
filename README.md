@@ -15,12 +15,9 @@ The REST API documentation can be found [on docs.useembed.com](https://docs.usee
 ## Installation
 
 ```sh
-# install from the production repo
-pip install git+ssh://git@github.com/embedhq/embed-python.git
+# install from PyPI
+pip install --pre embedhq
 ```
-
-> [!NOTE]
-> Once this package is [published to PyPI](https://app.stainlessapi.com/docs/guides/publish), this will become: `pip install --pre embedhq`
 
 ## Usage
 
