@@ -42,7 +42,6 @@ from ..._base_client import (
 from ...types.collection import Collection
 from ...types.collection_list_response import CollectionListResponse
 from ...types.collection_query_response import CollectionQueryResponse
-from ...types.collection_disable_response import CollectionDisableResponse
 
 __all__ = ["CollectionsResource", "AsyncCollectionsResource"]
 
@@ -214,7 +213,7 @@ class CollectionsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> CollectionDisableResponse:
+    ) -> Collection:
         """
         Disables a collection.
 
@@ -242,7 +241,7 @@ class CollectionsResource(SyncAPIResource):
                     {"integration_id": integration_id}, collection_disable_params.CollectionDisableParams
                 ),
             ),
-            cast_to=CollectionDisableResponse,
+            cast_to=Collection,
         )
 
     def enable(
@@ -541,7 +540,7 @@ class AsyncCollectionsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> CollectionDisableResponse:
+    ) -> Collection:
         """
         Disables a collection.
 
@@ -569,7 +568,7 @@ class AsyncCollectionsResource(AsyncAPIResource):
                     {"integration_id": integration_id}, collection_disable_params.CollectionDisableParams
                 ),
             ),
-            cast_to=CollectionDisableResponse,
+            cast_to=Collection,
         )
 
     async def enable(

@@ -13,7 +13,6 @@ from embedhq.types import (
     Integration,
     IntegrationListResponse,
     IntegrationDeleteResponse,
-    IntegrationDisableResponse,
 )
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
@@ -231,7 +230,7 @@ class TestIntegrations:
         integration = client.integrations.disable(
             "github-123",
         )
-        assert_matches_type(IntegrationDisableResponse, integration, path=["response"])
+        assert_matches_type(Integration, integration, path=["response"])
 
     @parametrize
     def test_raw_response_disable(self, client: Embed) -> None:
@@ -242,7 +241,7 @@ class TestIntegrations:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         integration = response.parse()
-        assert_matches_type(IntegrationDisableResponse, integration, path=["response"])
+        assert_matches_type(Integration, integration, path=["response"])
 
     @parametrize
     def test_streaming_response_disable(self, client: Embed) -> None:
@@ -253,7 +252,7 @@ class TestIntegrations:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             integration = response.parse()
-            assert_matches_type(IntegrationDisableResponse, integration, path=["response"])
+            assert_matches_type(Integration, integration, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -515,7 +514,7 @@ class TestAsyncIntegrations:
         integration = await async_client.integrations.disable(
             "github-123",
         )
-        assert_matches_type(IntegrationDisableResponse, integration, path=["response"])
+        assert_matches_type(Integration, integration, path=["response"])
 
     @parametrize
     async def test_raw_response_disable(self, async_client: AsyncEmbed) -> None:
@@ -526,7 +525,7 @@ class TestAsyncIntegrations:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         integration = await response.parse()
-        assert_matches_type(IntegrationDisableResponse, integration, path=["response"])
+        assert_matches_type(Integration, integration, path=["response"])
 
     @parametrize
     async def test_streaming_response_disable(self, async_client: AsyncEmbed) -> None:
@@ -537,7 +536,7 @@ class TestAsyncIntegrations:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             integration = await response.parse()
-            assert_matches_type(IntegrationDisableResponse, integration, path=["response"])
+            assert_matches_type(Integration, integration, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 

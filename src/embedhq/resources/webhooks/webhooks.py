@@ -34,7 +34,6 @@ from ..._base_client import (
 from ...types.webhook import Webhook
 from ...types.webhook_list_response import WebhookListResponse
 from ...types.webhook_delete_response import WebhookDeleteResponse
-from ...types.webhook_disable_response import WebhookDisableResponse
 
 __all__ = ["WebhooksResource", "AsyncWebhooksResource"]
 
@@ -236,7 +235,7 @@ class WebhooksResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> WebhookDisableResponse:
+    ) -> Webhook:
         """
         Disables a webhook.
 
@@ -256,7 +255,7 @@ class WebhooksResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=WebhookDisableResponse,
+            cast_to=Webhook,
         )
 
     def enable(
@@ -490,7 +489,7 @@ class AsyncWebhooksResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> WebhookDisableResponse:
+    ) -> Webhook:
         """
         Disables a webhook.
 
@@ -510,7 +509,7 @@ class AsyncWebhooksResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=WebhookDisableResponse,
+            cast_to=Webhook,
         )
 
     async def enable(
