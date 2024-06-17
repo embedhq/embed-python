@@ -12,7 +12,6 @@ from tests.utils import assert_matches_type
 from embedhq.types import (
     Action,
     ActionListResponse,
-    ActionDisableResponse,
     ActionTriggerResponse,
 )
 from embedhq.types.actions import ActionSchema
@@ -102,7 +101,7 @@ class TestActions:
             "create-issue",
             integration_id="github-123",
         )
-        assert_matches_type(ActionDisableResponse, action, path=["response"])
+        assert_matches_type(Action, action, path=["response"])
 
     @parametrize
     def test_raw_response_disable(self, client: Embed) -> None:
@@ -114,7 +113,7 @@ class TestActions:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         action = response.parse()
-        assert_matches_type(ActionDisableResponse, action, path=["response"])
+        assert_matches_type(Action, action, path=["response"])
 
     @parametrize
     def test_streaming_response_disable(self, client: Embed) -> None:
@@ -126,7 +125,7 @@ class TestActions:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             action = response.parse()
-            assert_matches_type(ActionDisableResponse, action, path=["response"])
+            assert_matches_type(Action, action, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -367,7 +366,7 @@ class TestAsyncActions:
             "create-issue",
             integration_id="github-123",
         )
-        assert_matches_type(ActionDisableResponse, action, path=["response"])
+        assert_matches_type(Action, action, path=["response"])
 
     @parametrize
     async def test_raw_response_disable(self, async_client: AsyncEmbed) -> None:
@@ -379,7 +378,7 @@ class TestAsyncActions:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         action = await response.parse()
-        assert_matches_type(ActionDisableResponse, action, path=["response"])
+        assert_matches_type(Action, action, path=["response"])
 
     @parametrize
     async def test_streaming_response_disable(self, async_client: AsyncEmbed) -> None:
@@ -391,7 +390,7 @@ class TestAsyncActions:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             action = await response.parse()
-            assert_matches_type(ActionDisableResponse, action, path=["response"])
+            assert_matches_type(Action, action, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 

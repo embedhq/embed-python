@@ -13,7 +13,6 @@ from embedhq.types import (
     Webhook,
     WebhookListResponse,
     WebhookDeleteResponse,
-    WebhookDisableResponse,
 )
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
@@ -209,7 +208,7 @@ class TestWebhooks:
         webhook = client.webhooks.disable(
             "webhook-123",
         )
-        assert_matches_type(WebhookDisableResponse, webhook, path=["response"])
+        assert_matches_type(Webhook, webhook, path=["response"])
 
     @parametrize
     def test_raw_response_disable(self, client: Embed) -> None:
@@ -220,7 +219,7 @@ class TestWebhooks:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         webhook = response.parse()
-        assert_matches_type(WebhookDisableResponse, webhook, path=["response"])
+        assert_matches_type(Webhook, webhook, path=["response"])
 
     @parametrize
     def test_streaming_response_disable(self, client: Embed) -> None:
@@ -231,7 +230,7 @@ class TestWebhooks:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             webhook = response.parse()
-            assert_matches_type(WebhookDisableResponse, webhook, path=["response"])
+            assert_matches_type(Webhook, webhook, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -471,7 +470,7 @@ class TestAsyncWebhooks:
         webhook = await async_client.webhooks.disable(
             "webhook-123",
         )
-        assert_matches_type(WebhookDisableResponse, webhook, path=["response"])
+        assert_matches_type(Webhook, webhook, path=["response"])
 
     @parametrize
     async def test_raw_response_disable(self, async_client: AsyncEmbed) -> None:
@@ -482,7 +481,7 @@ class TestAsyncWebhooks:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         webhook = await response.parse()
-        assert_matches_type(WebhookDisableResponse, webhook, path=["response"])
+        assert_matches_type(Webhook, webhook, path=["response"])
 
     @parametrize
     async def test_streaming_response_disable(self, async_client: AsyncEmbed) -> None:
@@ -493,7 +492,7 @@ class TestAsyncWebhooks:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             webhook = await response.parse()
-            assert_matches_type(WebhookDisableResponse, webhook, path=["response"])
+            assert_matches_type(Webhook, webhook, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 

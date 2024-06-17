@@ -37,7 +37,6 @@ from .action_retrieve_params import ActionRetrieveParams as ActionRetrieveParams
 from .collection_list_params import CollectionListParams as CollectionListParams
 from .connection_list_params import ConnectionListParams as ConnectionListParams
 from .provider_list_response import ProviderListResponse as ProviderListResponse
-from .action_disable_response import ActionDisableResponse as ActionDisableResponse
 from .action_trigger_response import ActionTriggerResponse as ActionTriggerResponse
 from .collection_query_params import CollectionQueryParams as CollectionQueryParams
 from .integration_list_params import IntegrationListParams as IntegrationListParams
@@ -49,7 +48,6 @@ from .connection_delete_params import ConnectionDeleteParams as ConnectionDelete
 from .connection_list_response import ConnectionListResponse as ConnectionListResponse
 from .connection_update_params import ConnectionUpdateParams as ConnectionUpdateParams
 from .connection_upsert_params import ConnectionUpsertParams as ConnectionUpsertParams
-from .webhook_disable_response import WebhookDisableResponse as WebhookDisableResponse
 from .collection_disable_params import CollectionDisableParams as CollectionDisableParams
 from .collection_query_response import CollectionQueryResponse as CollectionQueryResponse
 from .integration_create_params import IntegrationCreateParams as IntegrationCreateParams
@@ -59,9 +57,7 @@ from .collection_retrieve_params import CollectionRetrieveParams as CollectionRe
 from .connection_delete_response import ConnectionDeleteResponse as ConnectionDeleteResponse
 from .connection_retrieve_params import ConnectionRetrieveParams as ConnectionRetrieveParams
 from .connection_update_response import ConnectionUpdateResponse as ConnectionUpdateResponse
-from .collection_disable_response import CollectionDisableResponse as CollectionDisableResponse
 from .integration_delete_response import IntegrationDeleteResponse as IntegrationDeleteResponse
 from .session_token_create_params import SessionTokenCreateParams as SessionTokenCreateParams
 from .session_token_list_response import SessionTokenListResponse as SessionTokenListResponse
-from .integration_disable_response import IntegrationDisableResponse as IntegrationDisableResponse
 from .session_token_delete_response import SessionTokenDeleteResponse as SessionTokenDeleteResponse

@@ -27,7 +27,6 @@ from .._base_client import (
 from ..types.integration import Integration
 from ..types.integration_list_response import IntegrationListResponse
 from ..types.integration_delete_response import IntegrationDeleteResponse
-from ..types.integration_disable_response import IntegrationDisableResponse
 
 __all__ = ["IntegrationsResource", "AsyncIntegrationsResource"]
 
@@ -297,7 +296,7 @@ class IntegrationsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> IntegrationDisableResponse:
+    ) -> Integration:
         """
         Disables an integration.
 
@@ -317,7 +316,7 @@ class IntegrationsResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=IntegrationDisableResponse,
+            cast_to=Integration,
         )
 
     def enable(
@@ -619,7 +618,7 @@ class AsyncIntegrationsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> IntegrationDisableResponse:
+    ) -> Integration:
         """
         Disables an integration.
 
@@ -639,7 +638,7 @@ class AsyncIntegrationsResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=IntegrationDisableResponse,
+            cast_to=Integration,
         )
 
     async def enable(
