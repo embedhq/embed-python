@@ -3,12 +3,7 @@
 Types:
 
 ```python
-from embedhq.types import (
-    Integration,
-    IntegrationListResponse,
-    IntegrationDeleteResponse,
-    IntegrationDisableResponse,
-)
+from embedhq.types import Integration, IntegrationListResponse, IntegrationDeleteResponse
 ```
 
 Methods:
@@ -18,7 +13,7 @@ Methods:
 - <code title="put /integrations/{integration_id}">client.integrations.<a href="./src/embedhq/resources/integrations.py">update</a>(integration_id, \*\*<a href="src/embedhq/types/integration_update_params.py">params</a>) -> <a href="./src/embedhq/types/integration.py">Integration</a></code>
 - <code title="get /integrations">client.integrations.<a href="./src/embedhq/resources/integrations.py">list</a>(\*\*<a href="src/embedhq/types/integration_list_params.py">params</a>) -> <a href="./src/embedhq/types/integration_list_response.py">IntegrationListResponse</a></code>
 - <code title="delete /integrations/{integration_id}">client.integrations.<a href="./src/embedhq/resources/integrations.py">delete</a>(integration_id) -> <a href="./src/embedhq/types/integration_delete_response.py">IntegrationDeleteResponse</a></code>
-- <code title="post /integrations/{integration_id}/disable">client.integrations.<a href="./src/embedhq/resources/integrations.py">disable</a>(integration_id) -> <a href="./src/embedhq/types/integration_disable_response.py">IntegrationDisableResponse</a></code>
+- <code title="post /integrations/{integration_id}/disable">client.integrations.<a href="./src/embedhq/resources/integrations.py">disable</a>(integration_id) -> <a href="./src/embedhq/types/integration.py">Integration</a></code>
 - <code title="post /integrations/{integration_id}/enable">client.integrations.<a href="./src/embedhq/resources/integrations.py">enable</a>(integration_id) -> <a href="./src/embedhq/types/integration.py">Integration</a></code>
 
 # Connections
@@ -75,12 +70,7 @@ Methods:
 Types:
 
 ```python
-from embedhq.types import (
-    Collection,
-    CollectionListResponse,
-    CollectionDisableResponse,
-    CollectionQueryResponse,
-)
+from embedhq.types import Collection, CollectionListResponse, CollectionQueryResponse
 ```
 
 Methods:
@@ -88,7 +78,7 @@ Methods:
 - <code title="get /collections/{collection_key}">client.collections.<a href="./src/embedhq/resources/collections/collections.py">retrieve</a>(collection_key, \*\*<a href="src/embedhq/types/collection_retrieve_params.py">params</a>) -> <a href="./src/embedhq/types/collection.py">Collection</a></code>
 - <code title="put /collections/{collection_key}">client.collections.<a href="./src/embedhq/resources/collections/collections.py">update</a>(collection_key, \*\*<a href="src/embedhq/types/collection_update_params.py">params</a>) -> <a href="./src/embedhq/types/collection.py">Collection</a></code>
 - <code title="get /collections">client.collections.<a href="./src/embedhq/resources/collections/collections.py">list</a>(\*\*<a href="src/embedhq/types/collection_list_params.py">params</a>) -> <a href="./src/embedhq/types/collection_list_response.py">CollectionListResponse</a></code>
-- <code title="post /collections/{collection_key}/disable">client.collections.<a href="./src/embedhq/resources/collections/collections.py">disable</a>(collection_key, \*\*<a href="src/embedhq/types/collection_disable_params.py">params</a>) -> <a href="./src/embedhq/types/collection_disable_response.py">CollectionDisableResponse</a></code>
+- <code title="post /collections/{collection_key}/disable">client.collections.<a href="./src/embedhq/resources/collections/collections.py">disable</a>(collection_key, \*\*<a href="src/embedhq/types/collection_disable_params.py">params</a>) -> <a href="./src/embedhq/types/collection.py">Collection</a></code>
 - <code title="post /collections/{collection_key}/enable">client.collections.<a href="./src/embedhq/resources/collections/collections.py">enable</a>(collection_key, \*\*<a href="src/embedhq/types/collection_enable_params.py">params</a>) -> <a href="./src/embedhq/types/collection.py">Collection</a></code>
 - <code title="post /collections/{collection_key}/query">client.collections.<a href="./src/embedhq/resources/collections/collections.py">query</a>(collection_key, \*\*<a href="src/embedhq/types/collection_query_params.py">params</a>) -> <a href="./src/embedhq/types/collection_query_response.py">CollectionQueryResponse</a></code>
 
@@ -140,14 +130,14 @@ Methods:
 Types:
 
 ```python
-from embedhq.types import Action, ActionListResponse, ActionDisableResponse, ActionTriggerResponse
+from embedhq.types import Action, ActionListResponse, ActionTriggerResponse
 ```
 
 Methods:
 
 - <code title="get /actions/{action_key}">client.actions.<a href="./src/embedhq/resources/actions/actions.py">retrieve</a>(action_key, \*\*<a href="src/embedhq/types/action_retrieve_params.py">params</a>) -> <a href="./src/embedhq/types/action.py">Action</a></code>
 - <code title="get /actions">client.actions.<a href="./src/embedhq/resources/actions/actions.py">list</a>(\*\*<a href="src/embedhq/types/action_list_params.py">params</a>) -> <a href="./src/embedhq/types/action_list_response.py">ActionListResponse</a></code>
-- <code title="post /actions/{action_key}/disable">client.actions.<a href="./src/embedhq/resources/actions/actions.py">disable</a>(action_key, \*\*<a href="src/embedhq/types/action_disable_params.py">params</a>) -> <a href="./src/embedhq/types/action_disable_response.py">ActionDisableResponse</a></code>
+- <code title="post /actions/{action_key}/disable">client.actions.<a href="./src/embedhq/resources/actions/actions.py">disable</a>(action_key, \*\*<a href="src/embedhq/types/action_disable_params.py">params</a>) -> <a href="./src/embedhq/types/action.py">Action</a></code>
 - <code title="post /actions/{action_key}/enable">client.actions.<a href="./src/embedhq/resources/actions/actions.py">enable</a>(action_key, \*\*<a href="src/embedhq/types/action_enable_params.py">params</a>) -> <a href="./src/embedhq/types/action.py">Action</a></code>
 - <code title="get /actions/{action_key}/schema">client.actions.<a href="./src/embedhq/resources/actions/actions.py">schema</a>(action_key, \*\*<a href="src/embedhq/types/action_schema_params.py">params</a>) -> <a href="./src/embedhq/types/actions/action_schema.py">ActionSchema</a></code>
 - <code title="post /actions/{action_key}/trigger">client.actions.<a href="./src/embedhq/resources/actions/actions.py">trigger</a>(action_key, \*\*<a href="src/embedhq/types/action_trigger_params.py">params</a>) -> <a href="./src/embedhq/types/action_trigger_response.py">ActionTriggerResponse</a></code>
@@ -185,12 +175,7 @@ Methods:
 Types:
 
 ```python
-from embedhq.types import (
-    Webhook,
-    WebhookListResponse,
-    WebhookDeleteResponse,
-    WebhookDisableResponse,
-)
+from embedhq.types import Webhook, WebhookListResponse, WebhookDeleteResponse
 ```
 
 Methods:
@@ -200,7 +185,7 @@ Methods:
 - <code title="put /webhooks/{webhook_id}">client.webhooks.<a href="./src/embedhq/resources/webhooks/webhooks.py">update</a>(webhook_id, \*\*<a href="src/embedhq/types/webhook_update_params.py">params</a>) -> <a href="./src/embedhq/types/webhook.py">Webhook</a></code>
 - <code title="get /webhooks">client.webhooks.<a href="./src/embedhq/resources/webhooks/webhooks.py">list</a>() -> <a href="./src/embedhq/types/webhook_list_response.py">WebhookListResponse</a></code>
 - <code title="delete /webhooks/{webhook_id}">client.webhooks.<a href="./src/embedhq/resources/webhooks/webhooks.py">delete</a>(webhook_id) -> <a href="./src/embedhq/types/webhook_delete_response.py">WebhookDeleteResponse</a></code>
-- <code title="post /webhooks/{webhook_id}/disable">client.webhooks.<a href="./src/embedhq/resources/webhooks/webhooks.py">disable</a>(webhook_id) -> <a href="./src/embedhq/types/webhook_disable_response.py">WebhookDisableResponse</a></code>
+- <code title="post /webhooks/{webhook_id}/disable">client.webhooks.<a href="./src/embedhq/resources/webhooks/webhooks.py">disable</a>(webhook_id) -> <a href="./src/embedhq/types/webhook.py">Webhook</a></code>
 - <code title="post /webhooks/{webhook_id}/enable">client.webhooks.<a href="./src/embedhq/resources/webhooks/webhooks.py">enable</a>(webhook_id) -> <a href="./src/embedhq/types/webhook.py">Webhook</a></code>
 
 ## Events
