@@ -33,7 +33,6 @@ from .._base_client import (
 from ..types.connection import Connection
 from ..types.connection_list_response import ConnectionListResponse
 from ..types.connection_delete_response import ConnectionDeleteResponse
-from ..types.connection_update_response import ConnectionUpdateResponse
 
 __all__ = ["ConnectionsResource", "AsyncConnectionsResource"]
 
@@ -103,7 +102,7 @@ class ConnectionsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ConnectionUpdateResponse:
+    ) -> Connection:
         """
         Updates a connection.
 
@@ -147,7 +146,7 @@ class ConnectionsResource(SyncAPIResource):
                     {"integration_id": integration_id}, connection_update_params.ConnectionUpdateParams
                 ),
             ),
-            cast_to=ConnectionUpdateResponse,
+            cast_to=Connection,
         )
 
     def list(
@@ -391,7 +390,7 @@ class AsyncConnectionsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ConnectionUpdateResponse:
+    ) -> Connection:
         """
         Updates a connection.
 
@@ -435,7 +434,7 @@ class AsyncConnectionsResource(AsyncAPIResource):
                     {"integration_id": integration_id}, connection_update_params.ConnectionUpdateParams
                 ),
             ),
-            cast_to=ConnectionUpdateResponse,
+            cast_to=Connection,
         )
 
     async def list(

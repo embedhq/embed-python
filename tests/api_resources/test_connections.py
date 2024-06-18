@@ -13,7 +13,6 @@ from embedhq.types import (
     Connection,
     ConnectionListResponse,
     ConnectionDeleteResponse,
-    ConnectionUpdateResponse,
 )
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
@@ -70,7 +69,7 @@ class TestConnections:
             "user-123",
             integration_id="string",
         )
-        assert_matches_type(ConnectionUpdateResponse, connection, path=["response"])
+        assert_matches_type(Connection, connection, path=["response"])
 
     @parametrize
     def test_method_update_with_all_params(self, client: Embed) -> None:
@@ -81,7 +80,7 @@ class TestConnections:
             inclusions={"foo": "bar"},
             metadata={"foo": "bar"},
         )
-        assert_matches_type(ConnectionUpdateResponse, connection, path=["response"])
+        assert_matches_type(Connection, connection, path=["response"])
 
     @parametrize
     def test_raw_response_update(self, client: Embed) -> None:
@@ -93,7 +92,7 @@ class TestConnections:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         connection = response.parse()
-        assert_matches_type(ConnectionUpdateResponse, connection, path=["response"])
+        assert_matches_type(Connection, connection, path=["response"])
 
     @parametrize
     def test_streaming_response_update(self, client: Embed) -> None:
@@ -105,7 +104,7 @@ class TestConnections:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             connection = response.parse()
-            assert_matches_type(ConnectionUpdateResponse, connection, path=["response"])
+            assert_matches_type(Connection, connection, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -317,7 +316,7 @@ class TestAsyncConnections:
             "user-123",
             integration_id="string",
         )
-        assert_matches_type(ConnectionUpdateResponse, connection, path=["response"])
+        assert_matches_type(Connection, connection, path=["response"])
 
     @parametrize
     async def test_method_update_with_all_params(self, async_client: AsyncEmbed) -> None:
@@ -328,7 +327,7 @@ class TestAsyncConnections:
             inclusions={"foo": "bar"},
             metadata={"foo": "bar"},
         )
-        assert_matches_type(ConnectionUpdateResponse, connection, path=["response"])
+        assert_matches_type(Connection, connection, path=["response"])
 
     @parametrize
     async def test_raw_response_update(self, async_client: AsyncEmbed) -> None:
@@ -340,7 +339,7 @@ class TestAsyncConnections:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         connection = await response.parse()
-        assert_matches_type(ConnectionUpdateResponse, connection, path=["response"])
+        assert_matches_type(Connection, connection, path=["response"])
 
     @parametrize
     async def test_streaming_response_update(self, async_client: AsyncEmbed) -> None:
@@ -352,7 +351,7 @@ class TestAsyncConnections:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             connection = await response.parse()
-            assert_matches_type(ConnectionUpdateResponse, connection, path=["response"])
+            assert_matches_type(Connection, connection, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
