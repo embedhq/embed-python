@@ -9,7 +9,7 @@ import pytest
 
 from embedhq import Embed, AsyncEmbed
 from tests.utils import assert_matches_type
-from embedhq.types.syncs import SyncRun, RunListResponse
+from embedhq.types.actions import ActionRun, RunListResponse
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
@@ -19,19 +19,19 @@ class TestRuns:
 
     @parametrize
     def test_method_retrieve(self, client: Embed) -> None:
-        run = client.syncs.runs.retrieve(
-            "sync-run-123",
-            collection_key="issues",
+        run = client.actions.runs.retrieve(
+            "action-run-123",
+            action_key="create-issue",
             connection_id="user-123",
             integration_id="github-123",
         )
-        assert_matches_type(SyncRun, run, path=["response"])
+        assert_matches_type(ActionRun, run, path=["response"])
 
     @parametrize
     def test_raw_response_retrieve(self, client: Embed) -> None:
-        response = client.syncs.runs.with_raw_response.retrieve(
-            "sync-run-123",
-            collection_key="issues",
+        response = client.actions.runs.with_raw_response.retrieve(
+            "action-run-123",
+            action_key="create-issue",
             connection_id="user-123",
             integration_id="github-123",
         )
@@ -39,13 +39,13 @@ class TestRuns:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         run = response.parse()
-        assert_matches_type(SyncRun, run, path=["response"])
+        assert_matches_type(ActionRun, run, path=["response"])
 
     @parametrize
     def test_streaming_response_retrieve(self, client: Embed) -> None:
-        with client.syncs.runs.with_streaming_response.retrieve(
-            "sync-run-123",
-            collection_key="issues",
+        with client.actions.runs.with_streaming_response.retrieve(
+            "action-run-123",
+            action_key="create-issue",
             connection_id="user-123",
             integration_id="github-123",
         ) as response:
@@ -53,32 +53,32 @@ class TestRuns:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             run = response.parse()
-            assert_matches_type(SyncRun, run, path=["response"])
+            assert_matches_type(ActionRun, run, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
     @parametrize
     def test_path_params_retrieve(self, client: Embed) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `collection_key` but received ''"):
-            client.syncs.runs.with_raw_response.retrieve(
-                "sync-run-123",
-                collection_key="",
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `action_key` but received ''"):
+            client.actions.runs.with_raw_response.retrieve(
+                "action-run-123",
+                action_key="",
                 connection_id="user-123",
                 integration_id="github-123",
             )
 
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `sync_run_id` but received ''"):
-            client.syncs.runs.with_raw_response.retrieve(
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `action_run_id` but received ''"):
+            client.actions.runs.with_raw_response.retrieve(
                 "",
-                collection_key="issues",
+                action_key="create-issue",
                 connection_id="user-123",
                 integration_id="github-123",
             )
 
     @parametrize
     def test_method_list(self, client: Embed) -> None:
-        run = client.syncs.runs.list(
-            "issues",
+        run = client.actions.runs.list(
+            "create-issue",
             connection_id="user-123",
             integration_id="github-123",
         )
@@ -86,8 +86,8 @@ class TestRuns:
 
     @parametrize
     def test_raw_response_list(self, client: Embed) -> None:
-        response = client.syncs.runs.with_raw_response.list(
-            "issues",
+        response = client.actions.runs.with_raw_response.list(
+            "create-issue",
             connection_id="user-123",
             integration_id="github-123",
         )
@@ -99,8 +99,8 @@ class TestRuns:
 
     @parametrize
     def test_streaming_response_list(self, client: Embed) -> None:
-        with client.syncs.runs.with_streaming_response.list(
-            "issues",
+        with client.actions.runs.with_streaming_response.list(
+            "create-issue",
             connection_id="user-123",
             integration_id="github-123",
         ) as response:
@@ -114,8 +114,8 @@ class TestRuns:
 
     @parametrize
     def test_path_params_list(self, client: Embed) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `collection_key` but received ''"):
-            client.syncs.runs.with_raw_response.list(
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `action_key` but received ''"):
+            client.actions.runs.with_raw_response.list(
                 "",
                 connection_id="user-123",
                 integration_id="github-123",
@@ -127,19 +127,19 @@ class TestAsyncRuns:
 
     @parametrize
     async def test_method_retrieve(self, async_client: AsyncEmbed) -> None:
-        run = await async_client.syncs.runs.retrieve(
-            "sync-run-123",
-            collection_key="issues",
+        run = await async_client.actions.runs.retrieve(
+            "action-run-123",
+            action_key="create-issue",
             connection_id="user-123",
             integration_id="github-123",
         )
-        assert_matches_type(SyncRun, run, path=["response"])
+        assert_matches_type(ActionRun, run, path=["response"])
 
     @parametrize
     async def test_raw_response_retrieve(self, async_client: AsyncEmbed) -> None:
-        response = await async_client.syncs.runs.with_raw_response.retrieve(
-            "sync-run-123",
-            collection_key="issues",
+        response = await async_client.actions.runs.with_raw_response.retrieve(
+            "action-run-123",
+            action_key="create-issue",
             connection_id="user-123",
             integration_id="github-123",
         )
@@ -147,13 +147,13 @@ class TestAsyncRuns:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         run = await response.parse()
-        assert_matches_type(SyncRun, run, path=["response"])
+        assert_matches_type(ActionRun, run, path=["response"])
 
     @parametrize
     async def test_streaming_response_retrieve(self, async_client: AsyncEmbed) -> None:
-        async with async_client.syncs.runs.with_streaming_response.retrieve(
-            "sync-run-123",
-            collection_key="issues",
+        async with async_client.actions.runs.with_streaming_response.retrieve(
+            "action-run-123",
+            action_key="create-issue",
             connection_id="user-123",
             integration_id="github-123",
         ) as response:
@@ -161,32 +161,32 @@ class TestAsyncRuns:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             run = await response.parse()
-            assert_matches_type(SyncRun, run, path=["response"])
+            assert_matches_type(ActionRun, run, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
     @parametrize
     async def test_path_params_retrieve(self, async_client: AsyncEmbed) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `collection_key` but received ''"):
-            await async_client.syncs.runs.with_raw_response.retrieve(
-                "sync-run-123",
-                collection_key="",
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `action_key` but received ''"):
+            await async_client.actions.runs.with_raw_response.retrieve(
+                "action-run-123",
+                action_key="",
                 connection_id="user-123",
                 integration_id="github-123",
             )
 
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `sync_run_id` but received ''"):
-            await async_client.syncs.runs.with_raw_response.retrieve(
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `action_run_id` but received ''"):
+            await async_client.actions.runs.with_raw_response.retrieve(
                 "",
-                collection_key="issues",
+                action_key="create-issue",
                 connection_id="user-123",
                 integration_id="github-123",
             )
 
     @parametrize
     async def test_method_list(self, async_client: AsyncEmbed) -> None:
-        run = await async_client.syncs.runs.list(
-            "issues",
+        run = await async_client.actions.runs.list(
+            "create-issue",
             connection_id="user-123",
             integration_id="github-123",
         )
@@ -194,8 +194,8 @@ class TestAsyncRuns:
 
     @parametrize
     async def test_raw_response_list(self, async_client: AsyncEmbed) -> None:
-        response = await async_client.syncs.runs.with_raw_response.list(
-            "issues",
+        response = await async_client.actions.runs.with_raw_response.list(
+            "create-issue",
             connection_id="user-123",
             integration_id="github-123",
         )
@@ -207,8 +207,8 @@ class TestAsyncRuns:
 
     @parametrize
     async def test_streaming_response_list(self, async_client: AsyncEmbed) -> None:
-        async with async_client.syncs.runs.with_streaming_response.list(
-            "issues",
+        async with async_client.actions.runs.with_streaming_response.list(
+            "create-issue",
             connection_id="user-123",
             integration_id="github-123",
         ) as response:
@@ -222,8 +222,8 @@ class TestAsyncRuns:
 
     @parametrize
     async def test_path_params_list(self, async_client: AsyncEmbed) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `collection_key` but received ''"):
-            await async_client.syncs.runs.with_raw_response.list(
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `action_key` but received ''"):
+            await async_client.actions.runs.with_raw_response.list(
                 "",
                 connection_id="user-123",
                 integration_id="github-123",

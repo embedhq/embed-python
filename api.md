@@ -117,6 +117,7 @@ from embedhq.types.syncs import SyncRun, RunListResponse
 
 Methods:
 
+- <code title="get /syncs/{collection_key}/runs/{sync_run_id}">client.syncs.runs.<a href="./src/embedhq/resources/syncs/runs.py">retrieve</a>(sync_run_id, \*, collection_key, \*\*<a href="src/embedhq/types/syncs/run_retrieve_params.py">params</a>) -> <a href="./src/embedhq/types/syncs/sync_run.py">SyncRun</a></code>
 - <code title="get /syncs/{collection_key}/runs">client.syncs.runs.<a href="./src/embedhq/resources/syncs/runs.py">list</a>(collection_key, \*\*<a href="src/embedhq/types/syncs/run_list_params.py">params</a>) -> <a href="./src/embedhq/types/syncs/run_list_response.py">RunListResponse</a></code>
 
 # Actions
@@ -148,6 +149,19 @@ Methods:
 
 - <code title="get /actions/{action_key}/schema">client.actions.schemas.<a href="./src/embedhq/resources/actions/schemas.py">retrieve</a>(action_key, \*\*<a href="src/embedhq/types/actions/schema_retrieve_params.py">params</a>) -> <a href="./src/embedhq/types/actions/action_schema.py">ActionSchema</a></code>
 - <code title="get /actions/schemas">client.actions.schemas.<a href="./src/embedhq/resources/actions/schemas.py">list</a>(\*\*<a href="src/embedhq/types/actions/schema_list_params.py">params</a>) -> <a href="./src/embedhq/types/actions/schema_list_response.py">SchemaListResponse</a></code>
+
+## Runs
+
+Types:
+
+```python
+from embedhq.types.actions import ActionRun, RunListResponse
+```
+
+Methods:
+
+- <code title="get /actions/{action_key}/runs/{action_run_id}">client.actions.runs.<a href="./src/embedhq/resources/actions/runs.py">retrieve</a>(action_run_id, \*, action_key, \*\*<a href="src/embedhq/types/actions/run_retrieve_params.py">params</a>) -> <a href="./src/embedhq/types/actions/action_run.py">ActionRun</a></code>
+- <code title="get /actions/{action_key}/runs">client.actions.runs.<a href="./src/embedhq/resources/actions/runs.py">list</a>(action_key, \*\*<a href="src/embedhq/types/actions/run_list_params.py">params</a>) -> <a href="./src/embedhq/types/actions/run_list_response.py">RunListResponse</a></code>
 
 # Proxy
 
