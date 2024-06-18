@@ -117,7 +117,6 @@ from embedhq.types.syncs import SyncRun, RunListResponse
 
 Methods:
 
-- <code title="get /syncs/{collection_key}/runs/{run_id}">client.syncs.runs.<a href="./src/embedhq/resources/syncs/runs.py">retrieve</a>(run_id, \*, collection_key, \*\*<a href="src/embedhq/types/syncs/run_retrieve_params.py">params</a>) -> <a href="./src/embedhq/types/syncs/sync_run.py">SyncRun</a></code>
 - <code title="get /syncs/{collection_key}/runs">client.syncs.runs.<a href="./src/embedhq/resources/syncs/runs.py">list</a>(collection_key, \*\*<a href="src/embedhq/types/syncs/run_list_params.py">params</a>) -> <a href="./src/embedhq/types/syncs/run_list_response.py">RunListResponse</a></code>
 
 # Actions
