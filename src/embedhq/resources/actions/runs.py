@@ -17,12 +17,12 @@ from ..._response import (
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
-from ...types.syncs import run_list_params, run_retrieve_params
 from ..._base_client import (
     make_request_options,
 )
-from ...types.syncs.sync_run import SyncRun
-from ...types.syncs.run_list_response import RunListResponse
+from ...types.actions import run_list_params, run_retrieve_params
+from ...types.actions.action_run import ActionRun
+from ...types.actions.run_list_response import RunListResponse
 
 __all__ = ["RunsResource", "AsyncRunsResource"]
 
@@ -38,9 +38,9 @@ class RunsResource(SyncAPIResource):
 
     def retrieve(
         self,
-        sync_run_id: str,
+        action_run_id: str,
         *,
-        collection_key: str,
+        action_key: str,
         connection_id: str,
         integration_id: str,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -49,14 +49,14 @@ class RunsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> SyncRun:
+    ) -> ActionRun:
         """
-        Returns a sync run.
+        Returns an action run.
 
         Args:
-          connection_id: The ID of the connection to which the sync run belongs.
+          connection_id: The ID of the connection to which the action run belongs.
 
-          integration_id: The ID of the integration to which the sync run belongs.
+          integration_id: The ID of the integration to which the action run belongs.
 
           extra_headers: Send extra headers
 
@@ -66,12 +66,12 @@ class RunsResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not collection_key:
-            raise ValueError(f"Expected a non-empty value for `collection_key` but received {collection_key!r}")
-        if not sync_run_id:
-            raise ValueError(f"Expected a non-empty value for `sync_run_id` but received {sync_run_id!r}")
+        if not action_key:
+            raise ValueError(f"Expected a non-empty value for `action_key` but received {action_key!r}")
+        if not action_run_id:
+            raise ValueError(f"Expected a non-empty value for `action_run_id` but received {action_run_id!r}")
         return self._get(
-            f"/syncs/{collection_key}/runs/{sync_run_id}",
+            f"/actions/{action_key}/runs/{action_run_id}",
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -85,12 +85,12 @@ class RunsResource(SyncAPIResource):
                     run_retrieve_params.RunRetrieveParams,
                 ),
             ),
-            cast_to=SyncRun,
+            cast_to=ActionRun,
         )
 
     def list(
         self,
-        collection_key: str,
+        action_key: str,
         *,
         connection_id: str,
         integration_id: str,
@@ -102,12 +102,12 @@ class RunsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> RunListResponse:
         """
-        Returns a list of recent sync runs.
+        Returns a list of recent action runs.
 
         Args:
-          connection_id: The ID of the connection to which the sync runs belong.
+          connection_id: The ID of the connection to which the action runs belong.
 
-          integration_id: The ID of the integration to which the sync runs belong.
+          integration_id: The ID of the integration to which the action runs belong.
 
           extra_headers: Send extra headers
 
@@ -117,10 +117,10 @@ class RunsResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not collection_key:
-            raise ValueError(f"Expected a non-empty value for `collection_key` but received {collection_key!r}")
+        if not action_key:
+            raise ValueError(f"Expected a non-empty value for `action_key` but received {action_key!r}")
         return self._get(
-            f"/syncs/{collection_key}/runs",
+            f"/actions/{action_key}/runs",
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -149,9 +149,9 @@ class AsyncRunsResource(AsyncAPIResource):
 
     async def retrieve(
         self,
-        sync_run_id: str,
+        action_run_id: str,
         *,
-        collection_key: str,
+        action_key: str,
         connection_id: str,
         integration_id: str,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -160,14 +160,14 @@ class AsyncRunsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> SyncRun:
+    ) -> ActionRun:
         """
-        Returns a sync run.
+        Returns an action run.
 
         Args:
-          connection_id: The ID of the connection to which the sync run belongs.
+          connection_id: The ID of the connection to which the action run belongs.
 
-          integration_id: The ID of the integration to which the sync run belongs.
+          integration_id: The ID of the integration to which the action run belongs.
 
           extra_headers: Send extra headers
 
@@ -177,12 +177,12 @@ class AsyncRunsResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not collection_key:
-            raise ValueError(f"Expected a non-empty value for `collection_key` but received {collection_key!r}")
-        if not sync_run_id:
-            raise ValueError(f"Expected a non-empty value for `sync_run_id` but received {sync_run_id!r}")
+        if not action_key:
+            raise ValueError(f"Expected a non-empty value for `action_key` but received {action_key!r}")
+        if not action_run_id:
+            raise ValueError(f"Expected a non-empty value for `action_run_id` but received {action_run_id!r}")
         return await self._get(
-            f"/syncs/{collection_key}/runs/{sync_run_id}",
+            f"/actions/{action_key}/runs/{action_run_id}",
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -196,12 +196,12 @@ class AsyncRunsResource(AsyncAPIResource):
                     run_retrieve_params.RunRetrieveParams,
                 ),
             ),
-            cast_to=SyncRun,
+            cast_to=ActionRun,
         )
 
     async def list(
         self,
-        collection_key: str,
+        action_key: str,
         *,
         connection_id: str,
         integration_id: str,
@@ -213,12 +213,12 @@ class AsyncRunsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> RunListResponse:
         """
-        Returns a list of recent sync runs.
+        Returns a list of recent action runs.
 
         Args:
-          connection_id: The ID of the connection to which the sync runs belong.
+          connection_id: The ID of the connection to which the action runs belong.
 
-          integration_id: The ID of the integration to which the sync runs belong.
+          integration_id: The ID of the integration to which the action runs belong.
 
           extra_headers: Send extra headers
 
@@ -228,10 +228,10 @@ class AsyncRunsResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not collection_key:
-            raise ValueError(f"Expected a non-empty value for `collection_key` but received {collection_key!r}")
+        if not action_key:
+            raise ValueError(f"Expected a non-empty value for `action_key` but received {action_key!r}")
         return await self._get(
-            f"/syncs/{collection_key}/runs",
+            f"/actions/{action_key}/runs",
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
