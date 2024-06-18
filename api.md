@@ -21,18 +21,13 @@ Methods:
 Types:
 
 ```python
-from embedhq.types import (
-    Connection,
-    ConnectionUpdateResponse,
-    ConnectionListResponse,
-    ConnectionDeleteResponse,
-)
+from embedhq.types import Connection, ConnectionListResponse, ConnectionDeleteResponse
 ```
 
 Methods:
 
 - <code title="get /connections/{connection_id}">client.connections.<a href="./src/embedhq/resources/connections.py">retrieve</a>(connection_id, \*\*<a href="src/embedhq/types/connection_retrieve_params.py">params</a>) -> <a href="./src/embedhq/types/connection.py">Connection</a></code>
-- <code title="put /connections/{connection_id}">client.connections.<a href="./src/embedhq/resources/connections.py">update</a>(connection_id, \*\*<a href="src/embedhq/types/connection_update_params.py">params</a>) -> <a href="./src/embedhq/types/connection_update_response.py">ConnectionUpdateResponse</a></code>
+- <code title="put /connections/{connection_id}">client.connections.<a href="./src/embedhq/resources/connections.py">update</a>(connection_id, \*\*<a href="src/embedhq/types/connection_update_params.py">params</a>) -> <a href="./src/embedhq/types/connection.py">Connection</a></code>
 - <code title="get /connections">client.connections.<a href="./src/embedhq/resources/connections.py">list</a>(\*\*<a href="src/embedhq/types/connection_list_params.py">params</a>) -> <a href="./src/embedhq/types/connection_list_response.py">ConnectionListResponse</a></code>
 - <code title="delete /connections/{connection_id}">client.connections.<a href="./src/embedhq/resources/connections.py">delete</a>(connection_id, \*\*<a href="src/embedhq/types/connection_delete_params.py">params</a>) -> <a href="./src/embedhq/types/connection_delete_response.py">ConnectionDeleteResponse</a></code>
 - <code title="post /connections">client.connections.<a href="./src/embedhq/resources/connections.py">upsert</a>(\*\*<a href="src/embedhq/types/connection_upsert_params.py">params</a>) -> <a href="./src/embedhq/types/connection.py">Connection</a></code>
