@@ -18,9 +18,6 @@ class SyncRun(BaseModel):
     connection_id: str
     """The unique identifier of the connection to which the sync belongs."""
 
-    created_at: int
-    """The Unix timestamp (in seconds) for when the sync run was created."""
-
     integration_id: str
     """The unique identifier of the integration to which the sync belongs."""
 
@@ -36,8 +33,11 @@ class SyncRun(BaseModel):
     records_updated: Optional[int] = None
     """The number of records updated during the sync run."""
 
-    status: Literal["running", "stopped", "completed", "failed"]
+    status: Literal["running", "stopped", "succeeded", "failed"]
     """The status of the sync run."""
 
-    updated_at: int
-    """The Unix timestamp (in seconds) for when the sync run was updated."""
+    duration: Optional[int] = None
+    """The duration of the sync run (in seconds)."""
+
+    timestamp: Optional[int] = None
+    """The Unix timestamp (in seconds) for when the sync run started."""
