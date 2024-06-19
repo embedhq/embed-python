@@ -22,7 +22,7 @@ class SessionTokenCreateParams(TypedDict, total=False):
     """Configuration options to assign to the connection."""
 
     connection_id: str
-    """The unique identifier to assign to the connection."""
+    """The unique identifier of the connection."""
 
     exclusions: Optional[Dict[str, object]]
     """Exclusion rules to assign to the connection.

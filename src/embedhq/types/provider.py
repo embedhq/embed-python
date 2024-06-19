@@ -25,9 +25,6 @@ class Schema(BaseModel):
     name: str
     """The name of the integration provider."""
 
-    unique_key: str
-    """The unique key of the integration provider."""
-
     actions: Optional[List[ActionSchema]] = None
 
     collections: Optional[List[CollectionSchema]] = None
