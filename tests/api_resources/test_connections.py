@@ -197,12 +197,10 @@ class TestConnections:
     @parametrize
     def test_method_upsert(self, client: Embed) -> None:
         connection = client.connections.upsert(
-            id="string",
             auth_scheme="oauth2",
             credentials={
                 "access_token": "string",
                 "refresh_token": "string",
-                "expires_at": 0,
             },
             integration_id="string",
         )
@@ -211,7 +209,6 @@ class TestConnections:
     @parametrize
     def test_method_upsert_with_all_params(self, client: Embed) -> None:
         connection = client.connections.upsert(
-            id="string",
             auth_scheme="oauth2",
             credentials={
                 "access_token": "string",
@@ -219,6 +216,7 @@ class TestConnections:
                 "expires_at": 0,
             },
             integration_id="string",
+            id="string",
             configuration={"foo": "bar"},
             exclusions={"foo": "bar"},
             inclusions={"foo": "bar"},
@@ -229,12 +227,10 @@ class TestConnections:
     @parametrize
     def test_raw_response_upsert(self, client: Embed) -> None:
         response = client.connections.with_raw_response.upsert(
-            id="string",
             auth_scheme="oauth2",
             credentials={
                 "access_token": "string",
                 "refresh_token": "string",
-                "expires_at": 0,
             },
             integration_id="string",
         )
@@ -247,12 +243,10 @@ class TestConnections:
     @parametrize
     def test_streaming_response_upsert(self, client: Embed) -> None:
         with client.connections.with_streaming_response.upsert(
-            id="string",
             auth_scheme="oauth2",
             credentials={
                 "access_token": "string",
                 "refresh_token": "string",
-                "expires_at": 0,
             },
             integration_id="string",
         ) as response:
@@ -444,12 +438,10 @@ class TestAsyncConnections:
     @parametrize
     async def test_method_upsert(self, async_client: AsyncEmbed) -> None:
         connection = await async_client.connections.upsert(
-            id="string",
             auth_scheme="oauth2",
             credentials={
                 "access_token": "string",
                 "refresh_token": "string",
-                "expires_at": 0,
             },
             integration_id="string",
         )
@@ -458,7 +450,6 @@ class TestAsyncConnections:
     @parametrize
     async def test_method_upsert_with_all_params(self, async_client: AsyncEmbed) -> None:
         connection = await async_client.connections.upsert(
-            id="string",
             auth_scheme="oauth2",
             credentials={
                 "access_token": "string",
@@ -466,6 +457,7 @@ class TestAsyncConnections:
                 "expires_at": 0,
             },
             integration_id="string",
+            id="string",
             configuration={"foo": "bar"},
             exclusions={"foo": "bar"},
             inclusions={"foo": "bar"},
@@ -476,12 +468,10 @@ class TestAsyncConnections:
     @parametrize
     async def test_raw_response_upsert(self, async_client: AsyncEmbed) -> None:
         response = await async_client.connections.with_raw_response.upsert(
-            id="string",
             auth_scheme="oauth2",
             credentials={
                 "access_token": "string",
                 "refresh_token": "string",
-                "expires_at": 0,
             },
             integration_id="string",
         )
@@ -494,12 +484,10 @@ class TestAsyncConnections:
     @parametrize
     async def test_streaming_response_upsert(self, async_client: AsyncEmbed) -> None:
         async with async_client.connections.with_streaming_response.upsert(
-            id="string",
             auth_scheme="oauth2",
             credentials={
                 "access_token": "string",
                 "refresh_token": "string",
-                "expires_at": 0,
             },
             integration_id="string",
         ) as response:
