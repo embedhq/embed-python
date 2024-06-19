@@ -255,10 +255,10 @@ class ConnectionsResource(SyncAPIResource):
     def upsert(
         self,
         *,
-        id: str,
         auth_scheme: Literal["oauth2", "oauth1", "basic", "api_key"],
         credentials: connection_upsert_params.Credentials,
         integration_id: str,
+        id: str | NotGiven = NOT_GIVEN,
         configuration: Optional[Dict[str, object]] | NotGiven = NOT_GIVEN,
         exclusions: Optional[Dict[str, object]] | NotGiven = NOT_GIVEN,
         inclusions: Optional[Dict[str, object]] | NotGiven = NOT_GIVEN,
@@ -277,13 +277,13 @@ class ConnectionsResource(SyncAPIResource):
         them to create a connection with this endpoint.
 
         Args:
-          id: The unique identifier for the connection.
-
           auth_scheme: The authentication scheme the connection should use.
 
           credentials: The connection's account credentials.
 
           integration_id: The unique identifier of the integration used by the connection.
+
+          id: The unique identifier for the connection.
 
           configuration: Configuration options for the connection.
 
@@ -307,10 +307,10 @@ class ConnectionsResource(SyncAPIResource):
             "/connections",
             body=maybe_transform(
                 {
-                    "id": id,
                     "auth_scheme": auth_scheme,
                     "credentials": credentials,
                     "integration_id": integration_id,
+                    "id": id,
                     "configuration": configuration,
                     "exclusions": exclusions,
                     "inclusions": inclusions,
@@ -543,10 +543,10 @@ class AsyncConnectionsResource(AsyncAPIResource):
     async def upsert(
         self,
         *,
-        id: str,
         auth_scheme: Literal["oauth2", "oauth1", "basic", "api_key"],
         credentials: connection_upsert_params.Credentials,
         integration_id: str,
+        id: str | NotGiven = NOT_GIVEN,
         configuration: Optional[Dict[str, object]] | NotGiven = NOT_GIVEN,
         exclusions: Optional[Dict[str, object]] | NotGiven = NOT_GIVEN,
         inclusions: Optional[Dict[str, object]] | NotGiven = NOT_GIVEN,
@@ -565,13 +565,13 @@ class AsyncConnectionsResource(AsyncAPIResource):
         them to create a connection with this endpoint.
 
         Args:
-          id: The unique identifier for the connection.
-
           auth_scheme: The authentication scheme the connection should use.
 
           credentials: The connection's account credentials.
 
           integration_id: The unique identifier of the integration used by the connection.
+
+          id: The unique identifier for the connection.
 
           configuration: Configuration options for the connection.
 
@@ -595,10 +595,10 @@ class AsyncConnectionsResource(AsyncAPIResource):
             "/connections",
             body=await async_maybe_transform(
                 {
-                    "id": id,
                     "auth_scheme": auth_scheme,
                     "credentials": credentials,
                     "integration_id": integration_id,
+                    "id": id,
                     "configuration": configuration,
                     "exclusions": exclusions,
                     "inclusions": inclusions,

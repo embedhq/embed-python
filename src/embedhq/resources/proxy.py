@@ -10,6 +10,7 @@ from ..types import proxy_put_params, proxy_post_params, proxy_delete_params
 from .._types import NOT_GIVEN, Body, Query, Headers, NotGiven
 from .._utils import (
     maybe_transform,
+    strip_not_given,
     async_maybe_transform,
 )
 from .._compat import cached_property
@@ -45,6 +46,10 @@ class ProxyResource(SyncAPIResource):
         endpoint: str,
         *,
         body: Dict[str, object],
+        connection_id: str,
+        integration_id: str,
+        base_url_override: str | NotGiven = NOT_GIVEN,
+        retries: int | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -58,6 +63,14 @@ class ProxyResource(SyncAPIResource):
         Args:
           endpoint: The endpoint to proxy the request to.
 
+          connection_id: The ID of the connection to use for the request.
+
+          integration_id: The ID of the integration to use for the request.
+
+          base_url_override: Override the base URL for the request.
+
+          retries: The number of times to retry the request.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -68,6 +81,17 @@ class ProxyResource(SyncAPIResource):
         """
         if not endpoint:
             raise ValueError(f"Expected a non-empty value for `endpoint` but received {endpoint!r}")
+        extra_headers = {
+            **strip_not_given(
+                {
+                    "connection_id": connection_id,
+                    "integration_id": integration_id,
+                    "base_url_override": base_url_override,
+                    "retries": str(retries),
+                }
+            ),
+            **(extra_headers or {}),
+        }
         return self._delete(
             f"/proxy/{endpoint}",
             body=maybe_transform(body, proxy_delete_params.ProxyDeleteParams),
@@ -81,6 +105,10 @@ class ProxyResource(SyncAPIResource):
         self,
         endpoint: str,
         *,
+        connection_id: str,
+        integration_id: str,
+        base_url_override: str | NotGiven = NOT_GIVEN,
+        retries: int | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -94,6 +122,14 @@ class ProxyResource(SyncAPIResource):
         Args:
           endpoint: The endpoint to proxy the request to.
 
+          connection_id: The ID of the connection to use for the request.
+
+          integration_id: The ID of the integration to use for the request.
+
+          base_url_override: Override the base URL for the request.
+
+          retries: The number of times to retry the request.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -104,6 +140,17 @@ class ProxyResource(SyncAPIResource):
         """
         if not endpoint:
             raise ValueError(f"Expected a non-empty value for `endpoint` but received {endpoint!r}")
+        extra_headers = {
+            **strip_not_given(
+                {
+                    "connection_id": connection_id,
+                    "integration_id": integration_id,
+                    "base_url_override": base_url_override,
+                    "retries": str(retries),
+                }
+            ),
+            **(extra_headers or {}),
+        }
         return self._get(
             f"/proxy/{endpoint}",
             options=make_request_options(
@@ -117,6 +164,10 @@ class ProxyResource(SyncAPIResource):
         endpoint: str,
         *,
         body: Dict[str, object],
+        connection_id: str,
+        integration_id: str,
+        base_url_override: str | NotGiven = NOT_GIVEN,
+        retries: int | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -130,6 +181,14 @@ class ProxyResource(SyncAPIResource):
         Args:
           endpoint: The endpoint to proxy the request to.
 
+          connection_id: The ID of the connection to use for the request.
+
+          integration_id: The ID of the integration to use for the request.
+
+          base_url_override: Override the base URL for the request.
+
+          retries: The number of times to retry the request.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -140,6 +199,17 @@ class ProxyResource(SyncAPIResource):
         """
         if not endpoint:
             raise ValueError(f"Expected a non-empty value for `endpoint` but received {endpoint!r}")
+        extra_headers = {
+            **strip_not_given(
+                {
+                    "connection_id": connection_id,
+                    "integration_id": integration_id,
+                    "base_url_override": base_url_override,
+                    "retries": str(retries),
+                }
+            ),
+            **(extra_headers or {}),
+        }
         return self._post(
             f"/proxy/{endpoint}",
             body=maybe_transform(body, proxy_post_params.ProxyPostParams),
@@ -154,6 +224,10 @@ class ProxyResource(SyncAPIResource):
         endpoint: str,
         *,
         body: Dict[str, object],
+        connection_id: str,
+        integration_id: str,
+        base_url_override: str | NotGiven = NOT_GIVEN,
+        retries: int | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -167,6 +241,14 @@ class ProxyResource(SyncAPIResource):
         Args:
           endpoint: The endpoint to proxy the request to.
 
+          connection_id: The ID of the connection to use for the request.
+
+          integration_id: The ID of the integration to use for the request.
+
+          base_url_override: Override the base URL for the request.
+
+          retries: The number of times to retry the request.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -177,6 +259,17 @@ class ProxyResource(SyncAPIResource):
         """
         if not endpoint:
             raise ValueError(f"Expected a non-empty value for `endpoint` but received {endpoint!r}")
+        extra_headers = {
+            **strip_not_given(
+                {
+                    "connection_id": connection_id,
+                    "integration_id": integration_id,
+                    "base_url_override": base_url_override,
+                    "retries": str(retries),
+                }
+            ),
+            **(extra_headers or {}),
+        }
         return self._put(
             f"/proxy/{endpoint}",
             body=maybe_transform(body, proxy_put_params.ProxyPutParams),
@@ -201,6 +294,10 @@ class AsyncProxyResource(AsyncAPIResource):
         endpoint: str,
         *,
         body: Dict[str, object],
+        connection_id: str,
+        integration_id: str,
+        base_url_override: str | NotGiven = NOT_GIVEN,
+        retries: int | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -214,6 +311,14 @@ class AsyncProxyResource(AsyncAPIResource):
         Args:
           endpoint: The endpoint to proxy the request to.
 
+          connection_id: The ID of the connection to use for the request.
+
+          integration_id: The ID of the integration to use for the request.
+
+          base_url_override: Override the base URL for the request.
+
+          retries: The number of times to retry the request.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -224,6 +329,17 @@ class AsyncProxyResource(AsyncAPIResource):
         """
         if not endpoint:
             raise ValueError(f"Expected a non-empty value for `endpoint` but received {endpoint!r}")
+        extra_headers = {
+            **strip_not_given(
+                {
+                    "connection_id": connection_id,
+                    "integration_id": integration_id,
+                    "base_url_override": base_url_override,
+                    "retries": str(retries),
+                }
+            ),
+            **(extra_headers or {}),
+        }
         return await self._delete(
             f"/proxy/{endpoint}",
             body=await async_maybe_transform(body, proxy_delete_params.ProxyDeleteParams),
@@ -237,6 +353,10 @@ class AsyncProxyResource(AsyncAPIResource):
         self,
         endpoint: str,
         *,
+        connection_id: str,
+        integration_id: str,
+        base_url_override: str | NotGiven = NOT_GIVEN,
+        retries: int | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -250,6 +370,14 @@ class AsyncProxyResource(AsyncAPIResource):
         Args:
           endpoint: The endpoint to proxy the request to.
 
+          connection_id: The ID of the connection to use for the request.
+
+          integration_id: The ID of the integration to use for the request.
+
+          base_url_override: Override the base URL for the request.
+
+          retries: The number of times to retry the request.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -260,6 +388,17 @@ class AsyncProxyResource(AsyncAPIResource):
         """
         if not endpoint:
             raise ValueError(f"Expected a non-empty value for `endpoint` but received {endpoint!r}")
+        extra_headers = {
+            **strip_not_given(
+                {
+                    "connection_id": connection_id,
+                    "integration_id": integration_id,
+                    "base_url_override": base_url_override,
+                    "retries": str(retries),
+                }
+            ),
+            **(extra_headers or {}),
+        }
         return await self._get(
             f"/proxy/{endpoint}",
             options=make_request_options(
@@ -273,6 +412,10 @@ class AsyncProxyResource(AsyncAPIResource):
         endpoint: str,
         *,
         body: Dict[str, object],
+        connection_id: str,
+        integration_id: str,
+        base_url_override: str | NotGiven = NOT_GIVEN,
+        retries: int | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -286,6 +429,14 @@ class AsyncProxyResource(AsyncAPIResource):
         Args:
           endpoint: The endpoint to proxy the request to.
 
+          connection_id: The ID of the connection to use for the request.
+
+          integration_id: The ID of the integration to use for the request.
+
+          base_url_override: Override the base URL for the request.
+
+          retries: The number of times to retry the request.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -296,6 +447,17 @@ class AsyncProxyResource(AsyncAPIResource):
         """
         if not endpoint:
             raise ValueError(f"Expected a non-empty value for `endpoint` but received {endpoint!r}")
+        extra_headers = {
+            **strip_not_given(
+                {
+                    "connection_id": connection_id,
+                    "integration_id": integration_id,
+                    "base_url_override": base_url_override,
+                    "retries": str(retries),
+                }
+            ),
+            **(extra_headers or {}),
+        }
         return await self._post(
             f"/proxy/{endpoint}",
             body=await async_maybe_transform(body, proxy_post_params.ProxyPostParams),
@@ -310,6 +472,10 @@ class AsyncProxyResource(AsyncAPIResource):
         endpoint: str,
         *,
         body: Dict[str, object],
+        connection_id: str,
+        integration_id: str,
+        base_url_override: str | NotGiven = NOT_GIVEN,
+        retries: int | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -323,6 +489,14 @@ class AsyncProxyResource(AsyncAPIResource):
         Args:
           endpoint: The endpoint to proxy the request to.
 
+          connection_id: The ID of the connection to use for the request.
+
+          integration_id: The ID of the integration to use for the request.
+
+          base_url_override: Override the base URL for the request.
+
+          retries: The number of times to retry the request.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -333,6 +507,17 @@ class AsyncProxyResource(AsyncAPIResource):
         """
         if not endpoint:
             raise ValueError(f"Expected a non-empty value for `endpoint` but received {endpoint!r}")
+        extra_headers = {
+            **strip_not_given(
+                {
+                    "connection_id": connection_id,
+                    "integration_id": integration_id,
+                    "base_url_override": base_url_override,
+                    "retries": str(retries),
+                }
+            ),
+            **(extra_headers or {}),
+        }
         return await self._put(
             f"/proxy/{endpoint}",
             body=await async_maybe_transform(body, proxy_put_params.ProxyPutParams),
