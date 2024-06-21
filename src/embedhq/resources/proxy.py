@@ -9,6 +9,7 @@ import httpx
 from ..types import proxy_put_params, proxy_post_params, proxy_delete_params
 from .._types import NOT_GIVEN, Body, Query, Headers, NotGiven
 from .._utils import (
+    is_given,
     maybe_transform,
     strip_not_given,
     async_maybe_transform,
@@ -87,7 +88,7 @@ class ProxyResource(SyncAPIResource):
                     "connection_id": connection_id,
                     "integration_id": integration_id,
                     "base_url_override": base_url_override,
-                    "retries": str(retries),
+                    "retries": str(retries) if is_given(retries) else NOT_GIVEN,
                 }
             ),
             **(extra_headers or {}),
@@ -146,7 +147,7 @@ class ProxyResource(SyncAPIResource):
                     "connection_id": connection_id,
                     "integration_id": integration_id,
                     "base_url_override": base_url_override,
-                    "retries": str(retries),
+                    "retries": str(retries) if is_given(retries) else NOT_GIVEN,
                 }
             ),
             **(extra_headers or {}),
@@ -205,7 +206,7 @@ class ProxyResource(SyncAPIResource):
                     "connection_id": connection_id,
                     "integration_id": integration_id,
                     "base_url_override": base_url_override,
-                    "retries": str(retries),
+                    "retries": str(retries) if is_given(retries) else NOT_GIVEN,
                 }
             ),
             **(extra_headers or {}),
@@ -265,7 +266,7 @@ class ProxyResource(SyncAPIResource):
                     "connection_id": connection_id,
                     "integration_id": integration_id,
                     "base_url_override": base_url_override,
-                    "retries": str(retries),
+                    "retries": str(retries) if is_given(retries) else NOT_GIVEN,
                 }
             ),
             **(extra_headers or {}),
@@ -335,7 +336,7 @@ class AsyncProxyResource(AsyncAPIResource):
                     "connection_id": connection_id,
                     "integration_id": integration_id,
                     "base_url_override": base_url_override,
-                    "retries": str(retries),
+                    "retries": str(retries) if is_given(retries) else NOT_GIVEN,
                 }
             ),
             **(extra_headers or {}),
@@ -394,7 +395,7 @@ class AsyncProxyResource(AsyncAPIResource):
                     "connection_id": connection_id,
                     "integration_id": integration_id,
                     "base_url_override": base_url_override,
-                    "retries": str(retries),
+                    "retries": str(retries) if is_given(retries) else NOT_GIVEN,
                 }
             ),
             **(extra_headers or {}),
@@ -453,7 +454,7 @@ class AsyncProxyResource(AsyncAPIResource):
                     "connection_id": connection_id,
                     "integration_id": integration_id,
                     "base_url_override": base_url_override,
-                    "retries": str(retries),
+                    "retries": str(retries) if is_given(retries) else NOT_GIVEN,
                 }
             ),
             **(extra_headers or {}),
@@ -513,7 +514,7 @@ class AsyncProxyResource(AsyncAPIResource):
                     "connection_id": connection_id,
                     "integration_id": integration_id,
                     "base_url_override": base_url_override,
-                    "retries": str(retries),
+                    "retries": str(retries) if is_given(retries) else NOT_GIVEN,
                 }
             ),
             **(extra_headers or {}),

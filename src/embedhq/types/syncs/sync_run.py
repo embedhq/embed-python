@@ -36,7 +36,7 @@ class SyncRun(BaseModel):
     status: Literal["running", "stopped", "succeeded", "failed"]
     """The status of the sync run."""
 
-    duration: Optional[int] = None
+    duration: Optional[float] = None
     """The duration of the sync run (in seconds)."""
 
     timestamp: Optional[int] = None
