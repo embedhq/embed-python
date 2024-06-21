@@ -19,7 +19,7 @@ class ActionRun(BaseModel):
     connection_id: str
     """The unique identifier of the connection to which the action belongs."""
 
-    duration: int
+    duration: float
     """The duration of the action run (in seconds)."""
 
     input: Dict[str, object]
