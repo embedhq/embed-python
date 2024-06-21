@@ -26,8 +26,10 @@ class Schema(BaseModel):
     """The name of the integration provider."""
 
     actions: Optional[List[ActionSchema]] = None
+    """The actions supported by the integration provider."""
 
     collections: Optional[List[CollectionSchema]] = None
+    """The collections supported by the integration provider."""
 
     docs_url: Optional[str] = None
     """The documentation URL of the integration provider."""
