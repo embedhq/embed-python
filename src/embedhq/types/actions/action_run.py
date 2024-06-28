@@ -1,7 +1,7 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import builtins
-from typing import Dict
+from typing import Dict, Optional
 from typing_extensions import Literal
 
 from ..._models import BaseModel
@@ -19,7 +19,7 @@ class ActionRun(BaseModel):
     connection_id: str
     """The unique identifier of the connection to which the action belongs."""
 
-    duration: float
+    duration: Optional[float] = None
     """The duration of the action run (in seconds)."""
 
     input: Dict[str, object]
