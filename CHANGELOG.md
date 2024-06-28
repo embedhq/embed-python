@@ -1,5 +1,28 @@
 # Changelog
 
+## 0.1.0-alpha.2 (2024-06-28)
+
+Full Changelog: [v0.1.0-alpha.1...v0.1.0-alpha.2](https://github.com/embedhq/embed-python/compare/v0.1.0-alpha.1...v0.1.0-alpha.2)
+
+### Features
+
+* **api:** OpenAPI spec update via Stainless API ([#10](https://github.com/embedhq/embed-python/issues/10)) ([3e57da1](https://github.com/embedhq/embed-python/commit/3e57da177591a2193a0252e1023720da49823da6))
+* **api:** OpenAPI spec update via Stainless API ([#12](https://github.com/embedhq/embed-python/issues/12)) ([0ac4606](https://github.com/embedhq/embed-python/commit/0ac4606c3032e9538c63965f9e00f3bee9ea1d81))
+* **api:** OpenAPI spec update via Stainless API ([#13](https://github.com/embedhq/embed-python/issues/13)) ([73462c5](https://github.com/embedhq/embed-python/commit/73462c56584f0137cc4c3c70b9e56cdc7bd8245b))
+* **api:** OpenAPI spec update via Stainless API ([#14](https://github.com/embedhq/embed-python/issues/14)) ([5691600](https://github.com/embedhq/embed-python/commit/56916001295218ea8feb84fd122c8e70c544c706))
+* **api:** OpenAPI spec update via Stainless API ([#15](https://github.com/embedhq/embed-python/issues/15)) ([7517307](https://github.com/embedhq/embed-python/commit/7517307f3f47afcc88cb2b3590f9b81b82ea2087))
+* **api:** OpenAPI spec update via Stainless API ([#16](https://github.com/embedhq/embed-python/issues/16)) ([19e04ed](https://github.com/embedhq/embed-python/commit/19e04ede1736c4bf6763e15496fceb8aa285ca31))
+* **api:** OpenAPI spec update via Stainless API ([#17](https://github.com/embedhq/embed-python/issues/17)) ([cdef163](https://github.com/embedhq/embed-python/commit/cdef1632c783490e471d5f88a7db88478e74e41f))
+* **api:** OpenAPI spec update via Stainless API ([#18](https://github.com/embedhq/embed-python/issues/18)) ([1de5e8c](https://github.com/embedhq/embed-python/commit/1de5e8c86b68b6438e9875863ac214a98fb52f6c))
+* **api:** OpenAPI spec update via Stainless API ([#8](https://github.com/embedhq/embed-python/issues/8)) ([52009d0](https://github.com/embedhq/embed-python/commit/52009d02795a06fdc5144267842d32f877d6ed52))
+* **api:** OpenAPI spec update via Stainless API ([#9](https://github.com/embedhq/embed-python/issues/9)) ([49da405](https://github.com/embedhq/embed-python/commit/49da405d9c16fa692d9ace5ef46b06d04d94f1bf))
+* **api:** update via SDK Studio ([#11](https://github.com/embedhq/embed-python/issues/11)) ([ca16035](https://github.com/embedhq/embed-python/commit/ca160353108c38638bf26ef1b26c5e6b856e6cbf))
+
+
+### Chores
+
+* update SDK settings ([#6](https://github.com/embedhq/embed-python/issues/6)) ([015392a](https://github.com/embedhq/embed-python/commit/015392aedea2cb35da1135afbac830d1495ea643))
+
 ## 0.1.0-alpha.1 (2024-06-17)
 
 Full Changelog: [v0.0.1-alpha.0...v0.1.0-alpha.1](https://github.com/embedhq/embed-python/compare/v0.0.1-alpha.0...v0.1.0-alpha.1)
