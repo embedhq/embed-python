@@ -6,6 +6,14 @@ from typing import Dict
 
 import httpx
 
+from .runs import (
+    RunsResource,
+    AsyncRunsResource,
+    RunsResourceWithRawResponse,
+    AsyncRunsResourceWithRawResponse,
+    RunsResourceWithStreamingResponse,
+    AsyncRunsResourceWithStreamingResponse,
+)
 from ...types import (
     action_list_params,
     action_enable_params,
@@ -50,6 +58,10 @@ class ActionsResource(SyncAPIResource):
     @cached_property
     def schemas(self) -> SchemasResource:
         return SchemasResource(self._client)
+
+    @cached_property
+    def runs(self) -> RunsResource:
+        return RunsResource(self._client)
 
     @cached_property
     def with_raw_response(self) -> ActionsResourceWithRawResponse:
@@ -314,6 +326,10 @@ class AsyncActionsResource(AsyncAPIResource):
     @cached_property
     def schemas(self) -> AsyncSchemasResource:
         return AsyncSchemasResource(self._client)
+
+    @cached_property
+    def runs(self) -> AsyncRunsResource:
+        return AsyncRunsResource(self._client)
 
     @cached_property
     def with_raw_response(self) -> AsyncActionsResourceWithRawResponse:
@@ -611,6 +627,10 @@ class ActionsResourceWithRawResponse:
     def schemas(self) -> SchemasResourceWithRawResponse:
         return SchemasResourceWithRawResponse(self._actions.schemas)
 
+    @cached_property
+    def runs(self) -> RunsResourceWithRawResponse:
+        return RunsResourceWithRawResponse(self._actions.runs)
+
 
 class AsyncActionsResourceWithRawResponse:
     def __init__(self, actions: AsyncActionsResource) -> None:
@@ -638,6 +658,10 @@ class AsyncActionsResourceWithRawResponse:
     @cached_property
     def schemas(self) -> AsyncSchemasResourceWithRawResponse:
         return AsyncSchemasResourceWithRawResponse(self._actions.schemas)
+
+    @cached_property
+    def runs(self) -> AsyncRunsResourceWithRawResponse:
+        return AsyncRunsResourceWithRawResponse(self._actions.runs)
 
 
 class ActionsResourceWithStreamingResponse:
@@ -667,6 +691,10 @@ class ActionsResourceWithStreamingResponse:
     def schemas(self) -> SchemasResourceWithStreamingResponse:
         return SchemasResourceWithStreamingResponse(self._actions.schemas)
 
+    @cached_property
+    def runs(self) -> RunsResourceWithStreamingResponse:
+        return RunsResourceWithStreamingResponse(self._actions.runs)
+
 
 class AsyncActionsResourceWithStreamingResponse:
     def __init__(self, actions: AsyncActionsResource) -> None:
@@ -694,3 +722,7 @@ class AsyncActionsResourceWithStreamingResponse:
     @cached_property
     def schemas(self) -> AsyncSchemasResourceWithStreamingResponse:
         return AsyncSchemasResourceWithStreamingResponse(self._actions.schemas)
+
+    @cached_property
+    def runs(self) -> AsyncRunsResourceWithStreamingResponse:
+        return AsyncRunsResourceWithStreamingResponse(self._actions.runs)

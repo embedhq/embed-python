@@ -70,7 +70,7 @@ class SessionTokensResource(SyncAPIResource):
 
           configuration: Configuration options to assign to the connection.
 
-          connection_id: The unique identifier to assign to the connection.
+          connection_id: The unique identifier of the connection.
 
           exclusions: Exclusion rules to assign to the connection. Only applicable for integrations
               that support exclusions.
@@ -239,7 +239,7 @@ class AsyncSessionTokensResource(AsyncAPIResource):
 
           configuration: Configuration options to assign to the connection.
 
-          connection_id: The unique identifier to assign to the connection.
+          connection_id: The unique identifier of the connection.
 
           exclusions: Exclusion rules to assign to the connection. Only applicable for integrations
               that support exclusions.

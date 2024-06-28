@@ -45,7 +45,7 @@ class IntegrationsResource(SyncAPIResource):
         *,
         provider_key: str,
         id: str | NotGiven = NOT_GIVEN,
-        auth_scheme: Literal["oauth1", "oauth2", "basic", "api_key"] | NotGiven = NOT_GIVEN,
+        auth_schemes: List[Literal["oauth1", "oauth2", "basic", "api_key"]] | NotGiven = NOT_GIVEN,
         oauth_client_id: Optional[str] | NotGiven = NOT_GIVEN,
         oauth_client_secret: Optional[str] | NotGiven = NOT_GIVEN,
         oauth_scopes: List[str] | NotGiven = NOT_GIVEN,
@@ -65,8 +65,7 @@ class IntegrationsResource(SyncAPIResource):
 
           id: The unique identifier for the integration.
 
-          auth_scheme: The authentication scheme the integration should use. Only applicable for
-              providers that support multiple auth schemes.
+          auth_schemes: The authentication schemes the integration supports.
 
           oauth_client_id: The OAuth Client ID. Required for integrations that use OAuth.
 
@@ -92,7 +91,7 @@ class IntegrationsResource(SyncAPIResource):
                 {
                     "provider_key": provider_key,
                     "id": id,
-                    "auth_scheme": auth_scheme,
+                    "auth_schemes": auth_schemes,
                     "oauth_client_id": oauth_client_id,
                     "oauth_client_secret": oauth_client_secret,
                     "oauth_scopes": oauth_scopes,
@@ -367,7 +366,7 @@ class AsyncIntegrationsResource(AsyncAPIResource):
         *,
         provider_key: str,
         id: str | NotGiven = NOT_GIVEN,
-        auth_scheme: Literal["oauth1", "oauth2", "basic", "api_key"] | NotGiven = NOT_GIVEN,
+        auth_schemes: List[Literal["oauth1", "oauth2", "basic", "api_key"]] | NotGiven = NOT_GIVEN,
         oauth_client_id: Optional[str] | NotGiven = NOT_GIVEN,
         oauth_client_secret: Optional[str] | NotGiven = NOT_GIVEN,
         oauth_scopes: List[str] | NotGiven = NOT_GIVEN,
@@ -387,8 +386,7 @@ class AsyncIntegrationsResource(AsyncAPIResource):
 
           id: The unique identifier for the integration.
 
-          auth_scheme: The authentication scheme the integration should use. Only applicable for
-              providers that support multiple auth schemes.
+          auth_schemes: The authentication schemes the integration supports.
 
           oauth_client_id: The OAuth Client ID. Required for integrations that use OAuth.
 
@@ -414,7 +412,7 @@ class AsyncIntegrationsResource(AsyncAPIResource):
                 {
                     "provider_key": provider_key,
                     "id": id,
-                    "auth_scheme": auth_scheme,
+                    "auth_schemes": auth_schemes,
                     "oauth_client_id": oauth_client_id,
                     "oauth_client_secret": oauth_client_secret,
                     "oauth_scopes": oauth_scopes,

@@ -15,11 +15,8 @@ class IntegrationCreateParams(TypedDict, total=False):
     id: str
     """The unique identifier for the integration."""
 
-    auth_scheme: Literal["oauth1", "oauth2", "basic", "api_key"]
-    """The authentication scheme the integration should use.
-
-    Only applicable for providers that support multiple auth schemes.
-    """
+    auth_schemes: List[Literal["oauth1", "oauth2", "basic", "api_key"]]
+    """The authentication schemes the integration supports."""
 
     oauth_client_id: Optional[str]
     """The OAuth Client ID. Required for integrations that use OAuth."""

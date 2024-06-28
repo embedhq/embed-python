@@ -33,7 +33,7 @@ class TestIntegrations:
         integration = client.integrations.create(
             provider_key="github",
             id="github-123",
-            auth_scheme="oauth2",
+            auth_schemes=["oauth2"],
             oauth_client_id="string",
             oauth_client_secret="string",
             oauth_scopes=["string", "string", "string"],
@@ -317,7 +317,7 @@ class TestAsyncIntegrations:
         integration = await async_client.integrations.create(
             provider_key="github",
             id="github-123",
-            auth_scheme="oauth2",
+            auth_schemes=["oauth2"],
             oauth_client_id="string",
             oauth_client_secret="string",
             oauth_scopes=["string", "string", "string"],

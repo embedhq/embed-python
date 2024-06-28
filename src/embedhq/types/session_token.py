@@ -54,8 +54,5 @@ class SessionToken(BaseModel):
     redirect_url: Optional[str] = None
     """The URL to redirect to after the authentication flow is complete."""
 
-    updated_at: int
-    """The Unix timestamp (in seconds) for when the session token was updated."""
-
     url: str
     """The magic link used to connect an account with the session token."""

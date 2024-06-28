@@ -13,7 +13,6 @@ from embedhq.types import (
     Connection,
     ConnectionListResponse,
     ConnectionDeleteResponse,
-    ConnectionUpdateResponse,
 )
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
@@ -70,7 +69,7 @@ class TestConnections:
             "user-123",
             integration_id="string",
         )
-        assert_matches_type(ConnectionUpdateResponse, connection, path=["response"])
+        assert_matches_type(Connection, connection, path=["response"])
 
     @parametrize
     def test_method_update_with_all_params(self, client: Embed) -> None:
@@ -81,7 +80,7 @@ class TestConnections:
             inclusions={"foo": "bar"},
             metadata={"foo": "bar"},
         )
-        assert_matches_type(ConnectionUpdateResponse, connection, path=["response"])
+        assert_matches_type(Connection, connection, path=["response"])
 
     @parametrize
     def test_raw_response_update(self, client: Embed) -> None:
@@ -93,7 +92,7 @@ class TestConnections:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         connection = response.parse()
-        assert_matches_type(ConnectionUpdateResponse, connection, path=["response"])
+        assert_matches_type(Connection, connection, path=["response"])
 
     @parametrize
     def test_streaming_response_update(self, client: Embed) -> None:
@@ -105,7 +104,7 @@ class TestConnections:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             connection = response.parse()
-            assert_matches_type(ConnectionUpdateResponse, connection, path=["response"])
+            assert_matches_type(Connection, connection, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -198,12 +197,10 @@ class TestConnections:
     @parametrize
     def test_method_upsert(self, client: Embed) -> None:
         connection = client.connections.upsert(
-            id="string",
             auth_scheme="oauth2",
             credentials={
                 "access_token": "string",
                 "refresh_token": "string",
-                "expires_at": 0,
             },
             integration_id="string",
         )
@@ -212,7 +209,6 @@ class TestConnections:
     @parametrize
     def test_method_upsert_with_all_params(self, client: Embed) -> None:
         connection = client.connections.upsert(
-            id="string",
             auth_scheme="oauth2",
             credentials={
                 "access_token": "string",
@@ -220,6 +216,7 @@ class TestConnections:
                 "expires_at": 0,
             },
             integration_id="string",
+            id="string",
             configuration={"foo": "bar"},
             exclusions={"foo": "bar"},
             inclusions={"foo": "bar"},
@@ -230,12 +227,10 @@ class TestConnections:
     @parametrize
     def test_raw_response_upsert(self, client: Embed) -> None:
         response = client.connections.with_raw_response.upsert(
-            id="string",
             auth_scheme="oauth2",
             credentials={
                 "access_token": "string",
                 "refresh_token": "string",
-                "expires_at": 0,
             },
             integration_id="string",
         )
@@ -248,12 +243,10 @@ class TestConnections:
     @parametrize
     def test_streaming_response_upsert(self, client: Embed) -> None:
         with client.connections.with_streaming_response.upsert(
-            id="string",
             auth_scheme="oauth2",
             credentials={
                 "access_token": "string",
                 "refresh_token": "string",
-                "expires_at": 0,
             },
             integration_id="string",
         ) as response:
@@ -317,7 +310,7 @@ class TestAsyncConnections:
             "user-123",
             integration_id="string",
         )
-        assert_matches_type(ConnectionUpdateResponse, connection, path=["response"])
+        assert_matches_type(Connection, connection, path=["response"])
 
     @parametrize
     async def test_method_update_with_all_params(self, async_client: AsyncEmbed) -> None:
@@ -328,7 +321,7 @@ class TestAsyncConnections:
             inclusions={"foo": "bar"},
             metadata={"foo": "bar"},
         )
-        assert_matches_type(ConnectionUpdateResponse, connection, path=["response"])
+        assert_matches_type(Connection, connection, path=["response"])
 
     @parametrize
     async def test_raw_response_update(self, async_client: AsyncEmbed) -> None:
@@ -340,7 +333,7 @@ class TestAsyncConnections:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         connection = await response.parse()
-        assert_matches_type(ConnectionUpdateResponse, connection, path=["response"])
+        assert_matches_type(Connection, connection, path=["response"])
 
     @parametrize
     async def test_streaming_response_update(self, async_client: AsyncEmbed) -> None:
@@ -352,7 +345,7 @@ class TestAsyncConnections:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             connection = await response.parse()
-            assert_matches_type(ConnectionUpdateResponse, connection, path=["response"])
+            assert_matches_type(Connection, connection, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -445,12 +438,10 @@ class TestAsyncConnections:
     @parametrize
     async def test_method_upsert(self, async_client: AsyncEmbed) -> None:
         connection = await async_client.connections.upsert(
-            id="string",
             auth_scheme="oauth2",
             credentials={
                 "access_token": "string",
                 "refresh_token": "string",
-                "expires_at": 0,
             },
             integration_id="string",
         )
@@ -459,7 +450,6 @@ class TestAsyncConnections:
     @parametrize
     async def test_method_upsert_with_all_params(self, async_client: AsyncEmbed) -> None:
         connection = await async_client.connections.upsert(
-            id="string",
             auth_scheme="oauth2",
             credentials={
                 "access_token": "string",
@@ -467,6 +457,7 @@ class TestAsyncConnections:
                 "expires_at": 0,
             },
             integration_id="string",
+            id="string",
             configuration={"foo": "bar"},
             exclusions={"foo": "bar"},
             inclusions={"foo": "bar"},
@@ -477,12 +468,10 @@ class TestAsyncConnections:
     @parametrize
     async def test_raw_response_upsert(self, async_client: AsyncEmbed) -> None:
         response = await async_client.connections.with_raw_response.upsert(
-            id="string",
             auth_scheme="oauth2",
             credentials={
                 "access_token": "string",
                 "refresh_token": "string",
-                "expires_at": 0,
             },
             integration_id="string",
         )
@@ -495,12 +484,10 @@ class TestAsyncConnections:
     @parametrize
     async def test_streaming_response_upsert(self, async_client: AsyncEmbed) -> None:
         async with async_client.connections.with_streaming_response.upsert(
-            id="string",
             auth_scheme="oauth2",
             credentials={
                 "access_token": "string",
                 "refresh_token": "string",
-                "expires_at": 0,
             },
             integration_id="string",
         ) as response:
