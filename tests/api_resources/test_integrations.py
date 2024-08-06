@@ -29,8 +29,8 @@ class TestIntegrations:
         integration = client.integrations.create(
             provider="github",
             name="GitHub",
-            oauth_client_id="string",
-            oauth_client_secret="string",
+            oauth_client_id="oauth_client_id",
+            oauth_client_secret="oauth_client_secret",
             oauth_scopes=["string", "string", "string"],
             slug="github-123",
             use_test_credentials=False,
@@ -69,8 +69,8 @@ class TestIntegrations:
     @parametrize
     def test_method_list_with_all_params(self, client: Embed) -> None:
         integration = client.integrations.list(
-            after="string",
-            before="string",
+            after="after",
+            before="before",
             limit=20,
             order="desc",
         )
@@ -112,8 +112,8 @@ class TestAsyncIntegrations:
         integration = await async_client.integrations.create(
             provider="github",
             name="GitHub",
-            oauth_client_id="string",
-            oauth_client_secret="string",
+            oauth_client_id="oauth_client_id",
+            oauth_client_secret="oauth_client_secret",
             oauth_scopes=["string", "string", "string"],
             slug="github-123",
             use_test_credentials=False,
@@ -152,8 +152,8 @@ class TestAsyncIntegrations:
     @parametrize
     async def test_method_list_with_all_params(self, async_client: AsyncEmbed) -> None:
         integration = await async_client.integrations.list(
-            after="string",
-            before="string",
+            after="after",
+            before="before",
             limit=20,
             order="desc",
         )
