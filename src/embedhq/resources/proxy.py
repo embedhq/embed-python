@@ -42,8 +42,8 @@ class ProxyResource(SyncAPIResource):
 
     def delete(
         self,
-        endpoint: str,
         *,
+        endpoint: str,
         body: Dict[str, object],
         x_embed_connected_account_id: str,
         x_embed_integration: str,
@@ -102,8 +102,8 @@ class ProxyResource(SyncAPIResource):
 
     def get(
         self,
-        endpoint: str,
         *,
+        endpoint: str,
         x_embed_connected_account_id: str,
         x_embed_integration: str,
         x_embed_base_url_override: str | NotGiven = NOT_GIVEN,
@@ -160,8 +160,8 @@ class ProxyResource(SyncAPIResource):
 
     def post(
         self,
-        endpoint: str,
         *,
+        endpoint: str,
         body: Dict[str, object],
         x_embed_connected_account_id: str,
         x_embed_integration: str,
@@ -220,8 +220,8 @@ class ProxyResource(SyncAPIResource):
 
     def put(
         self,
-        endpoint: str,
         *,
+        endpoint: str,
         body: Dict[str, object],
         x_embed_connected_account_id: str,
         x_embed_integration: str,
@@ -290,8 +290,8 @@ class AsyncProxyResource(AsyncAPIResource):
 
     async def delete(
         self,
-        endpoint: str,
         *,
+        endpoint: str,
         body: Dict[str, object],
         x_embed_connected_account_id: str,
         x_embed_integration: str,
@@ -350,8 +350,8 @@ class AsyncProxyResource(AsyncAPIResource):
 
     async def get(
         self,
-        endpoint: str,
         *,
+        endpoint: str,
         x_embed_connected_account_id: str,
         x_embed_integration: str,
         x_embed_base_url_override: str | NotGiven = NOT_GIVEN,
@@ -408,8 +408,8 @@ class AsyncProxyResource(AsyncAPIResource):
 
     async def post(
         self,
-        endpoint: str,
         *,
+        endpoint: str,
         body: Dict[str, object],
         x_embed_connected_account_id: str,
         x_embed_integration: str,
@@ -468,8 +468,8 @@ class AsyncProxyResource(AsyncAPIResource):
 
     async def put(
         self,
-        endpoint: str,
         *,
+        endpoint: str,
         body: Dict[str, object],
         x_embed_connected_account_id: str,
         x_embed_integration: str,

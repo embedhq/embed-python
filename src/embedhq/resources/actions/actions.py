@@ -119,8 +119,8 @@ class ActionsResource(SyncAPIResource):
 
     def retrieve(
         self,
-        action: str,
         *,
+        action: str,
         integration: str,
         action_version: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -168,8 +168,8 @@ class ActionsResource(SyncAPIResource):
 
     def update(
         self,
-        action: str,
         *,
+        action: str,
         integration: str,
         action_version: str | NotGiven = NOT_GIVEN,
         configuration: Optional[Dict[str, object]] | NotGiven = NOT_GIVEN,
@@ -275,8 +275,8 @@ class ActionsResource(SyncAPIResource):
 
     def delete(
         self,
-        action: str,
         *,
+        action: str,
         integration: str,
         action_version: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -324,8 +324,8 @@ class ActionsResource(SyncAPIResource):
 
     def trigger(
         self,
-        action: str,
         *,
+        action: str,
         connected_account_id: str,
         integration: str,
         input: Dict[str, object],
@@ -455,8 +455,8 @@ class AsyncActionsResource(AsyncAPIResource):
 
     async def retrieve(
         self,
-        action: str,
         *,
+        action: str,
         integration: str,
         action_version: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -504,8 +504,8 @@ class AsyncActionsResource(AsyncAPIResource):
 
     async def update(
         self,
-        action: str,
         *,
+        action: str,
         integration: str,
         action_version: str | NotGiven = NOT_GIVEN,
         configuration: Optional[Dict[str, object]] | NotGiven = NOT_GIVEN,
@@ -611,8 +611,8 @@ class AsyncActionsResource(AsyncAPIResource):
 
     async def delete(
         self,
-        action: str,
         *,
+        action: str,
         integration: str,
         action_version: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -660,8 +660,8 @@ class AsyncActionsResource(AsyncAPIResource):
 
     async def trigger(
         self,
-        action: str,
         *,
+        action: str,
         connected_account_id: str,
         integration: str,
         input: Dict[str, object],
