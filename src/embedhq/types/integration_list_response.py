@@ -14,8 +14,8 @@ class IntegrationListResponse(BaseModel):
 
     object: Literal["list"]
 
-    first_id: Optional[str] = None
+    first: Optional[str] = None
 
     has_more: Optional[bool] = None
 
-    last_id: Optional[str] = None
+    last: Optional[str] = None

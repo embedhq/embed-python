@@ -47,10 +47,10 @@ class ProxyResource(SyncAPIResource):
         endpoint: str,
         *,
         body: Dict[str, object],
-        connection_id: str,
-        integration_id: str,
-        base_url_override: str | NotGiven = NOT_GIVEN,
-        retries: int | NotGiven = NOT_GIVEN,
+        x_embed_connected_account_id: str,
+        x_embed_integration: str,
+        x_embed_base_url_override: str | NotGiven = NOT_GIVEN,
+        x_embed_retries: int | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -59,18 +59,18 @@ class ProxyResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> ProxyDeleteResponse:
         """
-        Proxy DELETE request with connection credentials.
+        Proxy DELETE request with connected account's credentials.
 
         Args:
           endpoint: The endpoint to proxy the request to.
 
-          connection_id: The ID of the connection to use for the request.
+          x_embed_connected_account_id: The ID of the connected account to use for the request.
 
-          integration_id: The ID of the integration to use for the request.
+          x_embed_integration: The slug of the integration to use for the request.
 
-          base_url_override: Override the base URL for the request.
+          x_embed_base_url_override: Override the base URL for the request.
 
-          retries: The number of times to retry the request.
+          x_embed_retries: The number of times to retry the request.
 
           extra_headers: Send extra headers
 
@@ -85,10 +85,10 @@ class ProxyResource(SyncAPIResource):
         extra_headers = {
             **strip_not_given(
                 {
-                    "connection_id": connection_id,
-                    "integration_id": integration_id,
-                    "base_url_override": base_url_override,
-                    "retries": str(retries) if is_given(retries) else NOT_GIVEN,
+                    "X-Embed-Connected-Account-Id": x_embed_connected_account_id,
+                    "X-Embed-Integration": x_embed_integration,
+                    "X-Embed-Base-Url-Override": x_embed_base_url_override,
+                    "X-Embed-Retries": str(x_embed_retries) if is_given(x_embed_retries) else NOT_GIVEN,
                 }
             ),
             **(extra_headers or {}),
@@ -106,10 +106,10 @@ class ProxyResource(SyncAPIResource):
         self,
         endpoint: str,
         *,
-        connection_id: str,
-        integration_id: str,
-        base_url_override: str | NotGiven = NOT_GIVEN,
-        retries: int | NotGiven = NOT_GIVEN,
+        x_embed_connected_account_id: str,
+        x_embed_integration: str,
+        x_embed_base_url_override: str | NotGiven = NOT_GIVEN,
+        x_embed_retries: int | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -118,18 +118,18 @@ class ProxyResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> ProxyGetResponse:
         """
-        Proxy GET request with connection credentials.
+        Proxy GET request with connected account's credentials.
 
         Args:
           endpoint: The endpoint to proxy the request to.
 
-          connection_id: The ID of the connection to use for the request.
+          x_embed_connected_account_id: The ID of the connected account to use for the request.
 
-          integration_id: The ID of the integration to use for the request.
+          x_embed_integration: The slug of the integration to use for the request.
 
-          base_url_override: Override the base URL for the request.
+          x_embed_base_url_override: Override the base URL for the request.
 
-          retries: The number of times to retry the request.
+          x_embed_retries: The number of times to retry the request.
 
           extra_headers: Send extra headers
 
@@ -144,10 +144,10 @@ class ProxyResource(SyncAPIResource):
         extra_headers = {
             **strip_not_given(
                 {
-                    "connection_id": connection_id,
-                    "integration_id": integration_id,
-                    "base_url_override": base_url_override,
-                    "retries": str(retries) if is_given(retries) else NOT_GIVEN,
+                    "X-Embed-Connected-Account-Id": x_embed_connected_account_id,
+                    "X-Embed-Integration": x_embed_integration,
+                    "X-Embed-Base-Url-Override": x_embed_base_url_override,
+                    "X-Embed-Retries": str(x_embed_retries) if is_given(x_embed_retries) else NOT_GIVEN,
                 }
             ),
             **(extra_headers or {}),
@@ -165,10 +165,10 @@ class ProxyResource(SyncAPIResource):
         endpoint: str,
         *,
         body: Dict[str, object],
-        connection_id: str,
-        integration_id: str,
-        base_url_override: str | NotGiven = NOT_GIVEN,
-        retries: int | NotGiven = NOT_GIVEN,
+        x_embed_connected_account_id: str,
+        x_embed_integration: str,
+        x_embed_base_url_override: str | NotGiven = NOT_GIVEN,
+        x_embed_retries: int | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -177,18 +177,18 @@ class ProxyResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> ProxyPostResponse:
         """
-        Proxy POST request with connection credentials.
+        Proxy POST request with connected account's credentials.
 
         Args:
           endpoint: The endpoint to proxy the request to.
 
-          connection_id: The ID of the connection to use for the request.
+          x_embed_connected_account_id: The ID of the connected account to use for the request.
 
-          integration_id: The ID of the integration to use for the request.
+          x_embed_integration: The slug of the integration to use for the request.
 
-          base_url_override: Override the base URL for the request.
+          x_embed_base_url_override: Override the base URL for the request.
 
-          retries: The number of times to retry the request.
+          x_embed_retries: The number of times to retry the request.
 
           extra_headers: Send extra headers
 
@@ -203,10 +203,10 @@ class ProxyResource(SyncAPIResource):
         extra_headers = {
             **strip_not_given(
                 {
-                    "connection_id": connection_id,
-                    "integration_id": integration_id,
-                    "base_url_override": base_url_override,
-                    "retries": str(retries) if is_given(retries) else NOT_GIVEN,
+                    "X-Embed-Connected-Account-Id": x_embed_connected_account_id,
+                    "X-Embed-Integration": x_embed_integration,
+                    "X-Embed-Base-Url-Override": x_embed_base_url_override,
+                    "X-Embed-Retries": str(x_embed_retries) if is_given(x_embed_retries) else NOT_GIVEN,
                 }
             ),
             **(extra_headers or {}),
@@ -225,10 +225,10 @@ class ProxyResource(SyncAPIResource):
         endpoint: str,
         *,
         body: Dict[str, object],
-        connection_id: str,
-        integration_id: str,
-        base_url_override: str | NotGiven = NOT_GIVEN,
-        retries: int | NotGiven = NOT_GIVEN,
+        x_embed_connected_account_id: str,
+        x_embed_integration: str,
+        x_embed_base_url_override: str | NotGiven = NOT_GIVEN,
+        x_embed_retries: int | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -237,18 +237,18 @@ class ProxyResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> ProxyPutResponse:
         """
-        Proxy PUT request with connection credentials.
+        Proxy PUT request with connected account's credentials.
 
         Args:
           endpoint: The endpoint to proxy the request to.
 
-          connection_id: The ID of the connection to use for the request.
+          x_embed_connected_account_id: The ID of the connected account to use for the request.
 
-          integration_id: The ID of the integration to use for the request.
+          x_embed_integration: The slug of the integration to use for the request.
 
-          base_url_override: Override the base URL for the request.
+          x_embed_base_url_override: Override the base URL for the request.
 
-          retries: The number of times to retry the request.
+          x_embed_retries: The number of times to retry the request.
 
           extra_headers: Send extra headers
 
@@ -263,10 +263,10 @@ class ProxyResource(SyncAPIResource):
         extra_headers = {
             **strip_not_given(
                 {
-                    "connection_id": connection_id,
-                    "integration_id": integration_id,
-                    "base_url_override": base_url_override,
-                    "retries": str(retries) if is_given(retries) else NOT_GIVEN,
+                    "X-Embed-Connected-Account-Id": x_embed_connected_account_id,
+                    "X-Embed-Integration": x_embed_integration,
+                    "X-Embed-Base-Url-Override": x_embed_base_url_override,
+                    "X-Embed-Retries": str(x_embed_retries) if is_given(x_embed_retries) else NOT_GIVEN,
                 }
             ),
             **(extra_headers or {}),
@@ -295,10 +295,10 @@ class AsyncProxyResource(AsyncAPIResource):
         endpoint: str,
         *,
         body: Dict[str, object],
-        connection_id: str,
-        integration_id: str,
-        base_url_override: str | NotGiven = NOT_GIVEN,
-        retries: int | NotGiven = NOT_GIVEN,
+        x_embed_connected_account_id: str,
+        x_embed_integration: str,
+        x_embed_base_url_override: str | NotGiven = NOT_GIVEN,
+        x_embed_retries: int | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -307,18 +307,18 @@ class AsyncProxyResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> ProxyDeleteResponse:
         """
-        Proxy DELETE request with connection credentials.
+        Proxy DELETE request with connected account's credentials.
 
         Args:
           endpoint: The endpoint to proxy the request to.
 
-          connection_id: The ID of the connection to use for the request.
+          x_embed_connected_account_id: The ID of the connected account to use for the request.
 
-          integration_id: The ID of the integration to use for the request.
+          x_embed_integration: The slug of the integration to use for the request.
 
-          base_url_override: Override the base URL for the request.
+          x_embed_base_url_override: Override the base URL for the request.
 
-          retries: The number of times to retry the request.
+          x_embed_retries: The number of times to retry the request.
 
           extra_headers: Send extra headers
 
@@ -333,10 +333,10 @@ class AsyncProxyResource(AsyncAPIResource):
         extra_headers = {
             **strip_not_given(
                 {
-                    "connection_id": connection_id,
-                    "integration_id": integration_id,
-                    "base_url_override": base_url_override,
-                    "retries": str(retries) if is_given(retries) else NOT_GIVEN,
+                    "X-Embed-Connected-Account-Id": x_embed_connected_account_id,
+                    "X-Embed-Integration": x_embed_integration,
+                    "X-Embed-Base-Url-Override": x_embed_base_url_override,
+                    "X-Embed-Retries": str(x_embed_retries) if is_given(x_embed_retries) else NOT_GIVEN,
                 }
             ),
             **(extra_headers or {}),
@@ -354,10 +354,10 @@ class AsyncProxyResource(AsyncAPIResource):
         self,
         endpoint: str,
         *,
-        connection_id: str,
-        integration_id: str,
-        base_url_override: str | NotGiven = NOT_GIVEN,
-        retries: int | NotGiven = NOT_GIVEN,
+        x_embed_connected_account_id: str,
+        x_embed_integration: str,
+        x_embed_base_url_override: str | NotGiven = NOT_GIVEN,
+        x_embed_retries: int | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -366,18 +366,18 @@ class AsyncProxyResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> ProxyGetResponse:
         """
-        Proxy GET request with connection credentials.
+        Proxy GET request with connected account's credentials.
 
         Args:
           endpoint: The endpoint to proxy the request to.
 
-          connection_id: The ID of the connection to use for the request.
+          x_embed_connected_account_id: The ID of the connected account to use for the request.
 
-          integration_id: The ID of the integration to use for the request.
+          x_embed_integration: The slug of the integration to use for the request.
 
-          base_url_override: Override the base URL for the request.
+          x_embed_base_url_override: Override the base URL for the request.
 
-          retries: The number of times to retry the request.
+          x_embed_retries: The number of times to retry the request.
 
           extra_headers: Send extra headers
 
@@ -392,10 +392,10 @@ class AsyncProxyResource(AsyncAPIResource):
         extra_headers = {
             **strip_not_given(
                 {
-                    "connection_id": connection_id,
-                    "integration_id": integration_id,
-                    "base_url_override": base_url_override,
-                    "retries": str(retries) if is_given(retries) else NOT_GIVEN,
+                    "X-Embed-Connected-Account-Id": x_embed_connected_account_id,
+                    "X-Embed-Integration": x_embed_integration,
+                    "X-Embed-Base-Url-Override": x_embed_base_url_override,
+                    "X-Embed-Retries": str(x_embed_retries) if is_given(x_embed_retries) else NOT_GIVEN,
                 }
             ),
             **(extra_headers or {}),
@@ -413,10 +413,10 @@ class AsyncProxyResource(AsyncAPIResource):
         endpoint: str,
         *,
         body: Dict[str, object],
-        connection_id: str,
-        integration_id: str,
-        base_url_override: str | NotGiven = NOT_GIVEN,
-        retries: int | NotGiven = NOT_GIVEN,
+        x_embed_connected_account_id: str,
+        x_embed_integration: str,
+        x_embed_base_url_override: str | NotGiven = NOT_GIVEN,
+        x_embed_retries: int | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -425,18 +425,18 @@ class AsyncProxyResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> ProxyPostResponse:
         """
-        Proxy POST request with connection credentials.
+        Proxy POST request with connected account's credentials.
 
         Args:
           endpoint: The endpoint to proxy the request to.
 
-          connection_id: The ID of the connection to use for the request.
+          x_embed_connected_account_id: The ID of the connected account to use for the request.
 
-          integration_id: The ID of the integration to use for the request.
+          x_embed_integration: The slug of the integration to use for the request.
 
-          base_url_override: Override the base URL for the request.
+          x_embed_base_url_override: Override the base URL for the request.
 
-          retries: The number of times to retry the request.
+          x_embed_retries: The number of times to retry the request.
 
           extra_headers: Send extra headers
 
@@ -451,10 +451,10 @@ class AsyncProxyResource(AsyncAPIResource):
         extra_headers = {
             **strip_not_given(
                 {
-                    "connection_id": connection_id,
-                    "integration_id": integration_id,
-                    "base_url_override": base_url_override,
-                    "retries": str(retries) if is_given(retries) else NOT_GIVEN,
+                    "X-Embed-Connected-Account-Id": x_embed_connected_account_id,
+                    "X-Embed-Integration": x_embed_integration,
+                    "X-Embed-Base-Url-Override": x_embed_base_url_override,
+                    "X-Embed-Retries": str(x_embed_retries) if is_given(x_embed_retries) else NOT_GIVEN,
                 }
             ),
             **(extra_headers or {}),
@@ -473,10 +473,10 @@ class AsyncProxyResource(AsyncAPIResource):
         endpoint: str,
         *,
         body: Dict[str, object],
-        connection_id: str,
-        integration_id: str,
-        base_url_override: str | NotGiven = NOT_GIVEN,
-        retries: int | NotGiven = NOT_GIVEN,
+        x_embed_connected_account_id: str,
+        x_embed_integration: str,
+        x_embed_base_url_override: str | NotGiven = NOT_GIVEN,
+        x_embed_retries: int | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -485,18 +485,18 @@ class AsyncProxyResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> ProxyPutResponse:
         """
-        Proxy PUT request with connection credentials.
+        Proxy PUT request with connected account's credentials.
 
         Args:
           endpoint: The endpoint to proxy the request to.
 
-          connection_id: The ID of the connection to use for the request.
+          x_embed_connected_account_id: The ID of the connected account to use for the request.
 
-          integration_id: The ID of the integration to use for the request.
+          x_embed_integration: The slug of the integration to use for the request.
 
-          base_url_override: Override the base URL for the request.
+          x_embed_base_url_override: Override the base URL for the request.
 
-          retries: The number of times to retry the request.
+          x_embed_retries: The number of times to retry the request.
 
           extra_headers: Send extra headers
 
@@ -511,10 +511,10 @@ class AsyncProxyResource(AsyncAPIResource):
         extra_headers = {
             **strip_not_given(
                 {
-                    "connection_id": connection_id,
-                    "integration_id": integration_id,
-                    "base_url_override": base_url_override,
-                    "retries": str(retries) if is_given(retries) else NOT_GIVEN,
+                    "X-Embed-Connected-Account-Id": x_embed_connected_account_id,
+                    "X-Embed-Integration": x_embed_integration,
+                    "X-Embed-Base-Url-Override": x_embed_base_url_override,
+                    "X-Embed-Retries": str(x_embed_retries) if is_given(x_embed_retries) else NOT_GIVEN,
                 }
             ),
             **(extra_headers or {}),
