@@ -4,28 +4,52 @@ from __future__ import annotations
 
 import httpx
 
-from ..types import provider_list_params, provider_retrieve_params
-from .._types import NOT_GIVEN, Body, Query, Headers, NotGiven
-from .._utils import (
+from ...types import provider_list_params, provider_retrieve_params
+from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven
+from ..._utils import (
     maybe_transform,
     async_maybe_transform,
 )
-from .._compat import cached_property
-from .._resource import SyncAPIResource, AsyncAPIResource
-from .._response import (
+from ..._compat import cached_property
+from ..._resource import SyncAPIResource, AsyncAPIResource
+from ..._response import (
     to_raw_response_wrapper,
     to_streamed_response_wrapper,
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
-from .._base_client import make_request_options
-from ..types.provider import Provider
-from ..types.provider_list_response import ProviderListResponse
+from ..._base_client import make_request_options
+from ...types.provider import Provider
+from .action_templates import (
+    ActionTemplatesResource,
+    AsyncActionTemplatesResource,
+    ActionTemplatesResourceWithRawResponse,
+    AsyncActionTemplatesResourceWithRawResponse,
+    ActionTemplatesResourceWithStreamingResponse,
+    AsyncActionTemplatesResourceWithStreamingResponse,
+)
+from .collection_templates import (
+    CollectionTemplatesResource,
+    AsyncCollectionTemplatesResource,
+    CollectionTemplatesResourceWithRawResponse,
+    AsyncCollectionTemplatesResourceWithRawResponse,
+    CollectionTemplatesResourceWithStreamingResponse,
+    AsyncCollectionTemplatesResourceWithStreamingResponse,
+)
+from ...types.provider_list_response import ProviderListResponse
 
 __all__ = ["ProvidersResource", "AsyncProvidersResource"]
 
 
 class ProvidersResource(SyncAPIResource):
+    @cached_property
+    def collection_templates(self) -> CollectionTemplatesResource:
+        return CollectionTemplatesResource(self._client)
+
+    @cached_property
+    def action_templates(self) -> ActionTemplatesResource:
+        return ActionTemplatesResource(self._client)
+
     @cached_property
     def with_raw_response(self) -> ProvidersResourceWithRawResponse:
         return ProvidersResourceWithRawResponse(self)
@@ -131,6 +155,14 @@ class ProvidersResource(SyncAPIResource):
 
 
 class AsyncProvidersResource(AsyncAPIResource):
+    @cached_property
+    def collection_templates(self) -> AsyncCollectionTemplatesResource:
+        return AsyncCollectionTemplatesResource(self._client)
+
+    @cached_property
+    def action_templates(self) -> AsyncActionTemplatesResource:
+        return AsyncActionTemplatesResource(self._client)
+
     @cached_property
     def with_raw_response(self) -> AsyncProvidersResourceWithRawResponse:
         return AsyncProvidersResourceWithRawResponse(self)
@@ -246,6 +278,14 @@ class ProvidersResourceWithRawResponse:
             providers.list,
         )
 
+    @cached_property
+    def collection_templates(self) -> CollectionTemplatesResourceWithRawResponse:
+        return CollectionTemplatesResourceWithRawResponse(self._providers.collection_templates)
+
+    @cached_property
+    def action_templates(self) -> ActionTemplatesResourceWithRawResponse:
+        return ActionTemplatesResourceWithRawResponse(self._providers.action_templates)
+
 
 class AsyncProvidersResourceWithRawResponse:
     def __init__(self, providers: AsyncProvidersResource) -> None:
@@ -257,6 +297,14 @@ class AsyncProvidersResourceWithRawResponse:
         self.list = async_to_raw_response_wrapper(
             providers.list,
         )
+
+    @cached_property
+    def collection_templates(self) -> AsyncCollectionTemplatesResourceWithRawResponse:
+        return AsyncCollectionTemplatesResourceWithRawResponse(self._providers.collection_templates)
+
+    @cached_property
+    def action_templates(self) -> AsyncActionTemplatesResourceWithRawResponse:
+        return AsyncActionTemplatesResourceWithRawResponse(self._providers.action_templates)
 
 
 class ProvidersResourceWithStreamingResponse:
@@ -270,6 +318,14 @@ class ProvidersResourceWithStreamingResponse:
             providers.list,
         )
 
+    @cached_property
+    def collection_templates(self) -> CollectionTemplatesResourceWithStreamingResponse:
+        return CollectionTemplatesResourceWithStreamingResponse(self._providers.collection_templates)
+
+    @cached_property
+    def action_templates(self) -> ActionTemplatesResourceWithStreamingResponse:
+        return ActionTemplatesResourceWithStreamingResponse(self._providers.action_templates)
+
 
 class AsyncProvidersResourceWithStreamingResponse:
     def __init__(self, providers: AsyncProvidersResource) -> None:
@@ -281,3 +337,11 @@ class AsyncProvidersResourceWithStreamingResponse:
         self.list = async_to_streamed_response_wrapper(
             providers.list,
         )
+
+    @cached_property
+    def collection_templates(self) -> AsyncCollectionTemplatesResourceWithStreamingResponse:
+        return AsyncCollectionTemplatesResourceWithStreamingResponse(self._providers.collection_templates)
+
+    @cached_property
+    def action_templates(self) -> AsyncActionTemplatesResourceWithStreamingResponse:
+        return AsyncActionTemplatesResourceWithStreamingResponse(self._providers.action_templates)
