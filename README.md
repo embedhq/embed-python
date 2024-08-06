@@ -16,7 +16,7 @@ The REST API documentation can be found on [docs.useembed.com](https://docs.usee
 
 ```sh
 # install from PyPI
-pip install --pre embedhq
+pip install embedhq
 ```
 
 ## Usage
