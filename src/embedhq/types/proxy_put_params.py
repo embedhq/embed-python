@@ -3,9 +3,7 @@
 from __future__ import annotations
 
 from typing import Dict
-from typing_extensions import Required, Annotated, TypedDict
-
-from .._utils import PropertyInfo
+from typing_extensions import Required, TypedDict
 
 __all__ = ["ProxyPutParams"]
 
@@ -16,14 +14,14 @@ class ProxyPutParams(TypedDict, total=False):
 
     body: Required[Dict[str, object]]
 
-    x_embed_connected_account_id: Required[Annotated[str, PropertyInfo(alias="X-Embed-Connected-Account-Id")]]
+    connected_account_id: Required[str]
     """The ID of the connected account to use for the request."""
 
-    x_embed_integration: Required[Annotated[str, PropertyInfo(alias="X-Embed-Integration")]]
+    integration: Required[str]
     """The slug of the integration to use for the request."""
 
-    x_embed_base_url_override: Annotated[str, PropertyInfo(alias="X-Embed-Base-Url-Override")]
+    base_url_override: str
     """Override the base URL for the request."""
 
-    x_embed_retries: Annotated[int, PropertyInfo(alias="X-Embed-Retries")]
+    retries: int
     """The number of times to retry the request."""
