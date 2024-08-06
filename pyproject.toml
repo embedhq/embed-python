@@ -1,6 +1,6 @@
 [project]
 name = "embedhq"
-version = "0.1.0-alpha.2"
+version = "1.0.0"
 description = "The official Python library for the Embed API"
 dynamic = ["readme"]
 license = "Apache-2.0"
