@@ -43,8 +43,8 @@ class Integration(BaseModel):
     updated_at: int
     """The Unix timestamp (in seconds) for when the integration was updated."""
 
-    auth_schemes: Optional[List[Literal["oauth1", "oauth2", "basic", "api_key"]]] = None
-    """The authentication schemes the integration supports."""
+    auth_methods: Optional[List[Literal["oauth1", "oauth2", "basic", "api_key"]]] = None
+    """The authentication methods the integration supports."""
 
     logo_url_dark_mode: Optional[str] = None
     """The URL of the integration provider's logo suitable for dark mode."""
