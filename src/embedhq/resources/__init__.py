@@ -48,14 +48,6 @@ from .collections import (
     CollectionsResourceWithStreamingResponse,
     AsyncCollectionsResourceWithStreamingResponse,
 )
-from .connections import (
-    ConnectionsResource,
-    AsyncConnectionsResource,
-    ConnectionsResourceWithRawResponse,
-    AsyncConnectionsResourceWithRawResponse,
-    ConnectionsResourceWithStreamingResponse,
-    AsyncConnectionsResourceWithStreamingResponse,
-)
 from .integrations import (
     IntegrationsResource,
     AsyncIntegrationsResource,
@@ -63,14 +55,6 @@ from .integrations import (
     AsyncIntegrationsResourceWithRawResponse,
     IntegrationsResourceWithStreamingResponse,
     AsyncIntegrationsResourceWithStreamingResponse,
-)
-from .session_tokens import (
-    SessionTokensResource,
-    AsyncSessionTokensResource,
-    SessionTokensResourceWithRawResponse,
-    AsyncSessionTokensResourceWithRawResponse,
-    SessionTokensResourceWithStreamingResponse,
-    AsyncSessionTokensResourceWithStreamingResponse,
 )
 
 __all__ = [
@@ -80,18 +64,6 @@ __all__ = [
     "AsyncIntegrationsResourceWithRawResponse",
     "IntegrationsResourceWithStreamingResponse",
     "AsyncIntegrationsResourceWithStreamingResponse",
-    "ConnectionsResource",
-    "AsyncConnectionsResource",
-    "ConnectionsResourceWithRawResponse",
-    "AsyncConnectionsResourceWithRawResponse",
-    "ConnectionsResourceWithStreamingResponse",
-    "AsyncConnectionsResourceWithStreamingResponse",
-    "SessionTokensResource",
-    "AsyncSessionTokensResource",
-    "SessionTokensResourceWithRawResponse",
-    "AsyncSessionTokensResourceWithRawResponse",
-    "SessionTokensResourceWithStreamingResponse",
-    "AsyncSessionTokensResourceWithStreamingResponse",
     "ProvidersResource",
     "AsyncProvidersResource",
     "ProvidersResourceWithRawResponse",

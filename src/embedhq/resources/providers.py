@@ -4,7 +4,12 @@ from __future__ import annotations
 
 import httpx
 
+from ..types import provider_list_params
 from .._types import NOT_GIVEN, Body, Query, Headers, NotGiven
+from .._utils import (
+    maybe_transform,
+    async_maybe_transform,
+)
 from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
 from .._response import (
@@ -16,7 +21,6 @@ from .._response import (
 from .._base_client import (
     make_request_options,
 )
-from ..types.provider import Provider
 from ..types.provider_list_response import ProviderListResponse
 
 __all__ = ["ProvidersResource", "AsyncProvidersResource"]
@@ -31,21 +35,26 @@ class ProvidersResource(SyncAPIResource):
     def with_streaming_response(self) -> ProvidersResourceWithStreamingResponse:
         return ProvidersResourceWithStreamingResponse(self)
 
-    def retrieve(
+    def list(
         self,
-        provider_key: str,
         *,
+        include_action_templates: bool | NotGiven = NOT_GIVEN,
+        include_collection_templates: bool | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> Provider:
+    ) -> ProviderListResponse:
         """
-        Returns a provider.
+        Returns a list of integration providers.
 
         Args:
+          include_action_templates: Include action templates for each provider in the response.
+
+          include_collection_templates: Include collection templates for each provider in the response.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -54,31 +63,20 @@ class ProvidersResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not provider_key:
-            raise ValueError(f"Expected a non-empty value for `provider_key` but received {provider_key!r}")
-        return self._get(
-            f"/providers/{provider_key}",
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=Provider,
-        )
-
-    def list(
-        self,
-        *,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ProviderListResponse:
-        """Returns a list of integration providers."""
         return self._get(
             "/providers",
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform(
+                    {
+                        "include_action_templates": include_action_templates,
+                        "include_collection_templates": include_collection_templates,
+                    },
+                    provider_list_params.ProviderListParams,
+                ),
             ),
             cast_to=ProviderListResponse,
         )
@@ -93,21 +91,26 @@ class AsyncProvidersResource(AsyncAPIResource):
     def with_streaming_response(self) -> AsyncProvidersResourceWithStreamingResponse:
         return AsyncProvidersResourceWithStreamingResponse(self)
 
-    async def retrieve(
+    async def list(
         self,
-        provider_key: str,
         *,
+        include_action_templates: bool | NotGiven = NOT_GIVEN,
+        include_collection_templates: bool | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> Provider:
+    ) -> ProviderListResponse:
         """
-        Returns a provider.
+        Returns a list of integration providers.
 
         Args:
+          include_action_templates: Include action templates for each provider in the response.
+
+          include_collection_templates: Include collection templates for each provider in the response.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -116,31 +119,20 @@ class AsyncProvidersResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not provider_key:
-            raise ValueError(f"Expected a non-empty value for `provider_key` but received {provider_key!r}")
-        return await self._get(
-            f"/providers/{provider_key}",
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=Provider,
-        )
-
-    async def list(
-        self,
-        *,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ProviderListResponse:
-        """Returns a list of integration providers."""
         return await self._get(
             "/providers",
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=await async_maybe_transform(
+                    {
+                        "include_action_templates": include_action_templates,
+                        "include_collection_templates": include_collection_templates,
+                    },
+                    provider_list_params.ProviderListParams,
+                ),
             ),
             cast_to=ProviderListResponse,
         )
@@ -150,9 +142,6 @@ class ProvidersResourceWithRawResponse:
     def __init__(self, providers: ProvidersResource) -> None:
         self._providers = providers
 
-        self.retrieve = to_raw_response_wrapper(
-            providers.retrieve,
-        )
         self.list = to_raw_response_wrapper(
             providers.list,
         )
@@ -162,9 +151,6 @@ class AsyncProvidersResourceWithRawResponse:
     def __init__(self, providers: AsyncProvidersResource) -> None:
         self._providers = providers
 
-        self.retrieve = async_to_raw_response_wrapper(
-            providers.retrieve,
-        )
         self.list = async_to_raw_response_wrapper(
             providers.list,
         )
@@ -174,9 +160,6 @@ class ProvidersResourceWithStreamingResponse:
     def __init__(self, providers: ProvidersResource) -> None:
         self._providers = providers
 
-        self.retrieve = to_streamed_response_wrapper(
-            providers.retrieve,
-        )
         self.list = to_streamed_response_wrapper(
             providers.list,
         )
@@ -186,9 +169,6 @@ class AsyncProvidersResourceWithStreamingResponse:
     def __init__(self, providers: AsyncProvidersResource) -> None:
         self._providers = providers
 
-        self.retrieve = async_to_streamed_response_wrapper(
-            providers.retrieve,
-        )
         self.list = async_to_streamed_response_wrapper(
             providers.list,
         )

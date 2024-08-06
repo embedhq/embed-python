@@ -27,8 +27,8 @@ class TestProxy:
         proxy = client.proxy.delete(
             "string",
             body={"foo": "bar"},
-            connection_id="string",
-            integration_id="string",
+            x_embed_connected_account_id="string",
+            x_embed_integration="string",
         )
         assert_matches_type(ProxyDeleteResponse, proxy, path=["response"])
 
@@ -37,10 +37,10 @@ class TestProxy:
         proxy = client.proxy.delete(
             "string",
             body={"foo": "bar"},
-            connection_id="string",
-            integration_id="string",
-            base_url_override="string",
-            retries=0,
+            x_embed_connected_account_id="string",
+            x_embed_integration="string",
+            x_embed_base_url_override="string",
+            x_embed_retries=0,
         )
         assert_matches_type(ProxyDeleteResponse, proxy, path=["response"])
 
@@ -49,8 +49,8 @@ class TestProxy:
         response = client.proxy.with_raw_response.delete(
             "string",
             body={"foo": "bar"},
-            connection_id="string",
-            integration_id="string",
+            x_embed_connected_account_id="string",
+            x_embed_integration="string",
         )
 
         assert response.is_closed is True
@@ -63,8 +63,8 @@ class TestProxy:
         with client.proxy.with_streaming_response.delete(
             "string",
             body={"foo": "bar"},
-            connection_id="string",
-            integration_id="string",
+            x_embed_connected_account_id="string",
+            x_embed_integration="string",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -80,16 +80,16 @@ class TestProxy:
             client.proxy.with_raw_response.delete(
                 "",
                 body={"foo": "bar"},
-                connection_id="string",
-                integration_id="string",
+                x_embed_connected_account_id="string",
+                x_embed_integration="string",
             )
 
     @parametrize
     def test_method_get(self, client: Embed) -> None:
         proxy = client.proxy.get(
             "string",
-            connection_id="string",
-            integration_id="string",
+            x_embed_connected_account_id="string",
+            x_embed_integration="string",
         )
         assert_matches_type(ProxyGetResponse, proxy, path=["response"])
 
@@ -97,10 +97,10 @@ class TestProxy:
     def test_method_get_with_all_params(self, client: Embed) -> None:
         proxy = client.proxy.get(
             "string",
-            connection_id="string",
-            integration_id="string",
-            base_url_override="string",
-            retries=0,
+            x_embed_connected_account_id="string",
+            x_embed_integration="string",
+            x_embed_base_url_override="string",
+            x_embed_retries=0,
         )
         assert_matches_type(ProxyGetResponse, proxy, path=["response"])
 
@@ -108,8 +108,8 @@ class TestProxy:
     def test_raw_response_get(self, client: Embed) -> None:
         response = client.proxy.with_raw_response.get(
             "string",
-            connection_id="string",
-            integration_id="string",
+            x_embed_connected_account_id="string",
+            x_embed_integration="string",
         )
 
         assert response.is_closed is True
@@ -121,8 +121,8 @@ class TestProxy:
     def test_streaming_response_get(self, client: Embed) -> None:
         with client.proxy.with_streaming_response.get(
             "string",
-            connection_id="string",
-            integration_id="string",
+            x_embed_connected_account_id="string",
+            x_embed_integration="string",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -137,8 +137,8 @@ class TestProxy:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `endpoint` but received ''"):
             client.proxy.with_raw_response.get(
                 "",
-                connection_id="string",
-                integration_id="string",
+                x_embed_connected_account_id="string",
+                x_embed_integration="string",
             )
 
     @parametrize
@@ -146,8 +146,8 @@ class TestProxy:
         proxy = client.proxy.post(
             "string",
             body={"foo": "bar"},
-            connection_id="string",
-            integration_id="string",
+            x_embed_connected_account_id="string",
+            x_embed_integration="string",
         )
         assert_matches_type(ProxyPostResponse, proxy, path=["response"])
 
@@ -156,10 +156,10 @@ class TestProxy:
         proxy = client.proxy.post(
             "string",
             body={"foo": "bar"},
-            connection_id="string",
-            integration_id="string",
-            base_url_override="string",
-            retries=0,
+            x_embed_connected_account_id="string",
+            x_embed_integration="string",
+            x_embed_base_url_override="string",
+            x_embed_retries=0,
         )
         assert_matches_type(ProxyPostResponse, proxy, path=["response"])
 
@@ -168,8 +168,8 @@ class TestProxy:
         response = client.proxy.with_raw_response.post(
             "string",
             body={"foo": "bar"},
-            connection_id="string",
-            integration_id="string",
+            x_embed_connected_account_id="string",
+            x_embed_integration="string",
         )
 
         assert response.is_closed is True
@@ -182,8 +182,8 @@ class TestProxy:
         with client.proxy.with_streaming_response.post(
             "string",
             body={"foo": "bar"},
-            connection_id="string",
-            integration_id="string",
+            x_embed_connected_account_id="string",
+            x_embed_integration="string",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -199,8 +199,8 @@ class TestProxy:
             client.proxy.with_raw_response.post(
                 "",
                 body={"foo": "bar"},
-                connection_id="string",
-                integration_id="string",
+                x_embed_connected_account_id="string",
+                x_embed_integration="string",
             )
 
     @parametrize
@@ -208,8 +208,8 @@ class TestProxy:
         proxy = client.proxy.put(
             "string",
             body={"foo": "bar"},
-            connection_id="string",
-            integration_id="string",
+            x_embed_connected_account_id="string",
+            x_embed_integration="string",
         )
         assert_matches_type(ProxyPutResponse, proxy, path=["response"])
 
@@ -218,10 +218,10 @@ class TestProxy:
         proxy = client.proxy.put(
             "string",
             body={"foo": "bar"},
-            connection_id="string",
-            integration_id="string",
-            base_url_override="string",
-            retries=0,
+            x_embed_connected_account_id="string",
+            x_embed_integration="string",
+            x_embed_base_url_override="string",
+            x_embed_retries=0,
         )
         assert_matches_type(ProxyPutResponse, proxy, path=["response"])
 
@@ -230,8 +230,8 @@ class TestProxy:
         response = client.proxy.with_raw_response.put(
             "string",
             body={"foo": "bar"},
-            connection_id="string",
-            integration_id="string",
+            x_embed_connected_account_id="string",
+            x_embed_integration="string",
         )
 
         assert response.is_closed is True
@@ -244,8 +244,8 @@ class TestProxy:
         with client.proxy.with_streaming_response.put(
             "string",
             body={"foo": "bar"},
-            connection_id="string",
-            integration_id="string",
+            x_embed_connected_account_id="string",
+            x_embed_integration="string",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -261,8 +261,8 @@ class TestProxy:
             client.proxy.with_raw_response.put(
                 "",
                 body={"foo": "bar"},
-                connection_id="string",
-                integration_id="string",
+                x_embed_connected_account_id="string",
+                x_embed_integration="string",
             )
 
 
@@ -274,8 +274,8 @@ class TestAsyncProxy:
         proxy = await async_client.proxy.delete(
             "string",
             body={"foo": "bar"},
-            connection_id="string",
-            integration_id="string",
+            x_embed_connected_account_id="string",
+            x_embed_integration="string",
         )
         assert_matches_type(ProxyDeleteResponse, proxy, path=["response"])
 
@@ -284,10 +284,10 @@ class TestAsyncProxy:
         proxy = await async_client.proxy.delete(
             "string",
             body={"foo": "bar"},
-            connection_id="string",
-            integration_id="string",
-            base_url_override="string",
-            retries=0,
+            x_embed_connected_account_id="string",
+            x_embed_integration="string",
+            x_embed_base_url_override="string",
+            x_embed_retries=0,
         )
         assert_matches_type(ProxyDeleteResponse, proxy, path=["response"])
 
@@ -296,8 +296,8 @@ class TestAsyncProxy:
         response = await async_client.proxy.with_raw_response.delete(
             "string",
             body={"foo": "bar"},
-            connection_id="string",
-            integration_id="string",
+            x_embed_connected_account_id="string",
+            x_embed_integration="string",
         )
 
         assert response.is_closed is True
@@ -310,8 +310,8 @@ class TestAsyncProxy:
         async with async_client.proxy.with_streaming_response.delete(
             "string",
             body={"foo": "bar"},
-            connection_id="string",
-            integration_id="string",
+            x_embed_connected_account_id="string",
+            x_embed_integration="string",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -327,16 +327,16 @@ class TestAsyncProxy:
             await async_client.proxy.with_raw_response.delete(
                 "",
                 body={"foo": "bar"},
-                connection_id="string",
-                integration_id="string",
+                x_embed_connected_account_id="string",
+                x_embed_integration="string",
             )
 
     @parametrize
     async def test_method_get(self, async_client: AsyncEmbed) -> None:
         proxy = await async_client.proxy.get(
             "string",
-            connection_id="string",
-            integration_id="string",
+            x_embed_connected_account_id="string",
+            x_embed_integration="string",
         )
         assert_matches_type(ProxyGetResponse, proxy, path=["response"])
 
@@ -344,10 +344,10 @@ class TestAsyncProxy:
     async def test_method_get_with_all_params(self, async_client: AsyncEmbed) -> None:
         proxy = await async_client.proxy.get(
             "string",
-            connection_id="string",
-            integration_id="string",
-            base_url_override="string",
-            retries=0,
+            x_embed_connected_account_id="string",
+            x_embed_integration="string",
+            x_embed_base_url_override="string",
+            x_embed_retries=0,
         )
         assert_matches_type(ProxyGetResponse, proxy, path=["response"])
 
@@ -355,8 +355,8 @@ class TestAsyncProxy:
     async def test_raw_response_get(self, async_client: AsyncEmbed) -> None:
         response = await async_client.proxy.with_raw_response.get(
             "string",
-            connection_id="string",
-            integration_id="string",
+            x_embed_connected_account_id="string",
+            x_embed_integration="string",
         )
 
         assert response.is_closed is True
@@ -368,8 +368,8 @@ class TestAsyncProxy:
     async def test_streaming_response_get(self, async_client: AsyncEmbed) -> None:
         async with async_client.proxy.with_streaming_response.get(
             "string",
-            connection_id="string",
-            integration_id="string",
+            x_embed_connected_account_id="string",
+            x_embed_integration="string",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -384,8 +384,8 @@ class TestAsyncProxy:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `endpoint` but received ''"):
             await async_client.proxy.with_raw_response.get(
                 "",
-                connection_id="string",
-                integration_id="string",
+                x_embed_connected_account_id="string",
+                x_embed_integration="string",
             )
 
     @parametrize
@@ -393,8 +393,8 @@ class TestAsyncProxy:
         proxy = await async_client.proxy.post(
             "string",
             body={"foo": "bar"},
-            connection_id="string",
-            integration_id="string",
+            x_embed_connected_account_id="string",
+            x_embed_integration="string",
         )
         assert_matches_type(ProxyPostResponse, proxy, path=["response"])
 
@@ -403,10 +403,10 @@ class TestAsyncProxy:
         proxy = await async_client.proxy.post(
             "string",
             body={"foo": "bar"},
-            connection_id="string",
-            integration_id="string",
-            base_url_override="string",
-            retries=0,
+            x_embed_connected_account_id="string",
+            x_embed_integration="string",
+            x_embed_base_url_override="string",
+            x_embed_retries=0,
         )
         assert_matches_type(ProxyPostResponse, proxy, path=["response"])
 
@@ -415,8 +415,8 @@ class TestAsyncProxy:
         response = await async_client.proxy.with_raw_response.post(
             "string",
             body={"foo": "bar"},
-            connection_id="string",
-            integration_id="string",
+            x_embed_connected_account_id="string",
+            x_embed_integration="string",
         )
 
         assert response.is_closed is True
@@ -429,8 +429,8 @@ class TestAsyncProxy:
         async with async_client.proxy.with_streaming_response.post(
             "string",
             body={"foo": "bar"},
-            connection_id="string",
-            integration_id="string",
+            x_embed_connected_account_id="string",
+            x_embed_integration="string",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -446,8 +446,8 @@ class TestAsyncProxy:
             await async_client.proxy.with_raw_response.post(
                 "",
                 body={"foo": "bar"},
-                connection_id="string",
-                integration_id="string",
+                x_embed_connected_account_id="string",
+                x_embed_integration="string",
             )
 
     @parametrize
@@ -455,8 +455,8 @@ class TestAsyncProxy:
         proxy = await async_client.proxy.put(
             "string",
             body={"foo": "bar"},
-            connection_id="string",
-            integration_id="string",
+            x_embed_connected_account_id="string",
+            x_embed_integration="string",
         )
         assert_matches_type(ProxyPutResponse, proxy, path=["response"])
 
@@ -465,10 +465,10 @@ class TestAsyncProxy:
         proxy = await async_client.proxy.put(
             "string",
             body={"foo": "bar"},
-            connection_id="string",
-            integration_id="string",
-            base_url_override="string",
-            retries=0,
+            x_embed_connected_account_id="string",
+            x_embed_integration="string",
+            x_embed_base_url_override="string",
+            x_embed_retries=0,
         )
         assert_matches_type(ProxyPutResponse, proxy, path=["response"])
 
@@ -477,8 +477,8 @@ class TestAsyncProxy:
         response = await async_client.proxy.with_raw_response.put(
             "string",
             body={"foo": "bar"},
-            connection_id="string",
-            integration_id="string",
+            x_embed_connected_account_id="string",
+            x_embed_integration="string",
         )
 
         assert response.is_closed is True
@@ -491,8 +491,8 @@ class TestAsyncProxy:
         async with async_client.proxy.with_streaming_response.put(
             "string",
             body={"foo": "bar"},
-            connection_id="string",
-            integration_id="string",
+            x_embed_connected_account_id="string",
+            x_embed_integration="string",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -508,6 +508,6 @@ class TestAsyncProxy:
             await async_client.proxy.with_raw_response.put(
                 "",
                 body={"foo": "bar"},
-                connection_id="string",
-                integration_id="string",
+                x_embed_connected_account_id="string",
+                x_embed_integration="string",
             )
