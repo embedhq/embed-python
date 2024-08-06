@@ -18,9 +18,7 @@ from ..._response import (
     async_to_streamed_response_wrapper,
 )
 from ...types.syncs import run_list_params, run_retrieve_params
-from ..._base_client import (
-    make_request_options,
-)
+from ..._base_client import make_request_options
 from ...types.syncs.sync_run import SyncRun
 from ...types.syncs.run_list_response import RunListResponse
 
@@ -38,11 +36,12 @@ class RunsResource(SyncAPIResource):
 
     def retrieve(
         self,
-        run_id: str,
+        sync_run_id: str,
         *,
-        collection_key: str,
-        connection_id: str,
-        integration_id: str,
+        collection: str,
+        connected_account_id: str,
+        integration: str,
+        collection_version: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -54,9 +53,11 @@ class RunsResource(SyncAPIResource):
         Returns a sync run.
 
         Args:
-          connection_id: The ID of the connection to which the sync run belongs.
+          connected_account_id: The ID of the connected account to which the syncs belong.
 
-          integration_id: The ID of the integration to which the sync run belongs.
+          integration: The slug of the integration to which the sync belongs.
+
+          collection_version: The collection version (defaults to latest).
 
           extra_headers: Send extra headers
 
@@ -66,12 +67,12 @@ class RunsResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not collection_key:
-            raise ValueError(f"Expected a non-empty value for `collection_key` but received {collection_key!r}")
-        if not run_id:
-            raise ValueError(f"Expected a non-empty value for `run_id` but received {run_id!r}")
+        if not collection:
+            raise ValueError(f"Expected a non-empty value for `collection` but received {collection!r}")
+        if not sync_run_id:
+            raise ValueError(f"Expected a non-empty value for `sync_run_id` but received {sync_run_id!r}")
         return self._get(
-            f"/syncs/{collection_key}/runs/{run_id}",
+            f"/syncs/{collection}/runs/{sync_run_id}",
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -79,8 +80,9 @@ class RunsResource(SyncAPIResource):
                 timeout=timeout,
                 query=maybe_transform(
                     {
-                        "connection_id": connection_id,
-                        "integration_id": integration_id,
+                        "connected_account_id": connected_account_id,
+                        "integration": integration,
+                        "collection_version": collection_version,
                     },
                     run_retrieve_params.RunRetrieveParams,
                 ),
@@ -90,10 +92,11 @@ class RunsResource(SyncAPIResource):
 
     def list(
         self,
-        collection_key: str,
+        collection: str,
         *,
-        connection_id: str,
-        integration_id: str,
+        connected_account_id: str,
+        integration: str,
+        collection_version: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -105,9 +108,11 @@ class RunsResource(SyncAPIResource):
         Returns a list of recent sync runs.
 
         Args:
-          connection_id: The ID of the connection to which the sync runs belong.
+          connected_account_id: The ID of the connected account to which the syncs belong.
 
-          integration_id: The ID of the integration to which the sync runs belong.
+          integration: The slug of the integration to which the sync belongs.
+
+          collection_version: The collection version (defaults to latest).
 
           extra_headers: Send extra headers
 
@@ -117,10 +122,10 @@ class RunsResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not collection_key:
-            raise ValueError(f"Expected a non-empty value for `collection_key` but received {collection_key!r}")
+        if not collection:
+            raise ValueError(f"Expected a non-empty value for `collection` but received {collection!r}")
         return self._get(
-            f"/syncs/{collection_key}/runs",
+            f"/syncs/{collection}/runs",
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -128,8 +133,9 @@ class RunsResource(SyncAPIResource):
                 timeout=timeout,
                 query=maybe_transform(
                     {
-                        "connection_id": connection_id,
-                        "integration_id": integration_id,
+                        "connected_account_id": connected_account_id,
+                        "integration": integration,
+                        "collection_version": collection_version,
                     },
                     run_list_params.RunListParams,
                 ),
@@ -149,11 +155,12 @@ class AsyncRunsResource(AsyncAPIResource):
 
     async def retrieve(
         self,
-        run_id: str,
+        sync_run_id: str,
         *,
-        collection_key: str,
-        connection_id: str,
-        integration_id: str,
+        collection: str,
+        connected_account_id: str,
+        integration: str,
+        collection_version: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -165,9 +172,11 @@ class AsyncRunsResource(AsyncAPIResource):
         Returns a sync run.
 
         Args:
-          connection_id: The ID of the connection to which the sync run belongs.
+          connected_account_id: The ID of the connected account to which the syncs belong.
 
-          integration_id: The ID of the integration to which the sync run belongs.
+          integration: The slug of the integration to which the sync belongs.
+
+          collection_version: The collection version (defaults to latest).
 
           extra_headers: Send extra headers
 
@@ -177,12 +186,12 @@ class AsyncRunsResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not collection_key:
-            raise ValueError(f"Expected a non-empty value for `collection_key` but received {collection_key!r}")
-        if not run_id:
-            raise ValueError(f"Expected a non-empty value for `run_id` but received {run_id!r}")
+        if not collection:
+            raise ValueError(f"Expected a non-empty value for `collection` but received {collection!r}")
+        if not sync_run_id:
+            raise ValueError(f"Expected a non-empty value for `sync_run_id` but received {sync_run_id!r}")
         return await self._get(
-            f"/syncs/{collection_key}/runs/{run_id}",
+            f"/syncs/{collection}/runs/{sync_run_id}",
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -190,8 +199,9 @@ class AsyncRunsResource(AsyncAPIResource):
                 timeout=timeout,
                 query=await async_maybe_transform(
                     {
-                        "connection_id": connection_id,
-                        "integration_id": integration_id,
+                        "connected_account_id": connected_account_id,
+                        "integration": integration,
+                        "collection_version": collection_version,
                     },
                     run_retrieve_params.RunRetrieveParams,
                 ),
@@ -201,10 +211,11 @@ class AsyncRunsResource(AsyncAPIResource):
 
     async def list(
         self,
-        collection_key: str,
+        collection: str,
         *,
-        connection_id: str,
-        integration_id: str,
+        connected_account_id: str,
+        integration: str,
+        collection_version: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -216,9 +227,11 @@ class AsyncRunsResource(AsyncAPIResource):
         Returns a list of recent sync runs.
 
         Args:
-          connection_id: The ID of the connection to which the sync runs belong.
+          connected_account_id: The ID of the connected account to which the syncs belong.
 
-          integration_id: The ID of the integration to which the sync runs belong.
+          integration: The slug of the integration to which the sync belongs.
+
+          collection_version: The collection version (defaults to latest).
 
           extra_headers: Send extra headers
 
@@ -228,10 +241,10 @@ class AsyncRunsResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not collection_key:
-            raise ValueError(f"Expected a non-empty value for `collection_key` but received {collection_key!r}")
+        if not collection:
+            raise ValueError(f"Expected a non-empty value for `collection` but received {collection!r}")
         return await self._get(
-            f"/syncs/{collection_key}/runs",
+            f"/syncs/{collection}/runs",
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -239,8 +252,9 @@ class AsyncRunsResource(AsyncAPIResource):
                 timeout=timeout,
                 query=await async_maybe_transform(
                     {
-                        "connection_id": connection_id,
-                        "integration_id": integration_id,
+                        "connected_account_id": connected_account_id,
+                        "integration": integration,
+                        "collection_version": collection_version,
                     },
                     run_list_params.RunListParams,
                 ),

@@ -25,16 +25,32 @@ class TestProxy:
     @parametrize
     def test_method_delete(self, client: Embed) -> None:
         proxy = client.proxy.delete(
-            "string",
+            endpoint="endpoint",
             body={"foo": "bar"},
+            x_embed_connected_account_id="X-Embed-Connected-Account-Id",
+            x_embed_integration="X-Embed-Integration",
+        )
+        assert_matches_type(ProxyDeleteResponse, proxy, path=["response"])
+
+    @parametrize
+    def test_method_delete_with_all_params(self, client: Embed) -> None:
+        proxy = client.proxy.delete(
+            endpoint="endpoint",
+            body={"foo": "bar"},
+            x_embed_connected_account_id="X-Embed-Connected-Account-Id",
+            x_embed_integration="X-Embed-Integration",
+            x_embed_base_url_override="X-Embed-Base-Url-Override",
+            x_embed_retries=0,
         )
         assert_matches_type(ProxyDeleteResponse, proxy, path=["response"])
 
     @parametrize
     def test_raw_response_delete(self, client: Embed) -> None:
         response = client.proxy.with_raw_response.delete(
-            "string",
+            endpoint="endpoint",
             body={"foo": "bar"},
+            x_embed_connected_account_id="X-Embed-Connected-Account-Id",
+            x_embed_integration="X-Embed-Integration",
         )
 
         assert response.is_closed is True
@@ -45,8 +61,10 @@ class TestProxy:
     @parametrize
     def test_streaming_response_delete(self, client: Embed) -> None:
         with client.proxy.with_streaming_response.delete(
-            "string",
+            endpoint="endpoint",
             body={"foo": "bar"},
+            x_embed_connected_account_id="X-Embed-Connected-Account-Id",
+            x_embed_integration="X-Embed-Integration",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -60,21 +78,38 @@ class TestProxy:
     def test_path_params_delete(self, client: Embed) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `endpoint` but received ''"):
             client.proxy.with_raw_response.delete(
-                "",
+                endpoint="",
                 body={"foo": "bar"},
+                x_embed_connected_account_id="X-Embed-Connected-Account-Id",
+                x_embed_integration="X-Embed-Integration",
             )
 
     @parametrize
     def test_method_get(self, client: Embed) -> None:
         proxy = client.proxy.get(
-            "string",
+            endpoint="endpoint",
+            x_embed_connected_account_id="X-Embed-Connected-Account-Id",
+            x_embed_integration="X-Embed-Integration",
+        )
+        assert_matches_type(ProxyGetResponse, proxy, path=["response"])
+
+    @parametrize
+    def test_method_get_with_all_params(self, client: Embed) -> None:
+        proxy = client.proxy.get(
+            endpoint="endpoint",
+            x_embed_connected_account_id="X-Embed-Connected-Account-Id",
+            x_embed_integration="X-Embed-Integration",
+            x_embed_base_url_override="X-Embed-Base-Url-Override",
+            x_embed_retries=0,
         )
         assert_matches_type(ProxyGetResponse, proxy, path=["response"])
 
     @parametrize
     def test_raw_response_get(self, client: Embed) -> None:
         response = client.proxy.with_raw_response.get(
-            "string",
+            endpoint="endpoint",
+            x_embed_connected_account_id="X-Embed-Connected-Account-Id",
+            x_embed_integration="X-Embed-Integration",
         )
 
         assert response.is_closed is True
@@ -85,7 +120,9 @@ class TestProxy:
     @parametrize
     def test_streaming_response_get(self, client: Embed) -> None:
         with client.proxy.with_streaming_response.get(
-            "string",
+            endpoint="endpoint",
+            x_embed_connected_account_id="X-Embed-Connected-Account-Id",
+            x_embed_integration="X-Embed-Integration",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -99,22 +136,40 @@ class TestProxy:
     def test_path_params_get(self, client: Embed) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `endpoint` but received ''"):
             client.proxy.with_raw_response.get(
-                "",
+                endpoint="",
+                x_embed_connected_account_id="X-Embed-Connected-Account-Id",
+                x_embed_integration="X-Embed-Integration",
             )
 
     @parametrize
     def test_method_post(self, client: Embed) -> None:
         proxy = client.proxy.post(
-            "string",
+            endpoint="endpoint",
             body={"foo": "bar"},
+            x_embed_connected_account_id="X-Embed-Connected-Account-Id",
+            x_embed_integration="X-Embed-Integration",
+        )
+        assert_matches_type(ProxyPostResponse, proxy, path=["response"])
+
+    @parametrize
+    def test_method_post_with_all_params(self, client: Embed) -> None:
+        proxy = client.proxy.post(
+            endpoint="endpoint",
+            body={"foo": "bar"},
+            x_embed_connected_account_id="X-Embed-Connected-Account-Id",
+            x_embed_integration="X-Embed-Integration",
+            x_embed_base_url_override="X-Embed-Base-Url-Override",
+            x_embed_retries=0,
         )
         assert_matches_type(ProxyPostResponse, proxy, path=["response"])
 
     @parametrize
     def test_raw_response_post(self, client: Embed) -> None:
         response = client.proxy.with_raw_response.post(
-            "string",
+            endpoint="endpoint",
             body={"foo": "bar"},
+            x_embed_connected_account_id="X-Embed-Connected-Account-Id",
+            x_embed_integration="X-Embed-Integration",
         )
 
         assert response.is_closed is True
@@ -125,8 +180,10 @@ class TestProxy:
     @parametrize
     def test_streaming_response_post(self, client: Embed) -> None:
         with client.proxy.with_streaming_response.post(
-            "string",
+            endpoint="endpoint",
             body={"foo": "bar"},
+            x_embed_connected_account_id="X-Embed-Connected-Account-Id",
+            x_embed_integration="X-Embed-Integration",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -140,23 +197,41 @@ class TestProxy:
     def test_path_params_post(self, client: Embed) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `endpoint` but received ''"):
             client.proxy.with_raw_response.post(
-                "",
+                endpoint="",
                 body={"foo": "bar"},
+                x_embed_connected_account_id="X-Embed-Connected-Account-Id",
+                x_embed_integration="X-Embed-Integration",
             )
 
     @parametrize
     def test_method_put(self, client: Embed) -> None:
         proxy = client.proxy.put(
-            "string",
+            endpoint="endpoint",
             body={"foo": "bar"},
+            x_embed_connected_account_id="X-Embed-Connected-Account-Id",
+            x_embed_integration="X-Embed-Integration",
+        )
+        assert_matches_type(ProxyPutResponse, proxy, path=["response"])
+
+    @parametrize
+    def test_method_put_with_all_params(self, client: Embed) -> None:
+        proxy = client.proxy.put(
+            endpoint="endpoint",
+            body={"foo": "bar"},
+            x_embed_connected_account_id="X-Embed-Connected-Account-Id",
+            x_embed_integration="X-Embed-Integration",
+            x_embed_base_url_override="X-Embed-Base-Url-Override",
+            x_embed_retries=0,
         )
         assert_matches_type(ProxyPutResponse, proxy, path=["response"])
 
     @parametrize
     def test_raw_response_put(self, client: Embed) -> None:
         response = client.proxy.with_raw_response.put(
-            "string",
+            endpoint="endpoint",
             body={"foo": "bar"},
+            x_embed_connected_account_id="X-Embed-Connected-Account-Id",
+            x_embed_integration="X-Embed-Integration",
         )
 
         assert response.is_closed is True
@@ -167,8 +242,10 @@ class TestProxy:
     @parametrize
     def test_streaming_response_put(self, client: Embed) -> None:
         with client.proxy.with_streaming_response.put(
-            "string",
+            endpoint="endpoint",
             body={"foo": "bar"},
+            x_embed_connected_account_id="X-Embed-Connected-Account-Id",
+            x_embed_integration="X-Embed-Integration",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -182,8 +259,10 @@ class TestProxy:
     def test_path_params_put(self, client: Embed) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `endpoint` but received ''"):
             client.proxy.with_raw_response.put(
-                "",
+                endpoint="",
                 body={"foo": "bar"},
+                x_embed_connected_account_id="X-Embed-Connected-Account-Id",
+                x_embed_integration="X-Embed-Integration",
             )
 
 
@@ -193,16 +272,32 @@ class TestAsyncProxy:
     @parametrize
     async def test_method_delete(self, async_client: AsyncEmbed) -> None:
         proxy = await async_client.proxy.delete(
-            "string",
+            endpoint="endpoint",
             body={"foo": "bar"},
+            x_embed_connected_account_id="X-Embed-Connected-Account-Id",
+            x_embed_integration="X-Embed-Integration",
+        )
+        assert_matches_type(ProxyDeleteResponse, proxy, path=["response"])
+
+    @parametrize
+    async def test_method_delete_with_all_params(self, async_client: AsyncEmbed) -> None:
+        proxy = await async_client.proxy.delete(
+            endpoint="endpoint",
+            body={"foo": "bar"},
+            x_embed_connected_account_id="X-Embed-Connected-Account-Id",
+            x_embed_integration="X-Embed-Integration",
+            x_embed_base_url_override="X-Embed-Base-Url-Override",
+            x_embed_retries=0,
         )
         assert_matches_type(ProxyDeleteResponse, proxy, path=["response"])
 
     @parametrize
     async def test_raw_response_delete(self, async_client: AsyncEmbed) -> None:
         response = await async_client.proxy.with_raw_response.delete(
-            "string",
+            endpoint="endpoint",
             body={"foo": "bar"},
+            x_embed_connected_account_id="X-Embed-Connected-Account-Id",
+            x_embed_integration="X-Embed-Integration",
         )
 
         assert response.is_closed is True
@@ -213,8 +308,10 @@ class TestAsyncProxy:
     @parametrize
     async def test_streaming_response_delete(self, async_client: AsyncEmbed) -> None:
         async with async_client.proxy.with_streaming_response.delete(
-            "string",
+            endpoint="endpoint",
             body={"foo": "bar"},
+            x_embed_connected_account_id="X-Embed-Connected-Account-Id",
+            x_embed_integration="X-Embed-Integration",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -228,21 +325,38 @@ class TestAsyncProxy:
     async def test_path_params_delete(self, async_client: AsyncEmbed) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `endpoint` but received ''"):
             await async_client.proxy.with_raw_response.delete(
-                "",
+                endpoint="",
                 body={"foo": "bar"},
+                x_embed_connected_account_id="X-Embed-Connected-Account-Id",
+                x_embed_integration="X-Embed-Integration",
             )
 
     @parametrize
     async def test_method_get(self, async_client: AsyncEmbed) -> None:
         proxy = await async_client.proxy.get(
-            "string",
+            endpoint="endpoint",
+            x_embed_connected_account_id="X-Embed-Connected-Account-Id",
+            x_embed_integration="X-Embed-Integration",
+        )
+        assert_matches_type(ProxyGetResponse, proxy, path=["response"])
+
+    @parametrize
+    async def test_method_get_with_all_params(self, async_client: AsyncEmbed) -> None:
+        proxy = await async_client.proxy.get(
+            endpoint="endpoint",
+            x_embed_connected_account_id="X-Embed-Connected-Account-Id",
+            x_embed_integration="X-Embed-Integration",
+            x_embed_base_url_override="X-Embed-Base-Url-Override",
+            x_embed_retries=0,
         )
         assert_matches_type(ProxyGetResponse, proxy, path=["response"])
 
     @parametrize
     async def test_raw_response_get(self, async_client: AsyncEmbed) -> None:
         response = await async_client.proxy.with_raw_response.get(
-            "string",
+            endpoint="endpoint",
+            x_embed_connected_account_id="X-Embed-Connected-Account-Id",
+            x_embed_integration="X-Embed-Integration",
         )
 
         assert response.is_closed is True
@@ -253,7 +367,9 @@ class TestAsyncProxy:
     @parametrize
     async def test_streaming_response_get(self, async_client: AsyncEmbed) -> None:
         async with async_client.proxy.with_streaming_response.get(
-            "string",
+            endpoint="endpoint",
+            x_embed_connected_account_id="X-Embed-Connected-Account-Id",
+            x_embed_integration="X-Embed-Integration",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -267,22 +383,40 @@ class TestAsyncProxy:
     async def test_path_params_get(self, async_client: AsyncEmbed) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `endpoint` but received ''"):
             await async_client.proxy.with_raw_response.get(
-                "",
+                endpoint="",
+                x_embed_connected_account_id="X-Embed-Connected-Account-Id",
+                x_embed_integration="X-Embed-Integration",
             )
 
     @parametrize
     async def test_method_post(self, async_client: AsyncEmbed) -> None:
         proxy = await async_client.proxy.post(
-            "string",
+            endpoint="endpoint",
             body={"foo": "bar"},
+            x_embed_connected_account_id="X-Embed-Connected-Account-Id",
+            x_embed_integration="X-Embed-Integration",
+        )
+        assert_matches_type(ProxyPostResponse, proxy, path=["response"])
+
+    @parametrize
+    async def test_method_post_with_all_params(self, async_client: AsyncEmbed) -> None:
+        proxy = await async_client.proxy.post(
+            endpoint="endpoint",
+            body={"foo": "bar"},
+            x_embed_connected_account_id="X-Embed-Connected-Account-Id",
+            x_embed_integration="X-Embed-Integration",
+            x_embed_base_url_override="X-Embed-Base-Url-Override",
+            x_embed_retries=0,
         )
         assert_matches_type(ProxyPostResponse, proxy, path=["response"])
 
     @parametrize
     async def test_raw_response_post(self, async_client: AsyncEmbed) -> None:
         response = await async_client.proxy.with_raw_response.post(
-            "string",
+            endpoint="endpoint",
             body={"foo": "bar"},
+            x_embed_connected_account_id="X-Embed-Connected-Account-Id",
+            x_embed_integration="X-Embed-Integration",
         )
 
         assert response.is_closed is True
@@ -293,8 +427,10 @@ class TestAsyncProxy:
     @parametrize
     async def test_streaming_response_post(self, async_client: AsyncEmbed) -> None:
         async with async_client.proxy.with_streaming_response.post(
-            "string",
+            endpoint="endpoint",
             body={"foo": "bar"},
+            x_embed_connected_account_id="X-Embed-Connected-Account-Id",
+            x_embed_integration="X-Embed-Integration",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -308,23 +444,41 @@ class TestAsyncProxy:
     async def test_path_params_post(self, async_client: AsyncEmbed) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `endpoint` but received ''"):
             await async_client.proxy.with_raw_response.post(
-                "",
+                endpoint="",
                 body={"foo": "bar"},
+                x_embed_connected_account_id="X-Embed-Connected-Account-Id",
+                x_embed_integration="X-Embed-Integration",
             )
 
     @parametrize
     async def test_method_put(self, async_client: AsyncEmbed) -> None:
         proxy = await async_client.proxy.put(
-            "string",
+            endpoint="endpoint",
             body={"foo": "bar"},
+            x_embed_connected_account_id="X-Embed-Connected-Account-Id",
+            x_embed_integration="X-Embed-Integration",
+        )
+        assert_matches_type(ProxyPutResponse, proxy, path=["response"])
+
+    @parametrize
+    async def test_method_put_with_all_params(self, async_client: AsyncEmbed) -> None:
+        proxy = await async_client.proxy.put(
+            endpoint="endpoint",
+            body={"foo": "bar"},
+            x_embed_connected_account_id="X-Embed-Connected-Account-Id",
+            x_embed_integration="X-Embed-Integration",
+            x_embed_base_url_override="X-Embed-Base-Url-Override",
+            x_embed_retries=0,
         )
         assert_matches_type(ProxyPutResponse, proxy, path=["response"])
 
     @parametrize
     async def test_raw_response_put(self, async_client: AsyncEmbed) -> None:
         response = await async_client.proxy.with_raw_response.put(
-            "string",
+            endpoint="endpoint",
             body={"foo": "bar"},
+            x_embed_connected_account_id="X-Embed-Connected-Account-Id",
+            x_embed_integration="X-Embed-Integration",
         )
 
         assert response.is_closed is True
@@ -335,8 +489,10 @@ class TestAsyncProxy:
     @parametrize
     async def test_streaming_response_put(self, async_client: AsyncEmbed) -> None:
         async with async_client.proxy.with_streaming_response.put(
-            "string",
+            endpoint="endpoint",
             body={"foo": "bar"},
+            x_embed_connected_account_id="X-Embed-Connected-Account-Id",
+            x_embed_integration="X-Embed-Integration",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -350,6 +506,8 @@ class TestAsyncProxy:
     async def test_path_params_put(self, async_client: AsyncEmbed) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `endpoint` but received ''"):
             await async_client.proxy.with_raw_response.put(
-                "",
+                endpoint="",
                 body={"foo": "bar"},
+                x_embed_connected_account_id="X-Embed-Connected-Account-Id",
+                x_embed_integration="X-Embed-Integration",
             )

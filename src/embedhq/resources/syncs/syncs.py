@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing_extensions import Literal
+from typing import List
 
 import httpx
 
@@ -18,6 +18,8 @@ from ...types import (
     sync_list_params,
     sync_stop_params,
     sync_start_params,
+    sync_create_params,
+    sync_delete_params,
     sync_update_params,
     sync_trigger_params,
     sync_retrieve_params,
@@ -36,10 +38,9 @@ from ..._response import (
     async_to_streamed_response_wrapper,
 )
 from ...types.sync import Sync
-from ..._base_client import (
-    make_request_options,
-)
+from ..._base_client import make_request_options
 from ...types.sync_list_response import SyncListResponse
+from ...types.sync_delete_response import SyncDeleteResponse
 
 __all__ = ["SyncsResource", "AsyncSyncsResource"]
 
@@ -57,12 +58,78 @@ class SyncsResource(SyncAPIResource):
     def with_streaming_response(self) -> SyncsResourceWithStreamingResponse:
         return SyncsResourceWithStreamingResponse(self)
 
+    def create(
+        self,
+        *,
+        collection: str,
+        connected_account_id: str,
+        integration: str,
+        collection_version: str | NotGiven = NOT_GIVEN,
+        exclusions: List[str] | NotGiven = NOT_GIVEN,
+        frequency: str | NotGiven = NOT_GIVEN,
+        inclusions: List[str] | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> Sync:
+        """
+        Creates a sync.
+
+        Args:
+          collection: The unique slug of the collection.
+
+          connected_account_id: The unique identifier of the connected account.
+
+          integration: The unique slug of the integration.
+
+          collection_version: The collection version used for the sync (defaults to latest).
+
+          exclusions: Array of IDs to exclude from the sync. If present, objects with matching IDs
+              will not be synced.
+
+          frequency: The frequency of the sync.
+
+          inclusions: Array of IDs to include in the sync. If present, only objects with matching IDs
+              will be synced.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self._post(
+            "/syncs",
+            body=maybe_transform(
+                {
+                    "collection": collection,
+                    "connected_account_id": connected_account_id,
+                    "integration": integration,
+                    "collection_version": collection_version,
+                    "exclusions": exclusions,
+                    "frequency": frequency,
+                    "inclusions": inclusions,
+                },
+                sync_create_params.SyncCreateParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=Sync,
+        )
+
     def retrieve(
         self,
-        collection_key: str,
+        collection: str,
         *,
-        connection_id: str,
-        integration_id: str,
+        connected_account_id: str,
+        integration: str,
+        collection_version: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -74,9 +141,11 @@ class SyncsResource(SyncAPIResource):
         Returns a sync.
 
         Args:
-          connection_id: The ID of the connection to which the sync belongs.
+          connected_account_id: The ID of the connected account to which the syncs belong.
 
-          integration_id: The ID of the integration to which the sync belongs.
+          integration: The slug of the integration to which the sync belongs.
+
+          collection_version: The collection version (defaults to latest).
 
           extra_headers: Send extra headers
 
@@ -86,10 +155,10 @@ class SyncsResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not collection_key:
-            raise ValueError(f"Expected a non-empty value for `collection_key` but received {collection_key!r}")
+        if not collection:
+            raise ValueError(f"Expected a non-empty value for `collection` but received {collection!r}")
         return self._get(
-            f"/syncs/{collection_key}",
+            f"/syncs/{collection}",
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -97,8 +166,9 @@ class SyncsResource(SyncAPIResource):
                 timeout=timeout,
                 query=maybe_transform(
                     {
-                        "connection_id": connection_id,
-                        "integration_id": integration_id,
+                        "connected_account_id": connected_account_id,
+                        "integration": integration,
+                        "collection_version": collection_version,
                     },
                     sync_retrieve_params.SyncRetrieveParams,
                 ),
@@ -108,11 +178,14 @@ class SyncsResource(SyncAPIResource):
 
     def update(
         self,
-        collection_key: str,
+        collection: str,
         *,
-        connection_id: str,
-        integration_id: str,
-        frequency: Literal["real_time", "hourly", "daily", "weekly", "monthly"] | NotGiven = NOT_GIVEN,
+        connected_account_id: str,
+        integration: str,
+        collection_version: str | NotGiven = NOT_GIVEN,
+        exclusions: List[str] | NotGiven = NOT_GIVEN,
+        frequency: str | NotGiven = NOT_GIVEN,
+        inclusions: List[str] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -124,11 +197,19 @@ class SyncsResource(SyncAPIResource):
         Updates a sync.
 
         Args:
-          connection_id: The ID of the connection to which the sync belongs.
+          connected_account_id: The ID of the connected account to which the syncs belong.
 
-          integration_id: The ID of the integration to which the sync belongs.
+          integration: The slug of the integration to which the sync belongs.
+
+          collection_version: The collection version (defaults to latest).
+
+          exclusions: Array of IDs to exclude from the sync. If present, objects with matching IDs
+              will not be synced.
 
           frequency: The frequency of the sync.
+
+          inclusions: Array of IDs to include in the sync. If present, only objects with matching IDs
+              will be synced.
 
           extra_headers: Send extra headers
 
@@ -138,11 +219,18 @@ class SyncsResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not collection_key:
-            raise ValueError(f"Expected a non-empty value for `collection_key` but received {collection_key!r}")
+        if not collection:
+            raise ValueError(f"Expected a non-empty value for `collection` but received {collection!r}")
         return self._put(
-            f"/syncs/{collection_key}",
-            body=maybe_transform({"frequency": frequency}, sync_update_params.SyncUpdateParams),
+            f"/syncs/{collection}",
+            body=maybe_transform(
+                {
+                    "exclusions": exclusions,
+                    "frequency": frequency,
+                    "inclusions": inclusions,
+                },
+                sync_update_params.SyncUpdateParams,
+            ),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -150,8 +238,9 @@ class SyncsResource(SyncAPIResource):
                 timeout=timeout,
                 query=maybe_transform(
                     {
-                        "connection_id": connection_id,
-                        "integration_id": integration_id,
+                        "connected_account_id": connected_account_id,
+                        "integration": integration,
+                        "collection_version": collection_version,
                     },
                     sync_update_params.SyncUpdateParams,
                 ),
@@ -162,8 +251,8 @@ class SyncsResource(SyncAPIResource):
     def list(
         self,
         *,
-        connection_id: str,
-        integration_id: str,
+        connected_account_id: str | NotGiven = NOT_GIVEN,
+        integration: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -175,9 +264,9 @@ class SyncsResource(SyncAPIResource):
         Returns a list of syncs.
 
         Args:
-          connection_id: The ID of the connection to which the syncs belong.
+          connected_account_id: Filter syncs by connected account.
 
-          integration_id: The ID of the integration to which the syncs belong.
+          integration: Filter syncs by integration.
 
           extra_headers: Send extra headers
 
@@ -196,8 +285,8 @@ class SyncsResource(SyncAPIResource):
                 timeout=timeout,
                 query=maybe_transform(
                     {
-                        "connection_id": connection_id,
-                        "integration_id": integration_id,
+                        "connected_account_id": connected_account_id,
+                        "integration": integration,
                     },
                     sync_list_params.SyncListParams,
                 ),
@@ -205,12 +294,66 @@ class SyncsResource(SyncAPIResource):
             cast_to=SyncListResponse,
         )
 
+    def delete(
+        self,
+        collection: str,
+        *,
+        connected_account_id: str,
+        integration: str,
+        collection_version: str | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> SyncDeleteResponse:
+        """
+        Deletes a sync.
+
+        Args:
+          connected_account_id: The ID of the connected account to which the syncs belong.
+
+          integration: The slug of the integration to which the sync belongs.
+
+          collection_version: The collection version (defaults to latest).
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not collection:
+            raise ValueError(f"Expected a non-empty value for `collection` but received {collection!r}")
+        return self._delete(
+            f"/syncs/{collection}",
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform(
+                    {
+                        "connected_account_id": connected_account_id,
+                        "integration": integration,
+                        "collection_version": collection_version,
+                    },
+                    sync_delete_params.SyncDeleteParams,
+                ),
+            ),
+            cast_to=SyncDeleteResponse,
+        )
+
     def start(
         self,
-        collection_key: str,
+        collection: str,
         *,
-        connection_id: str,
-        integration_id: str,
+        connected_account_id: str,
+        integration: str,
+        collection_version: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -222,9 +365,11 @@ class SyncsResource(SyncAPIResource):
         Starts a sync.
 
         Args:
-          connection_id: The ID of the connection to which the sync belongs.
+          connected_account_id: The ID of the connected account to which the syncs belong.
 
-          integration_id: The ID of the integration to which the sync belongs.
+          integration: The slug of the integration to which the sync belongs.
+
+          collection_version: The collection version (defaults to latest).
 
           extra_headers: Send extra headers
 
@@ -234,10 +379,10 @@ class SyncsResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not collection_key:
-            raise ValueError(f"Expected a non-empty value for `collection_key` but received {collection_key!r}")
+        if not collection:
+            raise ValueError(f"Expected a non-empty value for `collection` but received {collection!r}")
         return self._post(
-            f"/syncs/{collection_key}/start",
+            f"/syncs/{collection}/start",
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -245,8 +390,9 @@ class SyncsResource(SyncAPIResource):
                 timeout=timeout,
                 query=maybe_transform(
                     {
-                        "connection_id": connection_id,
-                        "integration_id": integration_id,
+                        "connected_account_id": connected_account_id,
+                        "integration": integration,
+                        "collection_version": collection_version,
                     },
                     sync_start_params.SyncStartParams,
                 ),
@@ -256,10 +402,11 @@ class SyncsResource(SyncAPIResource):
 
     def stop(
         self,
-        collection_key: str,
+        collection: str,
         *,
-        connection_id: str,
-        integration_id: str,
+        connected_account_id: str,
+        integration: str,
+        collection_version: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -271,9 +418,11 @@ class SyncsResource(SyncAPIResource):
         Stops a sync.
 
         Args:
-          connection_id: The ID of the connection to which the sync belongs.
+          connected_account_id: The ID of the connected account to which the syncs belong.
 
-          integration_id: The ID of the integration to which the sync belongs.
+          integration: The slug of the integration to which the sync belongs.
+
+          collection_version: The collection version (defaults to latest).
 
           extra_headers: Send extra headers
 
@@ -283,10 +432,10 @@ class SyncsResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not collection_key:
-            raise ValueError(f"Expected a non-empty value for `collection_key` but received {collection_key!r}")
+        if not collection:
+            raise ValueError(f"Expected a non-empty value for `collection` but received {collection!r}")
         return self._post(
-            f"/syncs/{collection_key}/stop",
+            f"/syncs/{collection}/stop",
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -294,8 +443,9 @@ class SyncsResource(SyncAPIResource):
                 timeout=timeout,
                 query=maybe_transform(
                     {
-                        "connection_id": connection_id,
-                        "integration_id": integration_id,
+                        "connected_account_id": connected_account_id,
+                        "integration": integration,
+                        "collection_version": collection_version,
                     },
                     sync_stop_params.SyncStopParams,
                 ),
@@ -305,10 +455,11 @@ class SyncsResource(SyncAPIResource):
 
     def trigger(
         self,
-        collection_key: str,
+        collection: str,
         *,
-        connection_id: str,
-        integration_id: str,
+        connected_account_id: str,
+        integration: str,
+        collection_version: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -320,9 +471,11 @@ class SyncsResource(SyncAPIResource):
         Triggers a one-time sync run.
 
         Args:
-          connection_id: The ID of the connection to which the sync belongs.
+          connected_account_id: The ID of the connected account to which the syncs belong.
 
-          integration_id: The ID of the integration to which the sync belongs.
+          integration: The slug of the integration to which the sync belongs.
+
+          collection_version: The collection version (defaults to latest).
 
           extra_headers: Send extra headers
 
@@ -332,10 +485,10 @@ class SyncsResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not collection_key:
-            raise ValueError(f"Expected a non-empty value for `collection_key` but received {collection_key!r}")
+        if not collection:
+            raise ValueError(f"Expected a non-empty value for `collection` but received {collection!r}")
         return self._post(
-            f"/syncs/{collection_key}/trigger",
+            f"/syncs/{collection}/trigger",
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -343,8 +496,9 @@ class SyncsResource(SyncAPIResource):
                 timeout=timeout,
                 query=maybe_transform(
                     {
-                        "connection_id": connection_id,
-                        "integration_id": integration_id,
+                        "connected_account_id": connected_account_id,
+                        "integration": integration,
+                        "collection_version": collection_version,
                     },
                     sync_trigger_params.SyncTriggerParams,
                 ),
@@ -366,12 +520,78 @@ class AsyncSyncsResource(AsyncAPIResource):
     def with_streaming_response(self) -> AsyncSyncsResourceWithStreamingResponse:
         return AsyncSyncsResourceWithStreamingResponse(self)
 
+    async def create(
+        self,
+        *,
+        collection: str,
+        connected_account_id: str,
+        integration: str,
+        collection_version: str | NotGiven = NOT_GIVEN,
+        exclusions: List[str] | NotGiven = NOT_GIVEN,
+        frequency: str | NotGiven = NOT_GIVEN,
+        inclusions: List[str] | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> Sync:
+        """
+        Creates a sync.
+
+        Args:
+          collection: The unique slug of the collection.
+
+          connected_account_id: The unique identifier of the connected account.
+
+          integration: The unique slug of the integration.
+
+          collection_version: The collection version used for the sync (defaults to latest).
+
+          exclusions: Array of IDs to exclude from the sync. If present, objects with matching IDs
+              will not be synced.
+
+          frequency: The frequency of the sync.
+
+          inclusions: Array of IDs to include in the sync. If present, only objects with matching IDs
+              will be synced.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return await self._post(
+            "/syncs",
+            body=await async_maybe_transform(
+                {
+                    "collection": collection,
+                    "connected_account_id": connected_account_id,
+                    "integration": integration,
+                    "collection_version": collection_version,
+                    "exclusions": exclusions,
+                    "frequency": frequency,
+                    "inclusions": inclusions,
+                },
+                sync_create_params.SyncCreateParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=Sync,
+        )
+
     async def retrieve(
         self,
-        collection_key: str,
+        collection: str,
         *,
-        connection_id: str,
-        integration_id: str,
+        connected_account_id: str,
+        integration: str,
+        collection_version: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -383,9 +603,11 @@ class AsyncSyncsResource(AsyncAPIResource):
         Returns a sync.
 
         Args:
-          connection_id: The ID of the connection to which the sync belongs.
+          connected_account_id: The ID of the connected account to which the syncs belong.
 
-          integration_id: The ID of the integration to which the sync belongs.
+          integration: The slug of the integration to which the sync belongs.
+
+          collection_version: The collection version (defaults to latest).
 
           extra_headers: Send extra headers
 
@@ -395,10 +617,10 @@ class AsyncSyncsResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not collection_key:
-            raise ValueError(f"Expected a non-empty value for `collection_key` but received {collection_key!r}")
+        if not collection:
+            raise ValueError(f"Expected a non-empty value for `collection` but received {collection!r}")
         return await self._get(
-            f"/syncs/{collection_key}",
+            f"/syncs/{collection}",
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -406,8 +628,9 @@ class AsyncSyncsResource(AsyncAPIResource):
                 timeout=timeout,
                 query=await async_maybe_transform(
                     {
-                        "connection_id": connection_id,
-                        "integration_id": integration_id,
+                        "connected_account_id": connected_account_id,
+                        "integration": integration,
+                        "collection_version": collection_version,
                     },
                     sync_retrieve_params.SyncRetrieveParams,
                 ),
@@ -417,11 +640,14 @@ class AsyncSyncsResource(AsyncAPIResource):
 
     async def update(
         self,
-        collection_key: str,
+        collection: str,
         *,
-        connection_id: str,
-        integration_id: str,
-        frequency: Literal["real_time", "hourly", "daily", "weekly", "monthly"] | NotGiven = NOT_GIVEN,
+        connected_account_id: str,
+        integration: str,
+        collection_version: str | NotGiven = NOT_GIVEN,
+        exclusions: List[str] | NotGiven = NOT_GIVEN,
+        frequency: str | NotGiven = NOT_GIVEN,
+        inclusions: List[str] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -433,11 +659,19 @@ class AsyncSyncsResource(AsyncAPIResource):
         Updates a sync.
 
         Args:
-          connection_id: The ID of the connection to which the sync belongs.
+          connected_account_id: The ID of the connected account to which the syncs belong.
 
-          integration_id: The ID of the integration to which the sync belongs.
+          integration: The slug of the integration to which the sync belongs.
+
+          collection_version: The collection version (defaults to latest).
+
+          exclusions: Array of IDs to exclude from the sync. If present, objects with matching IDs
+              will not be synced.
 
           frequency: The frequency of the sync.
+
+          inclusions: Array of IDs to include in the sync. If present, only objects with matching IDs
+              will be synced.
 
           extra_headers: Send extra headers
 
@@ -447,11 +681,18 @@ class AsyncSyncsResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not collection_key:
-            raise ValueError(f"Expected a non-empty value for `collection_key` but received {collection_key!r}")
+        if not collection:
+            raise ValueError(f"Expected a non-empty value for `collection` but received {collection!r}")
         return await self._put(
-            f"/syncs/{collection_key}",
-            body=await async_maybe_transform({"frequency": frequency}, sync_update_params.SyncUpdateParams),
+            f"/syncs/{collection}",
+            body=await async_maybe_transform(
+                {
+                    "exclusions": exclusions,
+                    "frequency": frequency,
+                    "inclusions": inclusions,
+                },
+                sync_update_params.SyncUpdateParams,
+            ),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -459,8 +700,9 @@ class AsyncSyncsResource(AsyncAPIResource):
                 timeout=timeout,
                 query=await async_maybe_transform(
                     {
-                        "connection_id": connection_id,
-                        "integration_id": integration_id,
+                        "connected_account_id": connected_account_id,
+                        "integration": integration,
+                        "collection_version": collection_version,
                     },
                     sync_update_params.SyncUpdateParams,
                 ),
@@ -471,8 +713,8 @@ class AsyncSyncsResource(AsyncAPIResource):
     async def list(
         self,
         *,
-        connection_id: str,
-        integration_id: str,
+        connected_account_id: str | NotGiven = NOT_GIVEN,
+        integration: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -484,9 +726,9 @@ class AsyncSyncsResource(AsyncAPIResource):
         Returns a list of syncs.
 
         Args:
-          connection_id: The ID of the connection to which the syncs belong.
+          connected_account_id: Filter syncs by connected account.
 
-          integration_id: The ID of the integration to which the syncs belong.
+          integration: Filter syncs by integration.
 
           extra_headers: Send extra headers
 
@@ -505,8 +747,8 @@ class AsyncSyncsResource(AsyncAPIResource):
                 timeout=timeout,
                 query=await async_maybe_transform(
                     {
-                        "connection_id": connection_id,
-                        "integration_id": integration_id,
+                        "connected_account_id": connected_account_id,
+                        "integration": integration,
                     },
                     sync_list_params.SyncListParams,
                 ),
@@ -514,12 +756,66 @@ class AsyncSyncsResource(AsyncAPIResource):
             cast_to=SyncListResponse,
         )
 
+    async def delete(
+        self,
+        collection: str,
+        *,
+        connected_account_id: str,
+        integration: str,
+        collection_version: str | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> SyncDeleteResponse:
+        """
+        Deletes a sync.
+
+        Args:
+          connected_account_id: The ID of the connected account to which the syncs belong.
+
+          integration: The slug of the integration to which the sync belongs.
+
+          collection_version: The collection version (defaults to latest).
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not collection:
+            raise ValueError(f"Expected a non-empty value for `collection` but received {collection!r}")
+        return await self._delete(
+            f"/syncs/{collection}",
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=await async_maybe_transform(
+                    {
+                        "connected_account_id": connected_account_id,
+                        "integration": integration,
+                        "collection_version": collection_version,
+                    },
+                    sync_delete_params.SyncDeleteParams,
+                ),
+            ),
+            cast_to=SyncDeleteResponse,
+        )
+
     async def start(
         self,
-        collection_key: str,
+        collection: str,
         *,
-        connection_id: str,
-        integration_id: str,
+        connected_account_id: str,
+        integration: str,
+        collection_version: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -531,9 +827,11 @@ class AsyncSyncsResource(AsyncAPIResource):
         Starts a sync.
 
         Args:
-          connection_id: The ID of the connection to which the sync belongs.
+          connected_account_id: The ID of the connected account to which the syncs belong.
 
-          integration_id: The ID of the integration to which the sync belongs.
+          integration: The slug of the integration to which the sync belongs.
+
+          collection_version: The collection version (defaults to latest).
 
           extra_headers: Send extra headers
 
@@ -543,10 +841,10 @@ class AsyncSyncsResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not collection_key:
-            raise ValueError(f"Expected a non-empty value for `collection_key` but received {collection_key!r}")
+        if not collection:
+            raise ValueError(f"Expected a non-empty value for `collection` but received {collection!r}")
         return await self._post(
-            f"/syncs/{collection_key}/start",
+            f"/syncs/{collection}/start",
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -554,8 +852,9 @@ class AsyncSyncsResource(AsyncAPIResource):
                 timeout=timeout,
                 query=await async_maybe_transform(
                     {
-                        "connection_id": connection_id,
-                        "integration_id": integration_id,
+                        "connected_account_id": connected_account_id,
+                        "integration": integration,
+                        "collection_version": collection_version,
                     },
                     sync_start_params.SyncStartParams,
                 ),
@@ -565,10 +864,11 @@ class AsyncSyncsResource(AsyncAPIResource):
 
     async def stop(
         self,
-        collection_key: str,
+        collection: str,
         *,
-        connection_id: str,
-        integration_id: str,
+        connected_account_id: str,
+        integration: str,
+        collection_version: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -580,9 +880,11 @@ class AsyncSyncsResource(AsyncAPIResource):
         Stops a sync.
 
         Args:
-          connection_id: The ID of the connection to which the sync belongs.
+          connected_account_id: The ID of the connected account to which the syncs belong.
 
-          integration_id: The ID of the integration to which the sync belongs.
+          integration: The slug of the integration to which the sync belongs.
+
+          collection_version: The collection version (defaults to latest).
 
           extra_headers: Send extra headers
 
@@ -592,10 +894,10 @@ class AsyncSyncsResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not collection_key:
-            raise ValueError(f"Expected a non-empty value for `collection_key` but received {collection_key!r}")
+        if not collection:
+            raise ValueError(f"Expected a non-empty value for `collection` but received {collection!r}")
         return await self._post(
-            f"/syncs/{collection_key}/stop",
+            f"/syncs/{collection}/stop",
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -603,8 +905,9 @@ class AsyncSyncsResource(AsyncAPIResource):
                 timeout=timeout,
                 query=await async_maybe_transform(
                     {
-                        "connection_id": connection_id,
-                        "integration_id": integration_id,
+                        "connected_account_id": connected_account_id,
+                        "integration": integration,
+                        "collection_version": collection_version,
                     },
                     sync_stop_params.SyncStopParams,
                 ),
@@ -614,10 +917,11 @@ class AsyncSyncsResource(AsyncAPIResource):
 
     async def trigger(
         self,
-        collection_key: str,
+        collection: str,
         *,
-        connection_id: str,
-        integration_id: str,
+        connected_account_id: str,
+        integration: str,
+        collection_version: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -629,9 +933,11 @@ class AsyncSyncsResource(AsyncAPIResource):
         Triggers a one-time sync run.
 
         Args:
-          connection_id: The ID of the connection to which the sync belongs.
+          connected_account_id: The ID of the connected account to which the syncs belong.
 
-          integration_id: The ID of the integration to which the sync belongs.
+          integration: The slug of the integration to which the sync belongs.
+
+          collection_version: The collection version (defaults to latest).
 
           extra_headers: Send extra headers
 
@@ -641,10 +947,10 @@ class AsyncSyncsResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not collection_key:
-            raise ValueError(f"Expected a non-empty value for `collection_key` but received {collection_key!r}")
+        if not collection:
+            raise ValueError(f"Expected a non-empty value for `collection` but received {collection!r}")
         return await self._post(
-            f"/syncs/{collection_key}/trigger",
+            f"/syncs/{collection}/trigger",
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -652,8 +958,9 @@ class AsyncSyncsResource(AsyncAPIResource):
                 timeout=timeout,
                 query=await async_maybe_transform(
                     {
-                        "connection_id": connection_id,
-                        "integration_id": integration_id,
+                        "connected_account_id": connected_account_id,
+                        "integration": integration,
+                        "collection_version": collection_version,
                     },
                     sync_trigger_params.SyncTriggerParams,
                 ),
@@ -666,6 +973,9 @@ class SyncsResourceWithRawResponse:
     def __init__(self, syncs: SyncsResource) -> None:
         self._syncs = syncs
 
+        self.create = to_raw_response_wrapper(
+            syncs.create,
+        )
         self.retrieve = to_raw_response_wrapper(
             syncs.retrieve,
         )
@@ -674,6 +984,9 @@ class SyncsResourceWithRawResponse:
         )
         self.list = to_raw_response_wrapper(
             syncs.list,
+        )
+        self.delete = to_raw_response_wrapper(
+            syncs.delete,
         )
         self.start = to_raw_response_wrapper(
             syncs.start,
@@ -694,6 +1007,9 @@ class AsyncSyncsResourceWithRawResponse:
     def __init__(self, syncs: AsyncSyncsResource) -> None:
         self._syncs = syncs
 
+        self.create = async_to_raw_response_wrapper(
+            syncs.create,
+        )
         self.retrieve = async_to_raw_response_wrapper(
             syncs.retrieve,
         )
@@ -702,6 +1018,9 @@ class AsyncSyncsResourceWithRawResponse:
         )
         self.list = async_to_raw_response_wrapper(
             syncs.list,
+        )
+        self.delete = async_to_raw_response_wrapper(
+            syncs.delete,
         )
         self.start = async_to_raw_response_wrapper(
             syncs.start,
@@ -722,6 +1041,9 @@ class SyncsResourceWithStreamingResponse:
     def __init__(self, syncs: SyncsResource) -> None:
         self._syncs = syncs
 
+        self.create = to_streamed_response_wrapper(
+            syncs.create,
+        )
         self.retrieve = to_streamed_response_wrapper(
             syncs.retrieve,
         )
@@ -730,6 +1052,9 @@ class SyncsResourceWithStreamingResponse:
         )
         self.list = to_streamed_response_wrapper(
             syncs.list,
+        )
+        self.delete = to_streamed_response_wrapper(
+            syncs.delete,
         )
         self.start = to_streamed_response_wrapper(
             syncs.start,
@@ -750,6 +1075,9 @@ class AsyncSyncsResourceWithStreamingResponse:
     def __init__(self, syncs: AsyncSyncsResource) -> None:
         self._syncs = syncs
 
+        self.create = async_to_streamed_response_wrapper(
+            syncs.create,
+        )
         self.retrieve = async_to_streamed_response_wrapper(
             syncs.retrieve,
         )
@@ -758,6 +1086,9 @@ class AsyncSyncsResourceWithStreamingResponse:
         )
         self.list = async_to_streamed_response_wrapper(
             syncs.list,
+        )
+        self.delete = async_to_streamed_response_wrapper(
+            syncs.delete,
         )
         self.start = async_to_streamed_response_wrapper(
             syncs.start,

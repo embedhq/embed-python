@@ -8,10 +8,13 @@ __all__ = ["RunRetrieveParams"]
 
 
 class RunRetrieveParams(TypedDict, total=False):
-    collection_key: Required[str]
+    collection: Required[str]
 
-    connection_id: Required[str]
-    """The ID of the connection to which the sync run belongs."""
+    connected_account_id: Required[str]
+    """The ID of the connected account to which the syncs belong."""
 
-    integration_id: Required[str]
-    """The ID of the integration to which the sync run belongs."""
+    integration: Required[str]
+    """The slug of the integration to which the sync belongs."""
+
+    collection_version: str
+    """The collection version (defaults to latest)."""

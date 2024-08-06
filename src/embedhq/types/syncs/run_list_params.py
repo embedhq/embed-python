@@ -8,8 +8,11 @@ __all__ = ["RunListParams"]
 
 
 class RunListParams(TypedDict, total=False):
-    connection_id: Required[str]
-    """The ID of the connection to which the sync runs belong."""
+    connected_account_id: Required[str]
+    """The ID of the connected account to which the syncs belong."""
 
-    integration_id: Required[str]
-    """The ID of the integration to which the sync runs belong."""
+    integration: Required[str]
+    """The slug of the integration to which the sync belongs."""
+
+    collection_version: str
+    """The collection version (defaults to latest)."""

@@ -48,14 +48,6 @@ from .collections import (
     CollectionsResourceWithStreamingResponse,
     AsyncCollectionsResourceWithStreamingResponse,
 )
-from .connections import (
-    ConnectionsResource,
-    AsyncConnectionsResource,
-    ConnectionsResourceWithRawResponse,
-    AsyncConnectionsResourceWithRawResponse,
-    ConnectionsResourceWithStreamingResponse,
-    AsyncConnectionsResourceWithStreamingResponse,
-)
 from .integrations import (
     IntegrationsResource,
     AsyncIntegrationsResource,
@@ -64,13 +56,21 @@ from .integrations import (
     IntegrationsResourceWithStreamingResponse,
     AsyncIntegrationsResourceWithStreamingResponse,
 )
-from .session_tokens import (
-    SessionTokensResource,
-    AsyncSessionTokensResource,
-    SessionTokensResourceWithRawResponse,
-    AsyncSessionTokensResourceWithRawResponse,
-    SessionTokensResourceWithStreamingResponse,
-    AsyncSessionTokensResourceWithStreamingResponse,
+from .connect_sessions import (
+    ConnectSessionsResource,
+    AsyncConnectSessionsResource,
+    ConnectSessionsResourceWithRawResponse,
+    AsyncConnectSessionsResourceWithRawResponse,
+    ConnectSessionsResourceWithStreamingResponse,
+    AsyncConnectSessionsResourceWithStreamingResponse,
+)
+from .connected_accounts import (
+    ConnectedAccountsResource,
+    AsyncConnectedAccountsResource,
+    ConnectedAccountsResourceWithRawResponse,
+    AsyncConnectedAccountsResourceWithRawResponse,
+    ConnectedAccountsResourceWithStreamingResponse,
+    AsyncConnectedAccountsResourceWithStreamingResponse,
 )
 
 __all__ = [
@@ -80,18 +80,18 @@ __all__ = [
     "AsyncIntegrationsResourceWithRawResponse",
     "IntegrationsResourceWithStreamingResponse",
     "AsyncIntegrationsResourceWithStreamingResponse",
-    "ConnectionsResource",
-    "AsyncConnectionsResource",
-    "ConnectionsResourceWithRawResponse",
-    "AsyncConnectionsResourceWithRawResponse",
-    "ConnectionsResourceWithStreamingResponse",
-    "AsyncConnectionsResourceWithStreamingResponse",
-    "SessionTokensResource",
-    "AsyncSessionTokensResource",
-    "SessionTokensResourceWithRawResponse",
-    "AsyncSessionTokensResourceWithRawResponse",
-    "SessionTokensResourceWithStreamingResponse",
-    "AsyncSessionTokensResourceWithStreamingResponse",
+    "ConnectedAccountsResource",
+    "AsyncConnectedAccountsResource",
+    "ConnectedAccountsResourceWithRawResponse",
+    "AsyncConnectedAccountsResourceWithRawResponse",
+    "ConnectedAccountsResourceWithStreamingResponse",
+    "AsyncConnectedAccountsResourceWithStreamingResponse",
+    "ConnectSessionsResource",
+    "AsyncConnectSessionsResource",
+    "ConnectSessionsResourceWithRawResponse",
+    "AsyncConnectSessionsResourceWithRawResponse",
+    "ConnectSessionsResourceWithStreamingResponse",
+    "AsyncConnectSessionsResourceWithStreamingResponse",
     "ProvidersResource",
     "AsyncProvidersResource",
     "ProvidersResourceWithRawResponse",

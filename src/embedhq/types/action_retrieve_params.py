@@ -8,5 +8,8 @@ __all__ = ["ActionRetrieveParams"]
 
 
 class ActionRetrieveParams(TypedDict, total=False):
-    integration_id: Required[str]
-    """The ID of the integration to which the action belongs."""
+    integration: Required[str]
+    """The slug of the integration to which the action belongs."""
+
+    action_version: str
+    """The version of the action to retrieve (defaults to latest)."""

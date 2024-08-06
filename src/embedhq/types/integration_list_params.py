@@ -11,13 +11,13 @@ class IntegrationListParams(TypedDict, total=False):
     after: str
     """A cursor for use in pagination.
 
-    `after` is an object ID that defines your place in the list.
+    `after` is an object ID or slug that defines your place in the list.
     """
 
     before: str
     """A cursor for use in pagination.
 
-    `before` is an object ID that defines your place in the list.
+    `before` is an object ID or slug that defines your place in the list.
     """
 
     limit: int

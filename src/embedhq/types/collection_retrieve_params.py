@@ -8,5 +8,8 @@ __all__ = ["CollectionRetrieveParams"]
 
 
 class CollectionRetrieveParams(TypedDict, total=False):
-    integration_id: Required[str]
-    """The ID of the integration to which the collection belongs."""
+    integration: Required[str]
+    """The slug of the integration to which the collection belongs."""
+
+    collection_version: str
+    """The version of the collection to retrieve (defaults to latest)."""

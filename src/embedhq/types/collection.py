@@ -1,7 +1,10 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import List
+import builtins
+from typing import Dict, List, Optional
 from typing_extensions import Literal
+
+from pydantic import Field as FieldInfo
 
 from .._models import BaseModel
 
@@ -9,35 +12,35 @@ __all__ = ["Collection"]
 
 
 class Collection(BaseModel):
-    auto_start_syncs: bool
-    """
-    Whether to automatically start syncing this collection after a connection is
-    created.
-    """
+    configuration: Optional[Dict[str, object]] = None
+    """Configuration options for the collection."""
 
     created_at: int
     """The Unix timestamp (in seconds) for when the collection was created."""
 
-    default_sync_frequency: Literal["real_time", "hourly", "daily", "weekly", "monthly"]
-    """The default sync frequency for the collection."""
-
-    exclude_properties_from_syncs: List[str]
-    """An array of properties to exclude from being synced."""
-
-    integration_id: str
-    """The ID of the integration to which the collection belongs."""
+    integration: str
+    """The slug of the integration to which the collection belongs."""
 
     is_enabled: bool
     """Whether the collection is enabled."""
 
+    name: str
+    """The display name of the collection."""
+
     object: Literal["collection"]
     """The object type, which is always `collection`."""
 
-    provider_key: str
-    """The unique key of the integration provider."""
+    schema_: Dict[str, builtins.object] = FieldInfo(alias="schema")
+    """The collection schema."""
 
-    unique_key: str
-    """The unique key of the collection."""
+    slug: str
+    """The unique slug of the collection."""
 
     updated_at: int
     """The Unix timestamp (in seconds) for when the collection was updated."""
+
+    version: str
+    """The version of the collection, formatted as "MAJOR.MINOR"."""
+
+    required_scopes: Optional[List[str]] = None
+    """The OAuth scopes required to sync the collection."""

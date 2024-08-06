@@ -20,14 +20,23 @@ class TestProviders:
     @parametrize
     def test_method_retrieve(self, client: Embed) -> None:
         provider = client.providers.retrieve(
-            "github",
+            provider="github",
+        )
+        assert_matches_type(Provider, provider, path=["response"])
+
+    @parametrize
+    def test_method_retrieve_with_all_params(self, client: Embed) -> None:
+        provider = client.providers.retrieve(
+            provider="github",
+            include_action_templates=False,
+            include_collection_templates=False,
         )
         assert_matches_type(Provider, provider, path=["response"])
 
     @parametrize
     def test_raw_response_retrieve(self, client: Embed) -> None:
         response = client.providers.with_raw_response.retrieve(
-            "github",
+            provider="github",
         )
 
         assert response.is_closed is True
@@ -38,7 +47,7 @@ class TestProviders:
     @parametrize
     def test_streaming_response_retrieve(self, client: Embed) -> None:
         with client.providers.with_streaming_response.retrieve(
-            "github",
+            provider="github",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -50,14 +59,22 @@ class TestProviders:
 
     @parametrize
     def test_path_params_retrieve(self, client: Embed) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `provider_key` but received ''"):
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `provider` but received ''"):
             client.providers.with_raw_response.retrieve(
-                "",
+                provider="",
             )
 
     @parametrize
     def test_method_list(self, client: Embed) -> None:
         provider = client.providers.list()
+        assert_matches_type(ProviderListResponse, provider, path=["response"])
+
+    @parametrize
+    def test_method_list_with_all_params(self, client: Embed) -> None:
+        provider = client.providers.list(
+            include_action_templates=False,
+            include_collection_templates=False,
+        )
         assert_matches_type(ProviderListResponse, provider, path=["response"])
 
     @parametrize
@@ -87,14 +104,23 @@ class TestAsyncProviders:
     @parametrize
     async def test_method_retrieve(self, async_client: AsyncEmbed) -> None:
         provider = await async_client.providers.retrieve(
-            "github",
+            provider="github",
+        )
+        assert_matches_type(Provider, provider, path=["response"])
+
+    @parametrize
+    async def test_method_retrieve_with_all_params(self, async_client: AsyncEmbed) -> None:
+        provider = await async_client.providers.retrieve(
+            provider="github",
+            include_action_templates=False,
+            include_collection_templates=False,
         )
         assert_matches_type(Provider, provider, path=["response"])
 
     @parametrize
     async def test_raw_response_retrieve(self, async_client: AsyncEmbed) -> None:
         response = await async_client.providers.with_raw_response.retrieve(
-            "github",
+            provider="github",
         )
 
         assert response.is_closed is True
@@ -105,7 +131,7 @@ class TestAsyncProviders:
     @parametrize
     async def test_streaming_response_retrieve(self, async_client: AsyncEmbed) -> None:
         async with async_client.providers.with_streaming_response.retrieve(
-            "github",
+            provider="github",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -117,14 +143,22 @@ class TestAsyncProviders:
 
     @parametrize
     async def test_path_params_retrieve(self, async_client: AsyncEmbed) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `provider_key` but received ''"):
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `provider` but received ''"):
             await async_client.providers.with_raw_response.retrieve(
-                "",
+                provider="",
             )
 
     @parametrize
     async def test_method_list(self, async_client: AsyncEmbed) -> None:
         provider = await async_client.providers.list()
+        assert_matches_type(ProviderListResponse, provider, path=["response"])
+
+    @parametrize
+    async def test_method_list_with_all_params(self, async_client: AsyncEmbed) -> None:
+        provider = await async_client.providers.list(
+            include_action_templates=False,
+            include_collection_templates=False,
+        )
         assert_matches_type(ProviderListResponse, provider, path=["response"])
 
     @parametrize

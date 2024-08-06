@@ -2,25 +2,25 @@
 
 from __future__ import annotations
 
-from typing import Dict
+from typing import Dict, List, Optional
 
 import httpx
 
+from .runs import (
+    RunsResource,
+    AsyncRunsResource,
+    RunsResourceWithRawResponse,
+    AsyncRunsResourceWithRawResponse,
+    RunsResourceWithStreamingResponse,
+    AsyncRunsResourceWithStreamingResponse,
+)
 from ...types import (
     action_list_params,
-    action_enable_params,
-    action_schema_params,
-    action_disable_params,
+    action_create_params,
+    action_delete_params,
+    action_update_params,
     action_trigger_params,
     action_retrieve_params,
-)
-from .schemas import (
-    SchemasResource,
-    AsyncSchemasResource,
-    SchemasResourceWithRawResponse,
-    AsyncSchemasResourceWithRawResponse,
-    SchemasResourceWithStreamingResponse,
-    AsyncSchemasResourceWithStreamingResponse,
 )
 from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven
 from ..._utils import (
@@ -35,12 +35,10 @@ from ..._response import (
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
-from ..._base_client import (
-    make_request_options,
-)
+from ..._base_client import make_request_options
 from ...types.action import Action
 from ...types.action_list_response import ActionListResponse
-from ...types.actions.action_schema import ActionSchema
+from ...types.action_delete_response import ActionDeleteResponse
 from ...types.action_trigger_response import ActionTriggerResponse
 
 __all__ = ["ActionsResource", "AsyncActionsResource"]
@@ -48,8 +46,8 @@ __all__ = ["ActionsResource", "AsyncActionsResource"]
 
 class ActionsResource(SyncAPIResource):
     @cached_property
-    def schemas(self) -> SchemasResource:
-        return SchemasResource(self._client)
+    def runs(self) -> RunsResource:
+        return RunsResource(self._client)
 
     @cached_property
     def with_raw_response(self) -> ActionsResourceWithRawResponse:
@@ -59,11 +57,72 @@ class ActionsResource(SyncAPIResource):
     def with_streaming_response(self) -> ActionsResourceWithStreamingResponse:
         return ActionsResourceWithStreamingResponse(self)
 
+    def create(
+        self,
+        *,
+        action_template: str,
+        integration: str,
+        configuration: Optional[Dict[str, object]] | NotGiven = NOT_GIVEN,
+        name: str | NotGiven = NOT_GIVEN,
+        required_scopes: List[str] | NotGiven = NOT_GIVEN,
+        slug: str | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> Action:
+        """
+        Creates an action from a template.
+
+        Args:
+          action_template: The slug of the action template to use.
+
+          integration: The slug of the integration to which the action belongs.
+
+          configuration: Configuration options for the action.
+
+          name: The display name of the action (defaults to the action template name).
+
+          required_scopes: The OAuth scopes required to trigger the action (defaults to the action template
+              scopes, if applicable).
+
+          slug: The unique slug of the action (defaults to the action template slug).
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self._post(
+            "/actions",
+            body=maybe_transform(
+                {
+                    "action_template": action_template,
+                    "integration": integration,
+                    "configuration": configuration,
+                    "name": name,
+                    "required_scopes": required_scopes,
+                    "slug": slug,
+                },
+                action_create_params.ActionCreateParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=Action,
+        )
+
     def retrieve(
         self,
-        action_key: str,
+        action: str,
         *,
-        integration_id: str,
+        integration: str,
+        action_version: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -75,7 +134,9 @@ class ActionsResource(SyncAPIResource):
         Returns an action.
 
         Args:
-          integration_id: The ID of the integration to which the action belongs.
+          integration: The slug of the integration to which the action belongs.
+
+          action_version: The version of the action to retrieve (defaults to latest).
 
           extra_headers: Send extra headers
 
@@ -85,16 +146,92 @@ class ActionsResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not action_key:
-            raise ValueError(f"Expected a non-empty value for `action_key` but received {action_key!r}")
+        if not action:
+            raise ValueError(f"Expected a non-empty value for `action` but received {action!r}")
         return self._get(
-            f"/actions/{action_key}",
+            f"/actions/{action}",
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
-                query=maybe_transform({"integration_id": integration_id}, action_retrieve_params.ActionRetrieveParams),
+                query=maybe_transform(
+                    {
+                        "integration": integration,
+                        "action_version": action_version,
+                    },
+                    action_retrieve_params.ActionRetrieveParams,
+                ),
+            ),
+            cast_to=Action,
+        )
+
+    def update(
+        self,
+        action: str,
+        *,
+        integration: str,
+        action_version: str | NotGiven = NOT_GIVEN,
+        configuration: Optional[Dict[str, object]] | NotGiven = NOT_GIVEN,
+        is_enabled: bool | NotGiven = NOT_GIVEN,
+        name: str | NotGiven = NOT_GIVEN,
+        required_scopes: List[str] | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> Action:
+        """
+        Updates an action.
+
+        Args:
+          integration: The slug of the integration to which the action belongs.
+
+          action_version: The version of the action to update (defaults to latest).
+
+          configuration: Configuration options for the action.
+
+          is_enabled: Whether the action is enabled.
+
+          name: The display name of the action.
+
+          required_scopes: The OAuth scopes required to trigger the action.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not action:
+            raise ValueError(f"Expected a non-empty value for `action` but received {action!r}")
+        return self._put(
+            f"/actions/{action}",
+            body=maybe_transform(
+                {
+                    "configuration": configuration,
+                    "is_enabled": is_enabled,
+                    "name": name,
+                    "required_scopes": required_scopes,
+                },
+                action_update_params.ActionUpdateParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform(
+                    {
+                        "integration": integration,
+                        "action_version": action_version,
+                    },
+                    action_update_params.ActionUpdateParams,
+                ),
             ),
             cast_to=Action,
         )
@@ -102,7 +239,7 @@ class ActionsResource(SyncAPIResource):
     def list(
         self,
         *,
-        integration_id: str,
+        integration: str,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -114,7 +251,7 @@ class ActionsResource(SyncAPIResource):
         Returns a list of actions.
 
         Args:
-          integration_id: The ID of the integration to which the actions belong.
+          integration: The slug of the integration to which the actions belong.
 
           extra_headers: Send extra headers
 
@@ -131,28 +268,31 @@ class ActionsResource(SyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
-                query=maybe_transform({"integration_id": integration_id}, action_list_params.ActionListParams),
+                query=maybe_transform({"integration": integration}, action_list_params.ActionListParams),
             ),
             cast_to=ActionListResponse,
         )
 
-    def disable(
+    def delete(
         self,
-        action_key: str,
+        action: str,
         *,
-        integration_id: str,
+        integration: str,
+        action_version: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> Action:
+    ) -> ActionDeleteResponse:
         """
-        Disables an action.
+        Deletes an action.
 
         Args:
-          integration_id: The ID of the integration to which the action belongs.
+          integration: The slug of the integration to which the action belongs.
+
+          action_version: The version of the action to delete (defaults to latest).
 
           extra_headers: Send extra headers
 
@@ -162,107 +302,34 @@ class ActionsResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not action_key:
-            raise ValueError(f"Expected a non-empty value for `action_key` but received {action_key!r}")
-        return self._post(
-            f"/actions/{action_key}/disable",
+        if not action:
+            raise ValueError(f"Expected a non-empty value for `action` but received {action!r}")
+        return self._delete(
+            f"/actions/{action}",
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
-                query=maybe_transform({"integration_id": integration_id}, action_disable_params.ActionDisableParams),
+                query=maybe_transform(
+                    {
+                        "integration": integration,
+                        "action_version": action_version,
+                    },
+                    action_delete_params.ActionDeleteParams,
+                ),
             ),
-            cast_to=Action,
-        )
-
-    def enable(
-        self,
-        action_key: str,
-        *,
-        integration_id: str,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> Action:
-        """
-        Enables an action.
-
-        Args:
-          integration_id: The ID of the integration to which the action belongs.
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        if not action_key:
-            raise ValueError(f"Expected a non-empty value for `action_key` but received {action_key!r}")
-        return self._post(
-            f"/actions/{action_key}/enable",
-            options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                query=maybe_transform({"integration_id": integration_id}, action_enable_params.ActionEnableParams),
-            ),
-            cast_to=Action,
-        )
-
-    def schema(
-        self,
-        action_key: str,
-        *,
-        integration_id: str,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ActionSchema:
-        """
-        Returns an action schema.
-
-        Args:
-          integration_id: The ID of the integration to which the action schema belongs.
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        if not action_key:
-            raise ValueError(f"Expected a non-empty value for `action_key` but received {action_key!r}")
-        return self._get(
-            f"/actions/{action_key}/schema",
-            options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                query=maybe_transform({"integration_id": integration_id}, action_schema_params.ActionSchemaParams),
-            ),
-            cast_to=ActionSchema,
+            cast_to=ActionDeleteResponse,
         )
 
     def trigger(
         self,
-        action_key: str,
+        action: str,
         *,
-        connection_id: str,
-        integration_id: str,
+        connected_account_id: str,
+        integration: str,
         input: Dict[str, object],
+        action_version: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -274,11 +341,13 @@ class ActionsResource(SyncAPIResource):
         Triggers an action.
 
         Args:
-          connection_id: The ID of the connection to use for the action.
+          connected_account_id: The ID of the connected account used to trigger the action.
 
-          integration_id: The ID of the integration to which the action belongs.
+          integration: The slug of the integration to which the action belongs.
 
           input: The input parameters for the action.
+
+          action_version: The version of the action to trigger (defaults to latest).
 
           extra_headers: Send extra headers
 
@@ -288,10 +357,10 @@ class ActionsResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not action_key:
-            raise ValueError(f"Expected a non-empty value for `action_key` but received {action_key!r}")
+        if not action:
+            raise ValueError(f"Expected a non-empty value for `action` but received {action!r}")
         return self._post(
-            f"/actions/{action_key}/trigger",
+            f"/actions/{action}/trigger",
             body=maybe_transform({"input": input}, action_trigger_params.ActionTriggerParams),
             options=make_request_options(
                 extra_headers=extra_headers,
@@ -300,8 +369,9 @@ class ActionsResource(SyncAPIResource):
                 timeout=timeout,
                 query=maybe_transform(
                     {
-                        "connection_id": connection_id,
-                        "integration_id": integration_id,
+                        "connected_account_id": connected_account_id,
+                        "integration": integration,
+                        "action_version": action_version,
                     },
                     action_trigger_params.ActionTriggerParams,
                 ),
@@ -312,8 +382,8 @@ class ActionsResource(SyncAPIResource):
 
 class AsyncActionsResource(AsyncAPIResource):
     @cached_property
-    def schemas(self) -> AsyncSchemasResource:
-        return AsyncSchemasResource(self._client)
+    def runs(self) -> AsyncRunsResource:
+        return AsyncRunsResource(self._client)
 
     @cached_property
     def with_raw_response(self) -> AsyncActionsResourceWithRawResponse:
@@ -323,11 +393,72 @@ class AsyncActionsResource(AsyncAPIResource):
     def with_streaming_response(self) -> AsyncActionsResourceWithStreamingResponse:
         return AsyncActionsResourceWithStreamingResponse(self)
 
+    async def create(
+        self,
+        *,
+        action_template: str,
+        integration: str,
+        configuration: Optional[Dict[str, object]] | NotGiven = NOT_GIVEN,
+        name: str | NotGiven = NOT_GIVEN,
+        required_scopes: List[str] | NotGiven = NOT_GIVEN,
+        slug: str | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> Action:
+        """
+        Creates an action from a template.
+
+        Args:
+          action_template: The slug of the action template to use.
+
+          integration: The slug of the integration to which the action belongs.
+
+          configuration: Configuration options for the action.
+
+          name: The display name of the action (defaults to the action template name).
+
+          required_scopes: The OAuth scopes required to trigger the action (defaults to the action template
+              scopes, if applicable).
+
+          slug: The unique slug of the action (defaults to the action template slug).
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return await self._post(
+            "/actions",
+            body=await async_maybe_transform(
+                {
+                    "action_template": action_template,
+                    "integration": integration,
+                    "configuration": configuration,
+                    "name": name,
+                    "required_scopes": required_scopes,
+                    "slug": slug,
+                },
+                action_create_params.ActionCreateParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=Action,
+        )
+
     async def retrieve(
         self,
-        action_key: str,
+        action: str,
         *,
-        integration_id: str,
+        integration: str,
+        action_version: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -339,7 +470,9 @@ class AsyncActionsResource(AsyncAPIResource):
         Returns an action.
 
         Args:
-          integration_id: The ID of the integration to which the action belongs.
+          integration: The slug of the integration to which the action belongs.
+
+          action_version: The version of the action to retrieve (defaults to latest).
 
           extra_headers: Send extra headers
 
@@ -349,17 +482,91 @@ class AsyncActionsResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not action_key:
-            raise ValueError(f"Expected a non-empty value for `action_key` but received {action_key!r}")
+        if not action:
+            raise ValueError(f"Expected a non-empty value for `action` but received {action!r}")
         return await self._get(
-            f"/actions/{action_key}",
+            f"/actions/{action}",
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
                 query=await async_maybe_transform(
-                    {"integration_id": integration_id}, action_retrieve_params.ActionRetrieveParams
+                    {
+                        "integration": integration,
+                        "action_version": action_version,
+                    },
+                    action_retrieve_params.ActionRetrieveParams,
+                ),
+            ),
+            cast_to=Action,
+        )
+
+    async def update(
+        self,
+        action: str,
+        *,
+        integration: str,
+        action_version: str | NotGiven = NOT_GIVEN,
+        configuration: Optional[Dict[str, object]] | NotGiven = NOT_GIVEN,
+        is_enabled: bool | NotGiven = NOT_GIVEN,
+        name: str | NotGiven = NOT_GIVEN,
+        required_scopes: List[str] | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> Action:
+        """
+        Updates an action.
+
+        Args:
+          integration: The slug of the integration to which the action belongs.
+
+          action_version: The version of the action to update (defaults to latest).
+
+          configuration: Configuration options for the action.
+
+          is_enabled: Whether the action is enabled.
+
+          name: The display name of the action.
+
+          required_scopes: The OAuth scopes required to trigger the action.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not action:
+            raise ValueError(f"Expected a non-empty value for `action` but received {action!r}")
+        return await self._put(
+            f"/actions/{action}",
+            body=await async_maybe_transform(
+                {
+                    "configuration": configuration,
+                    "is_enabled": is_enabled,
+                    "name": name,
+                    "required_scopes": required_scopes,
+                },
+                action_update_params.ActionUpdateParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=await async_maybe_transform(
+                    {
+                        "integration": integration,
+                        "action_version": action_version,
+                    },
+                    action_update_params.ActionUpdateParams,
                 ),
             ),
             cast_to=Action,
@@ -368,7 +575,7 @@ class AsyncActionsResource(AsyncAPIResource):
     async def list(
         self,
         *,
-        integration_id: str,
+        integration: str,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -380,7 +587,7 @@ class AsyncActionsResource(AsyncAPIResource):
         Returns a list of actions.
 
         Args:
-          integration_id: The ID of the integration to which the actions belong.
+          integration: The slug of the integration to which the actions belong.
 
           extra_headers: Send extra headers
 
@@ -397,30 +604,31 @@ class AsyncActionsResource(AsyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
-                query=await async_maybe_transform(
-                    {"integration_id": integration_id}, action_list_params.ActionListParams
-                ),
+                query=await async_maybe_transform({"integration": integration}, action_list_params.ActionListParams),
             ),
             cast_to=ActionListResponse,
         )
 
-    async def disable(
+    async def delete(
         self,
-        action_key: str,
+        action: str,
         *,
-        integration_id: str,
+        integration: str,
+        action_version: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> Action:
+    ) -> ActionDeleteResponse:
         """
-        Disables an action.
+        Deletes an action.
 
         Args:
-          integration_id: The ID of the integration to which the action belongs.
+          integration: The slug of the integration to which the action belongs.
+
+          action_version: The version of the action to delete (defaults to latest).
 
           extra_headers: Send extra headers
 
@@ -430,113 +638,34 @@ class AsyncActionsResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not action_key:
-            raise ValueError(f"Expected a non-empty value for `action_key` but received {action_key!r}")
-        return await self._post(
-            f"/actions/{action_key}/disable",
+        if not action:
+            raise ValueError(f"Expected a non-empty value for `action` but received {action!r}")
+        return await self._delete(
+            f"/actions/{action}",
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
                 query=await async_maybe_transform(
-                    {"integration_id": integration_id}, action_disable_params.ActionDisableParams
+                    {
+                        "integration": integration,
+                        "action_version": action_version,
+                    },
+                    action_delete_params.ActionDeleteParams,
                 ),
             ),
-            cast_to=Action,
-        )
-
-    async def enable(
-        self,
-        action_key: str,
-        *,
-        integration_id: str,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> Action:
-        """
-        Enables an action.
-
-        Args:
-          integration_id: The ID of the integration to which the action belongs.
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        if not action_key:
-            raise ValueError(f"Expected a non-empty value for `action_key` but received {action_key!r}")
-        return await self._post(
-            f"/actions/{action_key}/enable",
-            options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                query=await async_maybe_transform(
-                    {"integration_id": integration_id}, action_enable_params.ActionEnableParams
-                ),
-            ),
-            cast_to=Action,
-        )
-
-    async def schema(
-        self,
-        action_key: str,
-        *,
-        integration_id: str,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ActionSchema:
-        """
-        Returns an action schema.
-
-        Args:
-          integration_id: The ID of the integration to which the action schema belongs.
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        if not action_key:
-            raise ValueError(f"Expected a non-empty value for `action_key` but received {action_key!r}")
-        return await self._get(
-            f"/actions/{action_key}/schema",
-            options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                query=await async_maybe_transform(
-                    {"integration_id": integration_id}, action_schema_params.ActionSchemaParams
-                ),
-            ),
-            cast_to=ActionSchema,
+            cast_to=ActionDeleteResponse,
         )
 
     async def trigger(
         self,
-        action_key: str,
+        action: str,
         *,
-        connection_id: str,
-        integration_id: str,
+        connected_account_id: str,
+        integration: str,
         input: Dict[str, object],
+        action_version: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -548,11 +677,13 @@ class AsyncActionsResource(AsyncAPIResource):
         Triggers an action.
 
         Args:
-          connection_id: The ID of the connection to use for the action.
+          connected_account_id: The ID of the connected account used to trigger the action.
 
-          integration_id: The ID of the integration to which the action belongs.
+          integration: The slug of the integration to which the action belongs.
 
           input: The input parameters for the action.
+
+          action_version: The version of the action to trigger (defaults to latest).
 
           extra_headers: Send extra headers
 
@@ -562,10 +693,10 @@ class AsyncActionsResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not action_key:
-            raise ValueError(f"Expected a non-empty value for `action_key` but received {action_key!r}")
+        if not action:
+            raise ValueError(f"Expected a non-empty value for `action` but received {action!r}")
         return await self._post(
-            f"/actions/{action_key}/trigger",
+            f"/actions/{action}/trigger",
             body=await async_maybe_transform({"input": input}, action_trigger_params.ActionTriggerParams),
             options=make_request_options(
                 extra_headers=extra_headers,
@@ -574,8 +705,9 @@ class AsyncActionsResource(AsyncAPIResource):
                 timeout=timeout,
                 query=await async_maybe_transform(
                     {
-                        "connection_id": connection_id,
-                        "integration_id": integration_id,
+                        "connected_account_id": connected_account_id,
+                        "integration": integration,
+                        "action_version": action_version,
                     },
                     action_trigger_params.ActionTriggerParams,
                 ),
@@ -588,109 +720,109 @@ class ActionsResourceWithRawResponse:
     def __init__(self, actions: ActionsResource) -> None:
         self._actions = actions
 
+        self.create = to_raw_response_wrapper(
+            actions.create,
+        )
         self.retrieve = to_raw_response_wrapper(
             actions.retrieve,
+        )
+        self.update = to_raw_response_wrapper(
+            actions.update,
         )
         self.list = to_raw_response_wrapper(
             actions.list,
         )
-        self.disable = to_raw_response_wrapper(
-            actions.disable,
-        )
-        self.enable = to_raw_response_wrapper(
-            actions.enable,
-        )
-        self.schema = to_raw_response_wrapper(
-            actions.schema,
+        self.delete = to_raw_response_wrapper(
+            actions.delete,
         )
         self.trigger = to_raw_response_wrapper(
             actions.trigger,
         )
 
     @cached_property
-    def schemas(self) -> SchemasResourceWithRawResponse:
-        return SchemasResourceWithRawResponse(self._actions.schemas)
+    def runs(self) -> RunsResourceWithRawResponse:
+        return RunsResourceWithRawResponse(self._actions.runs)
 
 
 class AsyncActionsResourceWithRawResponse:
     def __init__(self, actions: AsyncActionsResource) -> None:
         self._actions = actions
 
+        self.create = async_to_raw_response_wrapper(
+            actions.create,
+        )
         self.retrieve = async_to_raw_response_wrapper(
             actions.retrieve,
+        )
+        self.update = async_to_raw_response_wrapper(
+            actions.update,
         )
         self.list = async_to_raw_response_wrapper(
             actions.list,
         )
-        self.disable = async_to_raw_response_wrapper(
-            actions.disable,
-        )
-        self.enable = async_to_raw_response_wrapper(
-            actions.enable,
-        )
-        self.schema = async_to_raw_response_wrapper(
-            actions.schema,
+        self.delete = async_to_raw_response_wrapper(
+            actions.delete,
         )
         self.trigger = async_to_raw_response_wrapper(
             actions.trigger,
         )
 
     @cached_property
-    def schemas(self) -> AsyncSchemasResourceWithRawResponse:
-        return AsyncSchemasResourceWithRawResponse(self._actions.schemas)
+    def runs(self) -> AsyncRunsResourceWithRawResponse:
+        return AsyncRunsResourceWithRawResponse(self._actions.runs)
 
 
 class ActionsResourceWithStreamingResponse:
     def __init__(self, actions: ActionsResource) -> None:
         self._actions = actions
 
+        self.create = to_streamed_response_wrapper(
+            actions.create,
+        )
         self.retrieve = to_streamed_response_wrapper(
             actions.retrieve,
+        )
+        self.update = to_streamed_response_wrapper(
+            actions.update,
         )
         self.list = to_streamed_response_wrapper(
             actions.list,
         )
-        self.disable = to_streamed_response_wrapper(
-            actions.disable,
-        )
-        self.enable = to_streamed_response_wrapper(
-            actions.enable,
-        )
-        self.schema = to_streamed_response_wrapper(
-            actions.schema,
+        self.delete = to_streamed_response_wrapper(
+            actions.delete,
         )
         self.trigger = to_streamed_response_wrapper(
             actions.trigger,
         )
 
     @cached_property
-    def schemas(self) -> SchemasResourceWithStreamingResponse:
-        return SchemasResourceWithStreamingResponse(self._actions.schemas)
+    def runs(self) -> RunsResourceWithStreamingResponse:
+        return RunsResourceWithStreamingResponse(self._actions.runs)
 
 
 class AsyncActionsResourceWithStreamingResponse:
     def __init__(self, actions: AsyncActionsResource) -> None:
         self._actions = actions
 
+        self.create = async_to_streamed_response_wrapper(
+            actions.create,
+        )
         self.retrieve = async_to_streamed_response_wrapper(
             actions.retrieve,
+        )
+        self.update = async_to_streamed_response_wrapper(
+            actions.update,
         )
         self.list = async_to_streamed_response_wrapper(
             actions.list,
         )
-        self.disable = async_to_streamed_response_wrapper(
-            actions.disable,
-        )
-        self.enable = async_to_streamed_response_wrapper(
-            actions.enable,
-        )
-        self.schema = async_to_streamed_response_wrapper(
-            actions.schema,
+        self.delete = async_to_streamed_response_wrapper(
+            actions.delete,
         )
         self.trigger = async_to_streamed_response_wrapper(
             actions.trigger,
         )
 
     @cached_property
-    def schemas(self) -> AsyncSchemasResourceWithStreamingResponse:
-        return AsyncSchemasResourceWithStreamingResponse(self._actions.schemas)
+    def runs(self) -> AsyncRunsResourceWithStreamingResponse:
+        return AsyncRunsResourceWithStreamingResponse(self._actions.runs)

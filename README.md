@@ -10,7 +10,7 @@ It is generated with [Stainless](https://www.stainlessapi.com/).
 
 ## Documentation
 
-The REST API documentation can be found [on docs.useembed.com](https://docs.useembed.com). The full API of this library can be found in [api.md](api.md).
+The REST API documentation can be found on [docs.useembed.com](https://docs.useembed.com). The full API of this library can be found in [api.md](api.md).
 
 ## Installation
 
@@ -33,9 +33,9 @@ client = Embed(
 )
 
 integration = client.integrations.create(
-    provider_key="github",
+    provider="github",
 )
-print(integration.id)
+print(integration.oauth_client_id)
 ```
 
 While you can provide an `api_key` keyword argument,
@@ -60,9 +60,9 @@ client = AsyncEmbed(
 
 async def main() -> None:
     integration = await client.integrations.create(
-        provider_key="github",
+        provider="github",
     )
-    print(integration.id)
+    print(integration.oauth_client_id)
 
 
 asyncio.run(main())
@@ -96,7 +96,7 @@ client = Embed()
 
 try:
     client.integrations.create(
-        provider_key="github",
+        provider="github",
     )
 except embedhq.APIConnectionError as e:
     print("The server could not be reached")
@@ -141,7 +141,7 @@ client = Embed(
 
 # Or, configure per-request:
 client.with_options(max_retries=5).integrations.create(
-    provider_key="github",
+    provider="github",
 )
 ```
 
@@ -166,7 +166,7 @@ client = Embed(
 
 # Override per-request:
 client.with_options(timeout=5.0).integrations.create(
-    provider_key="github",
+    provider="github",
 )
 ```
 
@@ -207,12 +207,12 @@ from embedhq import Embed
 
 client = Embed()
 response = client.integrations.with_raw_response.create(
-    provider_key="github",
+    provider="github",
 )
 print(response.headers.get('X-My-Header'))
 
 integration = response.parse()  # get the object that `integrations.create()` would have returned
-print(integration.id)
+print(integration.oauth_client_id)
 ```
 
 These methods return an [`APIResponse`](https://github.com/embedhq/embed-python/tree/main/src/embedhq/_response.py) object.
@@ -227,7 +227,7 @@ To stream the response body, use `.with_streaming_response` instead, which requi
 
 ```python
 with client.integrations.with_streaming_response.create(
-    provider_key="github",
+    provider="github",
 ) as response:
     print(response.headers.get("X-My-Header"))
 
@@ -278,7 +278,7 @@ You can directly override the [httpx client](https://www.python-httpx.org/api/#c
 
 - Support for proxies
 - Custom transports
-- Additional [advanced](https://www.python-httpx.org/advanced/#client-instances) functionality
+- Additional [advanced](https://www.python-httpx.org/advanced/clients/) functionality
 
 ```python
 from embedhq import Embed, DefaultHttpxClient
@@ -291,6 +291,12 @@ client = Embed(
         transport=httpx.HTTPTransport(local_address="0.0.0.0"),
     ),
 )
+```
+
+You can also customize the client on a per-request basis by using `with_options()`:
+
+```python
+client.with_options(http_client=DefaultHttpxClient(...))
 ```
 
 ### Managing HTTP resources

@@ -21,9 +21,7 @@ from .._response import (
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
-from .._base_client import (
-    make_request_options,
-)
+from .._base_client import make_request_options
 from ..types.integration import Integration
 from ..types.integration_list_response import IntegrationListResponse
 from ..types.integration_delete_response import IntegrationDeleteResponse
@@ -43,12 +41,12 @@ class IntegrationsResource(SyncAPIResource):
     def create(
         self,
         *,
-        provider_key: str,
-        id: str | NotGiven = NOT_GIVEN,
-        auth_scheme: Literal["oauth1", "oauth2", "basic", "api_key"] | NotGiven = NOT_GIVEN,
+        provider: str,
+        name: str | NotGiven = NOT_GIVEN,
         oauth_client_id: Optional[str] | NotGiven = NOT_GIVEN,
         oauth_client_secret: Optional[str] | NotGiven = NOT_GIVEN,
         oauth_scopes: List[str] | NotGiven = NOT_GIVEN,
+        slug: str | NotGiven = NOT_GIVEN,
         use_test_credentials: bool | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -61,12 +59,9 @@ class IntegrationsResource(SyncAPIResource):
         Creates an integration.
 
         Args:
-          provider_key: The unique key of the integration provider.
+          provider: The unique slug of the integration provider.
 
-          id: The unique identifier for the integration.
-
-          auth_scheme: The authentication scheme the integration should use. Only applicable for
-              providers that support multiple auth schemes.
+          name: The display name of the integration (defaults to provider name).
 
           oauth_client_id: The OAuth Client ID. Required for integrations that use OAuth.
 
@@ -76,7 +71,9 @@ class IntegrationsResource(SyncAPIResource):
               the minimum required scopes for the collections and actions enabled on the
               integration.
 
-          use_test_credentials: Use test credentials provided by Embed. Only available in staging environment.
+          slug: The unique slug of the integration (defaults to provider slug).
+
+          use_test_credentials: Use test credentials provided by Embed.
 
           extra_headers: Send extra headers
 
@@ -90,12 +87,12 @@ class IntegrationsResource(SyncAPIResource):
             "/integrations",
             body=maybe_transform(
                 {
-                    "provider_key": provider_key,
-                    "id": id,
-                    "auth_scheme": auth_scheme,
+                    "provider": provider,
+                    "name": name,
                     "oauth_client_id": oauth_client_id,
                     "oauth_client_secret": oauth_client_secret,
                     "oauth_scopes": oauth_scopes,
+                    "slug": slug,
                     "use_test_credentials": use_test_credentials,
                 },
                 integration_create_params.IntegrationCreateParams,
@@ -108,7 +105,7 @@ class IntegrationsResource(SyncAPIResource):
 
     def retrieve(
         self,
-        integration_id: str,
+        integration: str,
         *,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -129,10 +126,10 @@ class IntegrationsResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not integration_id:
-            raise ValueError(f"Expected a non-empty value for `integration_id` but received {integration_id!r}")
+        if not integration:
+            raise ValueError(f"Expected a non-empty value for `integration` but received {integration!r}")
         return self._get(
-            f"/integrations/{integration_id}",
+            f"/integrations/{integration}",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -141,7 +138,7 @@ class IntegrationsResource(SyncAPIResource):
 
     def update(
         self,
-        integration_id: str,
+        integration: str,
         *,
         is_using_test_credentials: bool | NotGiven = NOT_GIVEN,
         oauth_client_id: Optional[str] | NotGiven = NOT_GIVEN,
@@ -177,10 +174,10 @@ class IntegrationsResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not integration_id:
-            raise ValueError(f"Expected a non-empty value for `integration_id` but received {integration_id!r}")
+        if not integration:
+            raise ValueError(f"Expected a non-empty value for `integration` but received {integration!r}")
         return self._put(
-            f"/integrations/{integration_id}",
+            f"/integrations/{integration}",
             body=maybe_transform(
                 {
                     "is_using_test_credentials": is_using_test_credentials,
@@ -215,11 +212,11 @@ class IntegrationsResource(SyncAPIResource):
         Args:
           after: A cursor for use in pagination.
 
-        `after` is an object ID that defines your place
-              in the list.
+        `after` is an object ID or slug that defines
+              your place in the list.
 
-          before: A cursor for use in pagination. `before` is an object ID that defines your place
-              in the list.
+          before: A cursor for use in pagination. `before` is an object ID or slug that defines
+              your place in the list.
 
           limit: A limit on the number of objects to be returned.
 
@@ -255,7 +252,7 @@ class IntegrationsResource(SyncAPIResource):
 
     def delete(
         self,
-        integration_id: str,
+        integration: str,
         *,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -276,80 +273,14 @@ class IntegrationsResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not integration_id:
-            raise ValueError(f"Expected a non-empty value for `integration_id` but received {integration_id!r}")
+        if not integration:
+            raise ValueError(f"Expected a non-empty value for `integration` but received {integration!r}")
         return self._delete(
-            f"/integrations/{integration_id}",
+            f"/integrations/{integration}",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=IntegrationDeleteResponse,
-        )
-
-    def disable(
-        self,
-        integration_id: str,
-        *,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> Integration:
-        """
-        Disables an integration.
-
-        Args:
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        if not integration_id:
-            raise ValueError(f"Expected a non-empty value for `integration_id` but received {integration_id!r}")
-        return self._post(
-            f"/integrations/{integration_id}/disable",
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=Integration,
-        )
-
-    def enable(
-        self,
-        integration_id: str,
-        *,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> Integration:
-        """
-        Enables an integration.
-
-        Args:
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        if not integration_id:
-            raise ValueError(f"Expected a non-empty value for `integration_id` but received {integration_id!r}")
-        return self._post(
-            f"/integrations/{integration_id}/enable",
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=Integration,
         )
 
 
@@ -365,12 +296,12 @@ class AsyncIntegrationsResource(AsyncAPIResource):
     async def create(
         self,
         *,
-        provider_key: str,
-        id: str | NotGiven = NOT_GIVEN,
-        auth_scheme: Literal["oauth1", "oauth2", "basic", "api_key"] | NotGiven = NOT_GIVEN,
+        provider: str,
+        name: str | NotGiven = NOT_GIVEN,
         oauth_client_id: Optional[str] | NotGiven = NOT_GIVEN,
         oauth_client_secret: Optional[str] | NotGiven = NOT_GIVEN,
         oauth_scopes: List[str] | NotGiven = NOT_GIVEN,
+        slug: str | NotGiven = NOT_GIVEN,
         use_test_credentials: bool | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -383,12 +314,9 @@ class AsyncIntegrationsResource(AsyncAPIResource):
         Creates an integration.
 
         Args:
-          provider_key: The unique key of the integration provider.
+          provider: The unique slug of the integration provider.
 
-          id: The unique identifier for the integration.
-
-          auth_scheme: The authentication scheme the integration should use. Only applicable for
-              providers that support multiple auth schemes.
+          name: The display name of the integration (defaults to provider name).
 
           oauth_client_id: The OAuth Client ID. Required for integrations that use OAuth.
 
@@ -398,7 +326,9 @@ class AsyncIntegrationsResource(AsyncAPIResource):
               the minimum required scopes for the collections and actions enabled on the
               integration.
 
-          use_test_credentials: Use test credentials provided by Embed. Only available in staging environment.
+          slug: The unique slug of the integration (defaults to provider slug).
+
+          use_test_credentials: Use test credentials provided by Embed.
 
           extra_headers: Send extra headers
 
@@ -412,12 +342,12 @@ class AsyncIntegrationsResource(AsyncAPIResource):
             "/integrations",
             body=await async_maybe_transform(
                 {
-                    "provider_key": provider_key,
-                    "id": id,
-                    "auth_scheme": auth_scheme,
+                    "provider": provider,
+                    "name": name,
                     "oauth_client_id": oauth_client_id,
                     "oauth_client_secret": oauth_client_secret,
                     "oauth_scopes": oauth_scopes,
+                    "slug": slug,
                     "use_test_credentials": use_test_credentials,
                 },
                 integration_create_params.IntegrationCreateParams,
@@ -430,7 +360,7 @@ class AsyncIntegrationsResource(AsyncAPIResource):
 
     async def retrieve(
         self,
-        integration_id: str,
+        integration: str,
         *,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -451,10 +381,10 @@ class AsyncIntegrationsResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not integration_id:
-            raise ValueError(f"Expected a non-empty value for `integration_id` but received {integration_id!r}")
+        if not integration:
+            raise ValueError(f"Expected a non-empty value for `integration` but received {integration!r}")
         return await self._get(
-            f"/integrations/{integration_id}",
+            f"/integrations/{integration}",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -463,7 +393,7 @@ class AsyncIntegrationsResource(AsyncAPIResource):
 
     async def update(
         self,
-        integration_id: str,
+        integration: str,
         *,
         is_using_test_credentials: bool | NotGiven = NOT_GIVEN,
         oauth_client_id: Optional[str] | NotGiven = NOT_GIVEN,
@@ -499,10 +429,10 @@ class AsyncIntegrationsResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not integration_id:
-            raise ValueError(f"Expected a non-empty value for `integration_id` but received {integration_id!r}")
+        if not integration:
+            raise ValueError(f"Expected a non-empty value for `integration` but received {integration!r}")
         return await self._put(
-            f"/integrations/{integration_id}",
+            f"/integrations/{integration}",
             body=await async_maybe_transform(
                 {
                     "is_using_test_credentials": is_using_test_credentials,
@@ -537,11 +467,11 @@ class AsyncIntegrationsResource(AsyncAPIResource):
         Args:
           after: A cursor for use in pagination.
 
-        `after` is an object ID that defines your place
-              in the list.
+        `after` is an object ID or slug that defines
+              your place in the list.
 
-          before: A cursor for use in pagination. `before` is an object ID that defines your place
-              in the list.
+          before: A cursor for use in pagination. `before` is an object ID or slug that defines
+              your place in the list.
 
           limit: A limit on the number of objects to be returned.
 
@@ -577,7 +507,7 @@ class AsyncIntegrationsResource(AsyncAPIResource):
 
     async def delete(
         self,
-        integration_id: str,
+        integration: str,
         *,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -598,80 +528,14 @@ class AsyncIntegrationsResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not integration_id:
-            raise ValueError(f"Expected a non-empty value for `integration_id` but received {integration_id!r}")
+        if not integration:
+            raise ValueError(f"Expected a non-empty value for `integration` but received {integration!r}")
         return await self._delete(
-            f"/integrations/{integration_id}",
+            f"/integrations/{integration}",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=IntegrationDeleteResponse,
-        )
-
-    async def disable(
-        self,
-        integration_id: str,
-        *,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> Integration:
-        """
-        Disables an integration.
-
-        Args:
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        if not integration_id:
-            raise ValueError(f"Expected a non-empty value for `integration_id` but received {integration_id!r}")
-        return await self._post(
-            f"/integrations/{integration_id}/disable",
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=Integration,
-        )
-
-    async def enable(
-        self,
-        integration_id: str,
-        *,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> Integration:
-        """
-        Enables an integration.
-
-        Args:
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        if not integration_id:
-            raise ValueError(f"Expected a non-empty value for `integration_id` but received {integration_id!r}")
-        return await self._post(
-            f"/integrations/{integration_id}/enable",
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=Integration,
         )
 
 
@@ -694,12 +558,6 @@ class IntegrationsResourceWithRawResponse:
         self.delete = to_raw_response_wrapper(
             integrations.delete,
         )
-        self.disable = to_raw_response_wrapper(
-            integrations.disable,
-        )
-        self.enable = to_raw_response_wrapper(
-            integrations.enable,
-        )
 
 
 class AsyncIntegrationsResourceWithRawResponse:
@@ -720,12 +578,6 @@ class AsyncIntegrationsResourceWithRawResponse:
         )
         self.delete = async_to_raw_response_wrapper(
             integrations.delete,
-        )
-        self.disable = async_to_raw_response_wrapper(
-            integrations.disable,
-        )
-        self.enable = async_to_raw_response_wrapper(
-            integrations.enable,
         )
 
 
@@ -748,12 +600,6 @@ class IntegrationsResourceWithStreamingResponse:
         self.delete = to_streamed_response_wrapper(
             integrations.delete,
         )
-        self.disable = to_streamed_response_wrapper(
-            integrations.disable,
-        )
-        self.enable = to_streamed_response_wrapper(
-            integrations.enable,
-        )
 
 
 class AsyncIntegrationsResourceWithStreamingResponse:
@@ -774,10 +620,4 @@ class AsyncIntegrationsResourceWithStreamingResponse:
         )
         self.delete = async_to_streamed_response_wrapper(
             integrations.delete,
-        )
-        self.disable = async_to_streamed_response_wrapper(
-            integrations.disable,
-        )
-        self.enable = async_to_streamed_response_wrapper(
-            integrations.enable,
         )

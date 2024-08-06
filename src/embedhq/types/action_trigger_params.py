@@ -9,11 +9,14 @@ __all__ = ["ActionTriggerParams"]
 
 
 class ActionTriggerParams(TypedDict, total=False):
-    connection_id: Required[str]
-    """The ID of the connection to use for the action."""
+    connected_account_id: Required[str]
+    """The ID of the connected account used to trigger the action."""
 
-    integration_id: Required[str]
-    """The ID of the integration to which the action belongs."""
+    integration: Required[str]
+    """The slug of the integration to which the action belongs."""
 
     input: Required[Dict[str, object]]
     """The input parameters for the action."""
+
+    action_version: str
+    """The version of the action to trigger (defaults to latest)."""
