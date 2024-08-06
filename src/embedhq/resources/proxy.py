@@ -22,9 +22,7 @@ from .._response import (
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
-from .._base_client import (
-    make_request_options,
-)
+from .._base_client import make_request_options
 from ..types.proxy_get_response import ProxyGetResponse
 from ..types.proxy_put_response import ProxyPutResponse
 from ..types.proxy_post_response import ProxyPostResponse

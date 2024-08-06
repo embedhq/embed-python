@@ -96,14 +96,14 @@ class TestWebhooks:
     @parametrize
     def test_method_update(self, client: Embed) -> None:
         webhook = client.webhooks.update(
-            "wh_1a2b3c",
+            webhook_id="wh_1a2b3c",
         )
         assert_matches_type(Webhook, webhook, path=["response"])
 
     @parametrize
     def test_method_update_with_all_params(self, client: Embed) -> None:
         webhook = client.webhooks.update(
-            "wh_1a2b3c",
+            webhook_id="wh_1a2b3c",
             events=["sync_run.succeeded", "sync_run.failed"],
             url="https://my-app.com/webhook",
         )
@@ -112,7 +112,7 @@ class TestWebhooks:
     @parametrize
     def test_raw_response_update(self, client: Embed) -> None:
         response = client.webhooks.with_raw_response.update(
-            "wh_1a2b3c",
+            webhook_id="wh_1a2b3c",
         )
 
         assert response.is_closed is True
@@ -123,7 +123,7 @@ class TestWebhooks:
     @parametrize
     def test_streaming_response_update(self, client: Embed) -> None:
         with client.webhooks.with_streaming_response.update(
-            "wh_1a2b3c",
+            webhook_id="wh_1a2b3c",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -137,7 +137,7 @@ class TestWebhooks:
     def test_path_params_update(self, client: Embed) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `webhook_id` but received ''"):
             client.webhooks.with_raw_response.update(
-                "",
+                webhook_id="",
             )
 
     @parametrize
@@ -282,14 +282,14 @@ class TestAsyncWebhooks:
     @parametrize
     async def test_method_update(self, async_client: AsyncEmbed) -> None:
         webhook = await async_client.webhooks.update(
-            "wh_1a2b3c",
+            webhook_id="wh_1a2b3c",
         )
         assert_matches_type(Webhook, webhook, path=["response"])
 
     @parametrize
     async def test_method_update_with_all_params(self, async_client: AsyncEmbed) -> None:
         webhook = await async_client.webhooks.update(
-            "wh_1a2b3c",
+            webhook_id="wh_1a2b3c",
             events=["sync_run.succeeded", "sync_run.failed"],
             url="https://my-app.com/webhook",
         )
@@ -298,7 +298,7 @@ class TestAsyncWebhooks:
     @parametrize
     async def test_raw_response_update(self, async_client: AsyncEmbed) -> None:
         response = await async_client.webhooks.with_raw_response.update(
-            "wh_1a2b3c",
+            webhook_id="wh_1a2b3c",
         )
 
         assert response.is_closed is True
@@ -309,7 +309,7 @@ class TestAsyncWebhooks:
     @parametrize
     async def test_streaming_response_update(self, async_client: AsyncEmbed) -> None:
         async with async_client.webhooks.with_streaming_response.update(
-            "wh_1a2b3c",
+            webhook_id="wh_1a2b3c",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -323,7 +323,7 @@ class TestAsyncWebhooks:
     async def test_path_params_update(self, async_client: AsyncEmbed) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `webhook_id` but received ''"):
             await async_client.webhooks.with_raw_response.update(
-                "",
+                webhook_id="",
             )
 
     @parametrize
