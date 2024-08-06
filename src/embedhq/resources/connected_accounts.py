@@ -46,8 +46,8 @@ class ConnectedAccountsResource(SyncAPIResource):
 
     def retrieve(
         self,
-        connected_account_id: str,
         *,
+        connected_account_id: str,
         integration: str,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -90,8 +90,8 @@ class ConnectedAccountsResource(SyncAPIResource):
 
     def update(
         self,
-        connected_account_id: str,
         *,
+        connected_account_id: str,
         integration: str,
         configuration: Optional[Dict[str, object]] | NotGiven = NOT_GIVEN,
         metadata: Optional[Dict[str, object]] | NotGiven = NOT_GIVEN,
@@ -211,8 +211,8 @@ class ConnectedAccountsResource(SyncAPIResource):
 
     def delete(
         self,
-        connected_account_id: str,
         *,
+        connected_account_id: str,
         integration: str,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -328,8 +328,8 @@ class AsyncConnectedAccountsResource(AsyncAPIResource):
 
     async def retrieve(
         self,
-        connected_account_id: str,
         *,
+        connected_account_id: str,
         integration: str,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -372,8 +372,8 @@ class AsyncConnectedAccountsResource(AsyncAPIResource):
 
     async def update(
         self,
-        connected_account_id: str,
         *,
+        connected_account_id: str,
         integration: str,
         configuration: Optional[Dict[str, object]] | NotGiven = NOT_GIVEN,
         metadata: Optional[Dict[str, object]] | NotGiven = NOT_GIVEN,
@@ -493,8 +493,8 @@ class AsyncConnectedAccountsResource(AsyncAPIResource):
 
     async def delete(
         self,
-        connected_account_id: str,
         *,
+        connected_account_id: str,
         integration: str,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.

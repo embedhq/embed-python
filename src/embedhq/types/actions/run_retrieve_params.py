@@ -10,6 +10,8 @@ __all__ = ["RunRetrieveParams"]
 class RunRetrieveParams(TypedDict, total=False):
     action: Required[str]
 
+    action_run_id: Required[str]
+
     connected_account_id: Required[str]
     """The ID of the connected account to which the action belongs."""
 

@@ -11,6 +11,9 @@ __all__ = ["ProxyPostParams"]
 
 
 class ProxyPostParams(TypedDict, total=False):
+    endpoint: Required[str]
+    """The endpoint to proxy the request to."""
+
     body: Required[Dict[str, object]]
 
     x_embed_connected_account_id: Required[Annotated[str, PropertyInfo(alias="X-Embed-Connected-Account-Id")]]
