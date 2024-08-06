@@ -56,6 +56,22 @@ from .integrations import (
     IntegrationsResourceWithStreamingResponse,
     AsyncIntegrationsResourceWithStreamingResponse,
 )
+from .connect_sessions import (
+    ConnectSessionsResource,
+    AsyncConnectSessionsResource,
+    ConnectSessionsResourceWithRawResponse,
+    AsyncConnectSessionsResourceWithRawResponse,
+    ConnectSessionsResourceWithStreamingResponse,
+    AsyncConnectSessionsResourceWithStreamingResponse,
+)
+from .connected_accounts import (
+    ConnectedAccountsResource,
+    AsyncConnectedAccountsResource,
+    ConnectedAccountsResourceWithRawResponse,
+    AsyncConnectedAccountsResourceWithRawResponse,
+    ConnectedAccountsResourceWithStreamingResponse,
+    AsyncConnectedAccountsResourceWithStreamingResponse,
+)
 
 __all__ = [
     "IntegrationsResource",
@@ -64,6 +80,18 @@ __all__ = [
     "AsyncIntegrationsResourceWithRawResponse",
     "IntegrationsResourceWithStreamingResponse",
     "AsyncIntegrationsResourceWithStreamingResponse",
+    "ConnectedAccountsResource",
+    "AsyncConnectedAccountsResource",
+    "ConnectedAccountsResourceWithRawResponse",
+    "AsyncConnectedAccountsResourceWithRawResponse",
+    "ConnectedAccountsResourceWithStreamingResponse",
+    "AsyncConnectedAccountsResourceWithStreamingResponse",
+    "ConnectSessionsResource",
+    "AsyncConnectSessionsResource",
+    "ConnectSessionsResourceWithRawResponse",
+    "AsyncConnectSessionsResourceWithRawResponse",
+    "ConnectSessionsResourceWithStreamingResponse",
+    "AsyncConnectSessionsResourceWithStreamingResponse",
     "ProvidersResource",
     "AsyncProvidersResource",
     "ProvidersResourceWithRawResponse",
