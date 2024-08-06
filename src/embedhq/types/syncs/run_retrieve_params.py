@@ -10,6 +10,8 @@ __all__ = ["RunRetrieveParams"]
 class RunRetrieveParams(TypedDict, total=False):
     collection: Required[str]
 
+    sync_run_id: Required[str]
+
     connected_account_id: Required[str]
     """The ID of the connected account to which the syncs belong."""
 

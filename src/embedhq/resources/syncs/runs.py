@@ -36,9 +36,9 @@ class RunsResource(SyncAPIResource):
 
     def retrieve(
         self,
-        sync_run_id: str,
         *,
         collection: str,
+        sync_run_id: str,
         connected_account_id: str,
         integration: str,
         collection_version: str | NotGiven = NOT_GIVEN,
@@ -92,8 +92,8 @@ class RunsResource(SyncAPIResource):
 
     def list(
         self,
-        collection: str,
         *,
+        collection: str,
         connected_account_id: str,
         integration: str,
         collection_version: str | NotGiven = NOT_GIVEN,
@@ -155,9 +155,9 @@ class AsyncRunsResource(AsyncAPIResource):
 
     async def retrieve(
         self,
-        sync_run_id: str,
         *,
         collection: str,
+        sync_run_id: str,
         connected_account_id: str,
         integration: str,
         collection_version: str | NotGiven = NOT_GIVEN,
@@ -211,8 +211,8 @@ class AsyncRunsResource(AsyncAPIResource):
 
     async def list(
         self,
-        collection: str,
         *,
+        collection: str,
         connected_account_id: str,
         integration: str,
         collection_version: str | NotGiven = NOT_GIVEN,

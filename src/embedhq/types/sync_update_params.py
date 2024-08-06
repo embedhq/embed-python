@@ -9,6 +9,8 @@ __all__ = ["SyncUpdateParams"]
 
 
 class SyncUpdateParams(TypedDict, total=False):
+    collection: Required[str]
+
     connected_account_id: Required[str]
     """The ID of the connected account to which the syncs belong."""
 

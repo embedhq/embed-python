@@ -9,6 +9,8 @@ __all__ = ["ActionUpdateParams"]
 
 
 class ActionUpdateParams(TypedDict, total=False):
+    action: Required[str]
+
     integration: Required[str]
     """The slug of the integration to which the action belongs."""
 

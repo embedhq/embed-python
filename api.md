@@ -28,10 +28,10 @@ from embedhq.types import (
 
 Methods:
 
-- <code title="get /connected-accounts/{connected_account_id}">client.connected_accounts.<a href="./src/embedhq/resources/connected_accounts.py">retrieve</a>(connected_account_id, \*\*<a href="src/embedhq/types/connected_account_retrieve_params.py">params</a>) -> <a href="./src/embedhq/types/connected_account.py">ConnectedAccount</a></code>
-- <code title="put /connected-accounts/{connected_account_id}">client.connected_accounts.<a href="./src/embedhq/resources/connected_accounts.py">update</a>(connected_account_id, \*\*<a href="src/embedhq/types/connected_account_update_params.py">params</a>) -> <a href="./src/embedhq/types/connected_account.py">ConnectedAccount</a></code>
+- <code title="get /connected-accounts/{connected_account_id}">client.connected_accounts.<a href="./src/embedhq/resources/connected_accounts.py">retrieve</a>(\*, connected_account_id, \*\*<a href="src/embedhq/types/connected_account_retrieve_params.py">params</a>) -> <a href="./src/embedhq/types/connected_account.py">ConnectedAccount</a></code>
+- <code title="put /connected-accounts/{connected_account_id}">client.connected_accounts.<a href="./src/embedhq/resources/connected_accounts.py">update</a>(\*, connected_account_id, \*\*<a href="src/embedhq/types/connected_account_update_params.py">params</a>) -> <a href="./src/embedhq/types/connected_account.py">ConnectedAccount</a></code>
 - <code title="get /connected-accounts">client.connected_accounts.<a href="./src/embedhq/resources/connected_accounts.py">list</a>(\*\*<a href="src/embedhq/types/connected_account_list_params.py">params</a>) -> <a href="./src/embedhq/types/connected_account_list_response.py">ConnectedAccountListResponse</a></code>
-- <code title="delete /connected-accounts/{connected_account_id}">client.connected_accounts.<a href="./src/embedhq/resources/connected_accounts.py">delete</a>(connected_account_id, \*\*<a href="src/embedhq/types/connected_account_delete_params.py">params</a>) -> <a href="./src/embedhq/types/connected_account_delete_response.py">ConnectedAccountDeleteResponse</a></code>
+- <code title="delete /connected-accounts/{connected_account_id}">client.connected_accounts.<a href="./src/embedhq/resources/connected_accounts.py">delete</a>(\*, connected_account_id, \*\*<a href="src/embedhq/types/connected_account_delete_params.py">params</a>) -> <a href="./src/embedhq/types/connected_account_delete_response.py">ConnectedAccountDeleteResponse</a></code>
 - <code title="post /connected-accounts">client.connected_accounts.<a href="./src/embedhq/resources/connected_accounts.py">upsert</a>(\*\*<a href="src/embedhq/types/connected_account_upsert_params.py">params</a>) -> <a href="./src/embedhq/types/connected_account.py">ConnectedAccount</a></code>
 
 # ConnectSessions
@@ -102,10 +102,10 @@ from embedhq.types import Collection, CollectionListResponse, CollectionDeleteRe
 Methods:
 
 - <code title="post /collections">client.collections.<a href="./src/embedhq/resources/collections.py">create</a>(\*\*<a href="src/embedhq/types/collection_create_params.py">params</a>) -> <a href="./src/embedhq/types/collection.py">Collection</a></code>
-- <code title="get /collections/{collection}">client.collections.<a href="./src/embedhq/resources/collections.py">retrieve</a>(collection, \*\*<a href="src/embedhq/types/collection_retrieve_params.py">params</a>) -> <a href="./src/embedhq/types/collection.py">Collection</a></code>
-- <code title="put /collections/{collection}">client.collections.<a href="./src/embedhq/resources/collections.py">update</a>(collection, \*\*<a href="src/embedhq/types/collection_update_params.py">params</a>) -> <a href="./src/embedhq/types/collection.py">Collection</a></code>
+- <code title="get /collections/{collection}">client.collections.<a href="./src/embedhq/resources/collections.py">retrieve</a>(\*, collection, \*\*<a href="src/embedhq/types/collection_retrieve_params.py">params</a>) -> <a href="./src/embedhq/types/collection.py">Collection</a></code>
+- <code title="put /collections/{collection}">client.collections.<a href="./src/embedhq/resources/collections.py">update</a>(\*, collection, \*\*<a href="src/embedhq/types/collection_update_params.py">params</a>) -> <a href="./src/embedhq/types/collection.py">Collection</a></code>
 - <code title="get /collections">client.collections.<a href="./src/embedhq/resources/collections.py">list</a>(\*\*<a href="src/embedhq/types/collection_list_params.py">params</a>) -> <a href="./src/embedhq/types/collection_list_response.py">CollectionListResponse</a></code>
-- <code title="delete /collections/{collection}">client.collections.<a href="./src/embedhq/resources/collections.py">delete</a>(collection, \*\*<a href="src/embedhq/types/collection_delete_params.py">params</a>) -> <a href="./src/embedhq/types/collection_delete_response.py">CollectionDeleteResponse</a></code>
+- <code title="delete /collections/{collection}">client.collections.<a href="./src/embedhq/resources/collections.py">delete</a>(\*, collection, \*\*<a href="src/embedhq/types/collection_delete_params.py">params</a>) -> <a href="./src/embedhq/types/collection_delete_response.py">CollectionDeleteResponse</a></code>
 
 # Syncs
 
@@ -118,13 +118,13 @@ from embedhq.types import Sync, SyncListResponse, SyncDeleteResponse
 Methods:
 
 - <code title="post /syncs">client.syncs.<a href="./src/embedhq/resources/syncs/syncs.py">create</a>(\*\*<a href="src/embedhq/types/sync_create_params.py">params</a>) -> <a href="./src/embedhq/types/sync.py">Sync</a></code>
-- <code title="get /syncs/{collection}">client.syncs.<a href="./src/embedhq/resources/syncs/syncs.py">retrieve</a>(collection, \*\*<a href="src/embedhq/types/sync_retrieve_params.py">params</a>) -> <a href="./src/embedhq/types/sync.py">Sync</a></code>
-- <code title="put /syncs/{collection}">client.syncs.<a href="./src/embedhq/resources/syncs/syncs.py">update</a>(collection, \*\*<a href="src/embedhq/types/sync_update_params.py">params</a>) -> <a href="./src/embedhq/types/sync.py">Sync</a></code>
+- <code title="get /syncs/{collection}">client.syncs.<a href="./src/embedhq/resources/syncs/syncs.py">retrieve</a>(\*, collection, \*\*<a href="src/embedhq/types/sync_retrieve_params.py">params</a>) -> <a href="./src/embedhq/types/sync.py">Sync</a></code>
+- <code title="put /syncs/{collection}">client.syncs.<a href="./src/embedhq/resources/syncs/syncs.py">update</a>(\*, collection, \*\*<a href="src/embedhq/types/sync_update_params.py">params</a>) -> <a href="./src/embedhq/types/sync.py">Sync</a></code>
 - <code title="get /syncs">client.syncs.<a href="./src/embedhq/resources/syncs/syncs.py">list</a>(\*\*<a href="src/embedhq/types/sync_list_params.py">params</a>) -> <a href="./src/embedhq/types/sync_list_response.py">SyncListResponse</a></code>
-- <code title="delete /syncs/{collection}">client.syncs.<a href="./src/embedhq/resources/syncs/syncs.py">delete</a>(collection, \*\*<a href="src/embedhq/types/sync_delete_params.py">params</a>) -> <a href="./src/embedhq/types/sync_delete_response.py">SyncDeleteResponse</a></code>
-- <code title="post /syncs/{collection}/start">client.syncs.<a href="./src/embedhq/resources/syncs/syncs.py">start</a>(collection, \*\*<a href="src/embedhq/types/sync_start_params.py">params</a>) -> <a href="./src/embedhq/types/sync.py">Sync</a></code>
-- <code title="post /syncs/{collection}/stop">client.syncs.<a href="./src/embedhq/resources/syncs/syncs.py">stop</a>(collection, \*\*<a href="src/embedhq/types/sync_stop_params.py">params</a>) -> <a href="./src/embedhq/types/sync.py">Sync</a></code>
-- <code title="post /syncs/{collection}/trigger">client.syncs.<a href="./src/embedhq/resources/syncs/syncs.py">trigger</a>(collection, \*\*<a href="src/embedhq/types/sync_trigger_params.py">params</a>) -> <a href="./src/embedhq/types/sync.py">Sync</a></code>
+- <code title="delete /syncs/{collection}">client.syncs.<a href="./src/embedhq/resources/syncs/syncs.py">delete</a>(\*, collection, \*\*<a href="src/embedhq/types/sync_delete_params.py">params</a>) -> <a href="./src/embedhq/types/sync_delete_response.py">SyncDeleteResponse</a></code>
+- <code title="post /syncs/{collection}/start">client.syncs.<a href="./src/embedhq/resources/syncs/syncs.py">start</a>(\*, collection, \*\*<a href="src/embedhq/types/sync_start_params.py">params</a>) -> <a href="./src/embedhq/types/sync.py">Sync</a></code>
+- <code title="post /syncs/{collection}/stop">client.syncs.<a href="./src/embedhq/resources/syncs/syncs.py">stop</a>(\*, collection, \*\*<a href="src/embedhq/types/sync_stop_params.py">params</a>) -> <a href="./src/embedhq/types/sync.py">Sync</a></code>
+- <code title="post /syncs/{collection}/trigger">client.syncs.<a href="./src/embedhq/resources/syncs/syncs.py">trigger</a>(\*, collection, \*\*<a href="src/embedhq/types/sync_trigger_params.py">params</a>) -> <a href="./src/embedhq/types/sync.py">Sync</a></code>
 
 ## Runs
 
@@ -136,8 +136,8 @@ from embedhq.types.syncs import SyncRun, RunListResponse
 
 Methods:
 
-- <code title="get /syncs/{collection}/runs/{sync_run_id}">client.syncs.runs.<a href="./src/embedhq/resources/syncs/runs.py">retrieve</a>(sync_run_id, \*, collection, \*\*<a href="src/embedhq/types/syncs/run_retrieve_params.py">params</a>) -> <a href="./src/embedhq/types/syncs/sync_run.py">SyncRun</a></code>
-- <code title="get /syncs/{collection}/runs">client.syncs.runs.<a href="./src/embedhq/resources/syncs/runs.py">list</a>(collection, \*\*<a href="src/embedhq/types/syncs/run_list_params.py">params</a>) -> <a href="./src/embedhq/types/syncs/run_list_response.py">RunListResponse</a></code>
+- <code title="get /syncs/{collection}/runs/{sync_run_id}">client.syncs.runs.<a href="./src/embedhq/resources/syncs/runs.py">retrieve</a>(\*, collection, sync_run_id, \*\*<a href="src/embedhq/types/syncs/run_retrieve_params.py">params</a>) -> <a href="./src/embedhq/types/syncs/sync_run.py">SyncRun</a></code>
+- <code title="get /syncs/{collection}/runs">client.syncs.runs.<a href="./src/embedhq/resources/syncs/runs.py">list</a>(\*, collection, \*\*<a href="src/embedhq/types/syncs/run_list_params.py">params</a>) -> <a href="./src/embedhq/types/syncs/run_list_response.py">RunListResponse</a></code>
 
 # Actions
 
@@ -150,11 +150,11 @@ from embedhq.types import Action, ActionListResponse, ActionDeleteResponse, Acti
 Methods:
 
 - <code title="post /actions">client.actions.<a href="./src/embedhq/resources/actions/actions.py">create</a>(\*\*<a href="src/embedhq/types/action_create_params.py">params</a>) -> <a href="./src/embedhq/types/action.py">Action</a></code>
-- <code title="get /actions/{action}">client.actions.<a href="./src/embedhq/resources/actions/actions.py">retrieve</a>(action, \*\*<a href="src/embedhq/types/action_retrieve_params.py">params</a>) -> <a href="./src/embedhq/types/action.py">Action</a></code>
-- <code title="put /actions/{action}">client.actions.<a href="./src/embedhq/resources/actions/actions.py">update</a>(action, \*\*<a href="src/embedhq/types/action_update_params.py">params</a>) -> <a href="./src/embedhq/types/action.py">Action</a></code>
+- <code title="get /actions/{action}">client.actions.<a href="./src/embedhq/resources/actions/actions.py">retrieve</a>(\*, action, \*\*<a href="src/embedhq/types/action_retrieve_params.py">params</a>) -> <a href="./src/embedhq/types/action.py">Action</a></code>
+- <code title="put /actions/{action}">client.actions.<a href="./src/embedhq/resources/actions/actions.py">update</a>(\*, action, \*\*<a href="src/embedhq/types/action_update_params.py">params</a>) -> <a href="./src/embedhq/types/action.py">Action</a></code>
 - <code title="get /actions">client.actions.<a href="./src/embedhq/resources/actions/actions.py">list</a>(\*\*<a href="src/embedhq/types/action_list_params.py">params</a>) -> <a href="./src/embedhq/types/action_list_response.py">ActionListResponse</a></code>
-- <code title="delete /actions/{action}">client.actions.<a href="./src/embedhq/resources/actions/actions.py">delete</a>(action, \*\*<a href="src/embedhq/types/action_delete_params.py">params</a>) -> <a href="./src/embedhq/types/action_delete_response.py">ActionDeleteResponse</a></code>
-- <code title="post /actions/{action}/trigger">client.actions.<a href="./src/embedhq/resources/actions/actions.py">trigger</a>(action, \*\*<a href="src/embedhq/types/action_trigger_params.py">params</a>) -> <a href="./src/embedhq/types/action_trigger_response.py">ActionTriggerResponse</a></code>
+- <code title="delete /actions/{action}">client.actions.<a href="./src/embedhq/resources/actions/actions.py">delete</a>(\*, action, \*\*<a href="src/embedhq/types/action_delete_params.py">params</a>) -> <a href="./src/embedhq/types/action_delete_response.py">ActionDeleteResponse</a></code>
+- <code title="post /actions/{action}/trigger">client.actions.<a href="./src/embedhq/resources/actions/actions.py">trigger</a>(\*, action, \*\*<a href="src/embedhq/types/action_trigger_params.py">params</a>) -> <a href="./src/embedhq/types/action_trigger_response.py">ActionTriggerResponse</a></code>
 
 ## Runs
 
@@ -166,8 +166,8 @@ from embedhq.types.actions import ActionRun, RunListResponse
 
 Methods:
 
-- <code title="get /actions/{action}/runs/{action_run_id}">client.actions.runs.<a href="./src/embedhq/resources/actions/runs.py">retrieve</a>(action_run_id, \*, action, \*\*<a href="src/embedhq/types/actions/run_retrieve_params.py">params</a>) -> <a href="./src/embedhq/types/actions/action_run.py">ActionRun</a></code>
-- <code title="get /actions/{action}/runs">client.actions.runs.<a href="./src/embedhq/resources/actions/runs.py">list</a>(action, \*\*<a href="src/embedhq/types/actions/run_list_params.py">params</a>) -> <a href="./src/embedhq/types/actions/run_list_response.py">RunListResponse</a></code>
+- <code title="get /actions/{action}/runs/{action_run_id}">client.actions.runs.<a href="./src/embedhq/resources/actions/runs.py">retrieve</a>(\*, action, action_run_id, \*\*<a href="src/embedhq/types/actions/run_retrieve_params.py">params</a>) -> <a href="./src/embedhq/types/actions/action_run.py">ActionRun</a></code>
+- <code title="get /actions/{action}/runs">client.actions.runs.<a href="./src/embedhq/resources/actions/runs.py">list</a>(\*, action, \*\*<a href="src/embedhq/types/actions/run_list_params.py">params</a>) -> <a href="./src/embedhq/types/actions/run_list_response.py">RunListResponse</a></code>
 
 # Proxy
 
@@ -179,10 +179,10 @@ from embedhq.types import ProxyDeleteResponse, ProxyGetResponse, ProxyPostRespon
 
 Methods:
 
-- <code title="delete /proxy/{endpoint}">client.proxy.<a href="./src/embedhq/resources/proxy.py">delete</a>(endpoint, \*\*<a href="src/embedhq/types/proxy_delete_params.py">params</a>) -> <a href="./src/embedhq/types/proxy_delete_response.py">ProxyDeleteResponse</a></code>
-- <code title="get /proxy/{endpoint}">client.proxy.<a href="./src/embedhq/resources/proxy.py">get</a>(endpoint) -> <a href="./src/embedhq/types/proxy_get_response.py">ProxyGetResponse</a></code>
-- <code title="post /proxy/{endpoint}">client.proxy.<a href="./src/embedhq/resources/proxy.py">post</a>(endpoint, \*\*<a href="src/embedhq/types/proxy_post_params.py">params</a>) -> <a href="./src/embedhq/types/proxy_post_response.py">ProxyPostResponse</a></code>
-- <code title="put /proxy/{endpoint}">client.proxy.<a href="./src/embedhq/resources/proxy.py">put</a>(endpoint, \*\*<a href="src/embedhq/types/proxy_put_params.py">params</a>) -> <a href="./src/embedhq/types/proxy_put_response.py">ProxyPutResponse</a></code>
+- <code title="delete /proxy/{endpoint}">client.proxy.<a href="./src/embedhq/resources/proxy.py">delete</a>(\*, endpoint, \*\*<a href="src/embedhq/types/proxy_delete_params.py">params</a>) -> <a href="./src/embedhq/types/proxy_delete_response.py">ProxyDeleteResponse</a></code>
+- <code title="get /proxy/{endpoint}">client.proxy.<a href="./src/embedhq/resources/proxy.py">get</a>(\*, endpoint) -> <a href="./src/embedhq/types/proxy_get_response.py">ProxyGetResponse</a></code>
+- <code title="post /proxy/{endpoint}">client.proxy.<a href="./src/embedhq/resources/proxy.py">post</a>(\*, endpoint, \*\*<a href="src/embedhq/types/proxy_post_params.py">params</a>) -> <a href="./src/embedhq/types/proxy_post_response.py">ProxyPostResponse</a></code>
+- <code title="put /proxy/{endpoint}">client.proxy.<a href="./src/embedhq/resources/proxy.py">put</a>(\*, endpoint, \*\*<a href="src/embedhq/types/proxy_put_params.py">params</a>) -> <a href="./src/embedhq/types/proxy_put_response.py">ProxyPutResponse</a></code>
 
 # Webhooks
 

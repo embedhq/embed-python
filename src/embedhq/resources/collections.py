@@ -105,8 +105,8 @@ class CollectionsResource(SyncAPIResource):
 
     def retrieve(
         self,
-        collection: str,
         *,
+        collection: str,
         integration: str,
         collection_version: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -154,8 +154,8 @@ class CollectionsResource(SyncAPIResource):
 
     def update(
         self,
-        collection: str,
         *,
+        collection: str,
         integration: str,
         collection_version: str | NotGiven = NOT_GIVEN,
         configuration: Optional[Dict[str, object]] | NotGiven = NOT_GIVEN,
@@ -261,8 +261,8 @@ class CollectionsResource(SyncAPIResource):
 
     def delete(
         self,
-        collection: str,
         *,
+        collection: str,
         integration: str,
         collection_version: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -380,8 +380,8 @@ class AsyncCollectionsResource(AsyncAPIResource):
 
     async def retrieve(
         self,
-        collection: str,
         *,
+        collection: str,
         integration: str,
         collection_version: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -429,8 +429,8 @@ class AsyncCollectionsResource(AsyncAPIResource):
 
     async def update(
         self,
-        collection: str,
         *,
+        collection: str,
         integration: str,
         collection_version: str | NotGiven = NOT_GIVEN,
         configuration: Optional[Dict[str, object]] | NotGiven = NOT_GIVEN,
@@ -538,8 +538,8 @@ class AsyncCollectionsResource(AsyncAPIResource):
 
     async def delete(
         self,
-        collection: str,
         *,
+        collection: str,
         integration: str,
         collection_version: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.

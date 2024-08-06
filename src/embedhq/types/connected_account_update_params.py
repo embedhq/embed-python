@@ -9,6 +9,8 @@ __all__ = ["ConnectedAccountUpdateParams"]
 
 
 class ConnectedAccountUpdateParams(TypedDict, total=False):
+    connected_account_id: Required[str]
+
     integration: Required[str]
     """The slug of the integration to which the connected account belongs."""
 

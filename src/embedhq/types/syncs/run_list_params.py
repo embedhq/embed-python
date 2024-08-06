@@ -8,6 +8,8 @@ __all__ = ["RunListParams"]
 
 
 class RunListParams(TypedDict, total=False):
+    collection: Required[str]
+
     connected_account_id: Required[str]
     """The ID of the connected account to which the syncs belong."""
 
