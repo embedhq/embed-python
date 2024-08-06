@@ -125,8 +125,8 @@ class SyncsResource(SyncAPIResource):
 
     def retrieve(
         self,
-        collection: str,
         *,
+        collection: str,
         connected_account_id: str,
         integration: str,
         collection_version: str | NotGiven = NOT_GIVEN,
@@ -178,8 +178,8 @@ class SyncsResource(SyncAPIResource):
 
     def update(
         self,
-        collection: str,
         *,
+        collection: str,
         connected_account_id: str,
         integration: str,
         collection_version: str | NotGiven = NOT_GIVEN,
@@ -296,8 +296,8 @@ class SyncsResource(SyncAPIResource):
 
     def delete(
         self,
-        collection: str,
         *,
+        collection: str,
         connected_account_id: str,
         integration: str,
         collection_version: str | NotGiven = NOT_GIVEN,
@@ -349,8 +349,8 @@ class SyncsResource(SyncAPIResource):
 
     def start(
         self,
-        collection: str,
         *,
+        collection: str,
         connected_account_id: str,
         integration: str,
         collection_version: str | NotGiven = NOT_GIVEN,
@@ -402,8 +402,8 @@ class SyncsResource(SyncAPIResource):
 
     def stop(
         self,
-        collection: str,
         *,
+        collection: str,
         connected_account_id: str,
         integration: str,
         collection_version: str | NotGiven = NOT_GIVEN,
@@ -455,8 +455,8 @@ class SyncsResource(SyncAPIResource):
 
     def trigger(
         self,
-        collection: str,
         *,
+        collection: str,
         connected_account_id: str,
         integration: str,
         collection_version: str | NotGiven = NOT_GIVEN,
@@ -587,8 +587,8 @@ class AsyncSyncsResource(AsyncAPIResource):
 
     async def retrieve(
         self,
-        collection: str,
         *,
+        collection: str,
         connected_account_id: str,
         integration: str,
         collection_version: str | NotGiven = NOT_GIVEN,
@@ -640,8 +640,8 @@ class AsyncSyncsResource(AsyncAPIResource):
 
     async def update(
         self,
-        collection: str,
         *,
+        collection: str,
         connected_account_id: str,
         integration: str,
         collection_version: str | NotGiven = NOT_GIVEN,
@@ -758,8 +758,8 @@ class AsyncSyncsResource(AsyncAPIResource):
 
     async def delete(
         self,
-        collection: str,
         *,
+        collection: str,
         connected_account_id: str,
         integration: str,
         collection_version: str | NotGiven = NOT_GIVEN,
@@ -811,8 +811,8 @@ class AsyncSyncsResource(AsyncAPIResource):
 
     async def start(
         self,
-        collection: str,
         *,
+        collection: str,
         connected_account_id: str,
         integration: str,
         collection_version: str | NotGiven = NOT_GIVEN,
@@ -864,8 +864,8 @@ class AsyncSyncsResource(AsyncAPIResource):
 
     async def stop(
         self,
-        collection: str,
         *,
+        collection: str,
         connected_account_id: str,
         integration: str,
         collection_version: str | NotGiven = NOT_GIVEN,
@@ -917,8 +917,8 @@ class AsyncSyncsResource(AsyncAPIResource):
 
     async def trigger(
         self,
-        collection: str,
         *,
+        collection: str,
         connected_account_id: str,
         integration: str,
         collection_version: str | NotGiven = NOT_GIVEN,

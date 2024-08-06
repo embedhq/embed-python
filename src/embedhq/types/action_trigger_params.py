@@ -9,6 +9,8 @@ __all__ = ["ActionTriggerParams"]
 
 
 class ActionTriggerParams(TypedDict, total=False):
+    action: Required[str]
+
     connected_account_id: Required[str]
     """The ID of the connected account used to trigger the action."""
 

@@ -20,8 +20,8 @@ class TestRuns:
     @parametrize
     def test_method_retrieve(self, client: Embed) -> None:
         run = client.syncs.runs.retrieve(
-            sync_run_id="sr_1a2b3c",
             collection="issues",
+            sync_run_id="sr_1a2b3c",
             connected_account_id="user-123",
             integration="github-123",
         )
@@ -30,8 +30,8 @@ class TestRuns:
     @parametrize
     def test_method_retrieve_with_all_params(self, client: Embed) -> None:
         run = client.syncs.runs.retrieve(
-            sync_run_id="sr_1a2b3c",
             collection="issues",
+            sync_run_id="sr_1a2b3c",
             connected_account_id="user-123",
             integration="github-123",
             collection_version="1.2",
@@ -41,8 +41,8 @@ class TestRuns:
     @parametrize
     def test_raw_response_retrieve(self, client: Embed) -> None:
         response = client.syncs.runs.with_raw_response.retrieve(
-            sync_run_id="sr_1a2b3c",
             collection="issues",
+            sync_run_id="sr_1a2b3c",
             connected_account_id="user-123",
             integration="github-123",
         )
@@ -55,8 +55,8 @@ class TestRuns:
     @parametrize
     def test_streaming_response_retrieve(self, client: Embed) -> None:
         with client.syncs.runs.with_streaming_response.retrieve(
-            sync_run_id="sr_1a2b3c",
             collection="issues",
+            sync_run_id="sr_1a2b3c",
             connected_account_id="user-123",
             integration="github-123",
         ) as response:
@@ -72,16 +72,16 @@ class TestRuns:
     def test_path_params_retrieve(self, client: Embed) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `collection` but received ''"):
             client.syncs.runs.with_raw_response.retrieve(
-                sync_run_id="sr_1a2b3c",
                 collection="",
+                sync_run_id="sr_1a2b3c",
                 connected_account_id="user-123",
                 integration="github-123",
             )
 
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `sync_run_id` but received ''"):
             client.syncs.runs.with_raw_response.retrieve(
-                sync_run_id="",
                 collection="issues",
+                sync_run_id="",
                 connected_account_id="user-123",
                 integration="github-123",
             )
@@ -149,8 +149,8 @@ class TestAsyncRuns:
     @parametrize
     async def test_method_retrieve(self, async_client: AsyncEmbed) -> None:
         run = await async_client.syncs.runs.retrieve(
-            sync_run_id="sr_1a2b3c",
             collection="issues",
+            sync_run_id="sr_1a2b3c",
             connected_account_id="user-123",
             integration="github-123",
         )
@@ -159,8 +159,8 @@ class TestAsyncRuns:
     @parametrize
     async def test_method_retrieve_with_all_params(self, async_client: AsyncEmbed) -> None:
         run = await async_client.syncs.runs.retrieve(
-            sync_run_id="sr_1a2b3c",
             collection="issues",
+            sync_run_id="sr_1a2b3c",
             connected_account_id="user-123",
             integration="github-123",
             collection_version="1.2",
@@ -170,8 +170,8 @@ class TestAsyncRuns:
     @parametrize
     async def test_raw_response_retrieve(self, async_client: AsyncEmbed) -> None:
         response = await async_client.syncs.runs.with_raw_response.retrieve(
-            sync_run_id="sr_1a2b3c",
             collection="issues",
+            sync_run_id="sr_1a2b3c",
             connected_account_id="user-123",
             integration="github-123",
         )
@@ -184,8 +184,8 @@ class TestAsyncRuns:
     @parametrize
     async def test_streaming_response_retrieve(self, async_client: AsyncEmbed) -> None:
         async with async_client.syncs.runs.with_streaming_response.retrieve(
-            sync_run_id="sr_1a2b3c",
             collection="issues",
+            sync_run_id="sr_1a2b3c",
             connected_account_id="user-123",
             integration="github-123",
         ) as response:
@@ -201,16 +201,16 @@ class TestAsyncRuns:
     async def test_path_params_retrieve(self, async_client: AsyncEmbed) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `collection` but received ''"):
             await async_client.syncs.runs.with_raw_response.retrieve(
-                sync_run_id="sr_1a2b3c",
                 collection="",
+                sync_run_id="sr_1a2b3c",
                 connected_account_id="user-123",
                 integration="github-123",
             )
 
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `sync_run_id` but received ''"):
             await async_client.syncs.runs.with_raw_response.retrieve(
-                sync_run_id="",
                 collection="issues",
+                sync_run_id="",
                 connected_account_id="user-123",
                 integration="github-123",
             )
