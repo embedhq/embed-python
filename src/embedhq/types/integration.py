@@ -9,9 +9,6 @@ __all__ = ["Integration"]
 
 
 class Integration(BaseModel):
-    id: str
-    """The unique identifier for the integration."""
-
     created_at: int
     """The Unix timestamp (in seconds) for when the integration was created."""
 
@@ -40,8 +37,8 @@ class Integration(BaseModel):
     object: Literal["integration"]
     """The object type, which is always `integration`."""
 
-    provider_key: str
-    """The unique key of the integration provider."""
+    provider: str
+    """The unique slug of the provider."""
 
     updated_at: int
     """The Unix timestamp (in seconds) for when the integration was updated."""
@@ -51,3 +48,6 @@ class Integration(BaseModel):
 
     logo_url_dark_mode: Optional[str] = None
     """The URL of the integration provider's logo suitable for dark mode."""
+
+    slug: Optional[str] = None
+    """The unique slug of the integration."""

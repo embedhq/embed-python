@@ -47,8 +47,6 @@ __all__ = [
 
 class Embed(SyncAPIClient):
     integrations: resources.IntegrationsResource
-    connections: resources.ConnectionsResource
-    session_tokens: resources.SessionTokensResource
     providers: resources.ProvidersResource
     collections: resources.CollectionsResource
     syncs: resources.SyncsResource
@@ -113,8 +111,6 @@ class Embed(SyncAPIClient):
         )
 
         self.integrations = resources.IntegrationsResource(self)
-        self.connections = resources.ConnectionsResource(self)
-        self.session_tokens = resources.SessionTokensResource(self)
         self.providers = resources.ProvidersResource(self)
         self.collections = resources.CollectionsResource(self)
         self.syncs = resources.SyncsResource(self)
@@ -231,8 +227,6 @@ class Embed(SyncAPIClient):
 
 class AsyncEmbed(AsyncAPIClient):
     integrations: resources.AsyncIntegrationsResource
-    connections: resources.AsyncConnectionsResource
-    session_tokens: resources.AsyncSessionTokensResource
     providers: resources.AsyncProvidersResource
     collections: resources.AsyncCollectionsResource
     syncs: resources.AsyncSyncsResource
@@ -297,8 +291,6 @@ class AsyncEmbed(AsyncAPIClient):
         )
 
         self.integrations = resources.AsyncIntegrationsResource(self)
-        self.connections = resources.AsyncConnectionsResource(self)
-        self.session_tokens = resources.AsyncSessionTokensResource(self)
         self.providers = resources.AsyncProvidersResource(self)
         self.collections = resources.AsyncCollectionsResource(self)
         self.syncs = resources.AsyncSyncsResource(self)
@@ -416,8 +408,6 @@ class AsyncEmbed(AsyncAPIClient):
 class EmbedWithRawResponse:
     def __init__(self, client: Embed) -> None:
         self.integrations = resources.IntegrationsResourceWithRawResponse(client.integrations)
-        self.connections = resources.ConnectionsResourceWithRawResponse(client.connections)
-        self.session_tokens = resources.SessionTokensResourceWithRawResponse(client.session_tokens)
         self.providers = resources.ProvidersResourceWithRawResponse(client.providers)
         self.collections = resources.CollectionsResourceWithRawResponse(client.collections)
         self.syncs = resources.SyncsResourceWithRawResponse(client.syncs)
@@ -429,8 +419,6 @@ class EmbedWithRawResponse:
 class AsyncEmbedWithRawResponse:
     def __init__(self, client: AsyncEmbed) -> None:
         self.integrations = resources.AsyncIntegrationsResourceWithRawResponse(client.integrations)
-        self.connections = resources.AsyncConnectionsResourceWithRawResponse(client.connections)
-        self.session_tokens = resources.AsyncSessionTokensResourceWithRawResponse(client.session_tokens)
         self.providers = resources.AsyncProvidersResourceWithRawResponse(client.providers)
         self.collections = resources.AsyncCollectionsResourceWithRawResponse(client.collections)
         self.syncs = resources.AsyncSyncsResourceWithRawResponse(client.syncs)
@@ -442,8 +430,6 @@ class AsyncEmbedWithRawResponse:
 class EmbedWithStreamedResponse:
     def __init__(self, client: Embed) -> None:
         self.integrations = resources.IntegrationsResourceWithStreamingResponse(client.integrations)
-        self.connections = resources.ConnectionsResourceWithStreamingResponse(client.connections)
-        self.session_tokens = resources.SessionTokensResourceWithStreamingResponse(client.session_tokens)
         self.providers = resources.ProvidersResourceWithStreamingResponse(client.providers)
         self.collections = resources.CollectionsResourceWithStreamingResponse(client.collections)
         self.syncs = resources.SyncsResourceWithStreamingResponse(client.syncs)
@@ -455,8 +441,6 @@ class EmbedWithStreamedResponse:
 class AsyncEmbedWithStreamedResponse:
     def __init__(self, client: AsyncEmbed) -> None:
         self.integrations = resources.AsyncIntegrationsResourceWithStreamingResponse(client.integrations)
-        self.connections = resources.AsyncConnectionsResourceWithStreamingResponse(client.connections)
-        self.session_tokens = resources.AsyncSessionTokensResourceWithStreamingResponse(client.session_tokens)
         self.providers = resources.AsyncProvidersResourceWithStreamingResponse(client.providers)
         self.collections = resources.AsyncCollectionsResourceWithStreamingResponse(client.collections)
         self.syncs = resources.AsyncSyncsResourceWithStreamingResponse(client.syncs)

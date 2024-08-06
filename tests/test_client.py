@@ -707,7 +707,7 @@ class TestEmbed:
         with pytest.raises(APITimeoutError):
             self.client.post(
                 "/integrations",
-                body=cast(object, dict(provider_key="github")),
+                body=cast(object, dict(provider="github")),
                 cast_to=httpx.Response,
                 options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
             )
@@ -722,7 +722,7 @@ class TestEmbed:
         with pytest.raises(APIStatusError):
             self.client.post(
                 "/integrations",
-                body=cast(object, dict(provider_key="github")),
+                body=cast(object, dict(provider="github")),
                 cast_to=httpx.Response,
                 options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
             )
@@ -1402,7 +1402,7 @@ class TestAsyncEmbed:
         with pytest.raises(APITimeoutError):
             await self.client.post(
                 "/integrations",
-                body=cast(object, dict(provider_key="github")),
+                body=cast(object, dict(provider="github")),
                 cast_to=httpx.Response,
                 options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
             )
@@ -1417,7 +1417,7 @@ class TestAsyncEmbed:
         with pytest.raises(APIStatusError):
             await self.client.post(
                 "/integrations",
-                body=cast(object, dict(provider_key="github")),
+                body=cast(object, dict(provider="github")),
                 cast_to=httpx.Response,
                 options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
             )

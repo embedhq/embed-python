@@ -8,5 +8,5 @@ __all__ = ["CollectionListParams"]
 
 
 class CollectionListParams(TypedDict, total=False):
-    integration_id: Required[str]
-    """The ID of the integration to which the collections belong."""
+    integration: Required[str]
+    """The slug of the integration to which the collections belong."""

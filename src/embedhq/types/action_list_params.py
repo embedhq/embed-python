@@ -8,5 +8,5 @@ __all__ = ["ActionListParams"]
 
 
 class ActionListParams(TypedDict, total=False):
-    integration_id: Required[str]
-    """The ID of the integration to which the actions belong."""
+    integration: Required[str]
+    """The slug of the integration to which the actions belong."""

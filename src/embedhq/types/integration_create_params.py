@@ -3,20 +3,17 @@
 from __future__ import annotations
 
 from typing import List, Optional
-from typing_extensions import Literal, Required, TypedDict
+from typing_extensions import Required, TypedDict
 
 __all__ = ["IntegrationCreateParams"]
 
 
 class IntegrationCreateParams(TypedDict, total=False):
-    provider_key: Required[str]
-    """The unique key of the integration provider."""
+    provider: Required[str]
+    """The unique slug of the integration provider."""
 
-    id: str
-    """The unique identifier for the integration."""
-
-    auth_schemes: List[Literal["oauth1", "oauth2", "basic", "api_key"]]
-    """The authentication schemes the integration supports."""
+    name: str
+    """The display name of the integration (defaults to provider name)."""
 
     oauth_client_id: Optional[str]
     """The OAuth Client ID. Required for integrations that use OAuth."""
@@ -31,5 +28,8 @@ class IntegrationCreateParams(TypedDict, total=False):
     and actions enabled on the integration.
     """
 
+    slug: str
+    """The unique slug of the integration (defaults to provider slug)."""
+
     use_test_credentials: bool
-    """Use test credentials provided by Embed. Only available in staging environment."""
+    """Use test credentials provided by Embed."""
