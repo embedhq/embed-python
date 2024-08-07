@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from typing import Dict
+from typing_extensions import Literal
 
 import httpx
 
@@ -48,6 +49,7 @@ class ProxyResource(SyncAPIResource):
         connected_account_id: str,
         integration: str,
         base_url_override: str | NotGiven = NOT_GIVEN,
+        response_type: Literal["arraybuffer", "json", "text", "stream"] | NotGiven = NOT_GIVEN,
         retries: int | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -68,6 +70,8 @@ class ProxyResource(SyncAPIResource):
 
           base_url_override: Override the base URL for the request.
 
+          response_type: Override the base URL for the request.
+
           retries: The number of times to retry the request.
 
           extra_headers: Send extra headers
@@ -86,6 +90,7 @@ class ProxyResource(SyncAPIResource):
                     "connected_account_id": connected_account_id,
                     "integration": integration,
                     "base_url_override": base_url_override,
+                    "response_type": str(response_type) if is_given(response_type) else NOT_GIVEN,
                     "retries": str(retries) if is_given(retries) else NOT_GIVEN,
                 }
             ),
@@ -107,6 +112,7 @@ class ProxyResource(SyncAPIResource):
         connected_account_id: str,
         integration: str,
         base_url_override: str | NotGiven = NOT_GIVEN,
+        response_type: Literal["arraybuffer", "json", "text", "stream"] | NotGiven = NOT_GIVEN,
         retries: int | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -127,6 +133,8 @@ class ProxyResource(SyncAPIResource):
 
           base_url_override: Override the base URL for the request.
 
+          response_type: Override the base URL for the request.
+
           retries: The number of times to retry the request.
 
           extra_headers: Send extra headers
@@ -145,6 +153,7 @@ class ProxyResource(SyncAPIResource):
                     "connected_account_id": connected_account_id,
                     "integration": integration,
                     "base_url_override": base_url_override,
+                    "response_type": str(response_type) if is_given(response_type) else NOT_GIVEN,
                     "retries": str(retries) if is_given(retries) else NOT_GIVEN,
                 }
             ),
@@ -166,6 +175,7 @@ class ProxyResource(SyncAPIResource):
         connected_account_id: str,
         integration: str,
         base_url_override: str | NotGiven = NOT_GIVEN,
+        response_type: Literal["arraybuffer", "json", "text", "stream"] | NotGiven = NOT_GIVEN,
         retries: int | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -186,6 +196,8 @@ class ProxyResource(SyncAPIResource):
 
           base_url_override: Override the base URL for the request.
 
+          response_type: Override the base URL for the request.
+
           retries: The number of times to retry the request.
 
           extra_headers: Send extra headers
@@ -204,6 +216,7 @@ class ProxyResource(SyncAPIResource):
                     "connected_account_id": connected_account_id,
                     "integration": integration,
                     "base_url_override": base_url_override,
+                    "response_type": str(response_type) if is_given(response_type) else NOT_GIVEN,
                     "retries": str(retries) if is_given(retries) else NOT_GIVEN,
                 }
             ),
@@ -226,6 +239,7 @@ class ProxyResource(SyncAPIResource):
         connected_account_id: str,
         integration: str,
         base_url_override: str | NotGiven = NOT_GIVEN,
+        response_type: Literal["arraybuffer", "json", "text", "stream"] | NotGiven = NOT_GIVEN,
         retries: int | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -246,6 +260,8 @@ class ProxyResource(SyncAPIResource):
 
           base_url_override: Override the base URL for the request.
 
+          response_type: Override the base URL for the request.
+
           retries: The number of times to retry the request.
 
           extra_headers: Send extra headers
@@ -264,6 +280,7 @@ class ProxyResource(SyncAPIResource):
                     "connected_account_id": connected_account_id,
                     "integration": integration,
                     "base_url_override": base_url_override,
+                    "response_type": str(response_type) if is_given(response_type) else NOT_GIVEN,
                     "retries": str(retries) if is_given(retries) else NOT_GIVEN,
                 }
             ),
@@ -296,6 +313,7 @@ class AsyncProxyResource(AsyncAPIResource):
         connected_account_id: str,
         integration: str,
         base_url_override: str | NotGiven = NOT_GIVEN,
+        response_type: Literal["arraybuffer", "json", "text", "stream"] | NotGiven = NOT_GIVEN,
         retries: int | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -316,6 +334,8 @@ class AsyncProxyResource(AsyncAPIResource):
 
           base_url_override: Override the base URL for the request.
 
+          response_type: Override the base URL for the request.
+
           retries: The number of times to retry the request.
 
           extra_headers: Send extra headers
@@ -334,6 +354,7 @@ class AsyncProxyResource(AsyncAPIResource):
                     "connected_account_id": connected_account_id,
                     "integration": integration,
                     "base_url_override": base_url_override,
+                    "response_type": str(response_type) if is_given(response_type) else NOT_GIVEN,
                     "retries": str(retries) if is_given(retries) else NOT_GIVEN,
                 }
             ),
@@ -355,6 +376,7 @@ class AsyncProxyResource(AsyncAPIResource):
         connected_account_id: str,
         integration: str,
         base_url_override: str | NotGiven = NOT_GIVEN,
+        response_type: Literal["arraybuffer", "json", "text", "stream"] | NotGiven = NOT_GIVEN,
         retries: int | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -375,6 +397,8 @@ class AsyncProxyResource(AsyncAPIResource):
 
           base_url_override: Override the base URL for the request.
 
+          response_type: Override the base URL for the request.
+
           retries: The number of times to retry the request.
 
           extra_headers: Send extra headers
@@ -393,6 +417,7 @@ class AsyncProxyResource(AsyncAPIResource):
                     "connected_account_id": connected_account_id,
                     "integration": integration,
                     "base_url_override": base_url_override,
+                    "response_type": str(response_type) if is_given(response_type) else NOT_GIVEN,
                     "retries": str(retries) if is_given(retries) else NOT_GIVEN,
                 }
             ),
@@ -414,6 +439,7 @@ class AsyncProxyResource(AsyncAPIResource):
         connected_account_id: str,
         integration: str,
         base_url_override: str | NotGiven = NOT_GIVEN,
+        response_type: Literal["arraybuffer", "json", "text", "stream"] | NotGiven = NOT_GIVEN,
         retries: int | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -434,6 +460,8 @@ class AsyncProxyResource(AsyncAPIResource):
 
           base_url_override: Override the base URL for the request.
 
+          response_type: Override the base URL for the request.
+
           retries: The number of times to retry the request.
 
           extra_headers: Send extra headers
@@ -452,6 +480,7 @@ class AsyncProxyResource(AsyncAPIResource):
                     "connected_account_id": connected_account_id,
                     "integration": integration,
                     "base_url_override": base_url_override,
+                    "response_type": str(response_type) if is_given(response_type) else NOT_GIVEN,
                     "retries": str(retries) if is_given(retries) else NOT_GIVEN,
                 }
             ),
@@ -474,6 +503,7 @@ class AsyncProxyResource(AsyncAPIResource):
         connected_account_id: str,
         integration: str,
         base_url_override: str | NotGiven = NOT_GIVEN,
+        response_type: Literal["arraybuffer", "json", "text", "stream"] | NotGiven = NOT_GIVEN,
         retries: int | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -494,6 +524,8 @@ class AsyncProxyResource(AsyncAPIResource):
 
           base_url_override: Override the base URL for the request.
 
+          response_type: Override the base URL for the request.
+
           retries: The number of times to retry the request.
 
           extra_headers: Send extra headers
@@ -512,6 +544,7 @@ class AsyncProxyResource(AsyncAPIResource):
                     "connected_account_id": connected_account_id,
                     "integration": integration,
                     "base_url_override": base_url_override,
+                    "response_type": str(response_type) if is_given(response_type) else NOT_GIVEN,
                     "retries": str(retries) if is_given(retries) else NOT_GIVEN,
                 }
             ),
