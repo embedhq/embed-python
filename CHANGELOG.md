@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.2.0 (2024-08-07)
+
+Full Changelog: [v1.1.0...v1.2.0](https://github.com/embedhq/embed-python/compare/v1.1.0...v1.2.0)
+
+### Features
+
+* **api:** OpenAPI spec update via Stainless API ([#34](https://github.com/embedhq/embed-python/issues/34)) ([0d42c7a](https://github.com/embedhq/embed-python/commit/0d42c7a539fb49ebb706f8b829e6b345f7720c3e))
+* **api:** OpenAPI spec update via Stainless API ([#36](https://github.com/embedhq/embed-python/issues/36)) ([825c32a](https://github.com/embedhq/embed-python/commit/825c32a01bacce67a1dc80d70563724be08ba872))
+
 ## 1.1.0 (2024-08-07)
 
 Full Changelog: [v1.0.0...v1.1.0](https://github.com/embedhq/embed-python/compare/v1.0.0...v1.1.0)

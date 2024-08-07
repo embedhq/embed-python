@@ -19,6 +19,9 @@ class Provider(BaseModel):
     docs_url: Optional[str] = None
     """The URL to the provider's API documentation."""
 
+    has_test_credentials: bool
+    """Whether the provider has OAuth credentials to test with."""
+
     headers: Optional[Dict[str, object]] = None
     """Headers to attach to requests made to the provider."""
 

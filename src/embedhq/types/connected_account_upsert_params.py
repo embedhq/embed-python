@@ -9,7 +9,6 @@ __all__ = [
     "ConnectedAccountUpsertParams",
     "Credentials",
     "CredentialsOAuth2Credentials",
-    "CredentialsOAuth1Credentials",
     "CredentialsBasicCredentials",
     "CredentialsAPIKeyCredentials",
 ]
@@ -34,6 +33,9 @@ class ConnectedAccountUpsertParams(TypedDict, total=False):
     metadata: Optional[Dict[str, object]]
     """Additional metadata for the connected account."""
 
+    name: str
+    """The display name of the connected account."""
+
 
 class CredentialsOAuth2Credentials(TypedDict, total=False):
     access_token: Required[str]
@@ -44,14 +46,6 @@ class CredentialsOAuth2Credentials(TypedDict, total=False):
 
     expires_at: int
     """The unix timestamp (in seconds) for when the access token expires."""
-
-
-class CredentialsOAuth1Credentials(TypedDict, total=False):
-    oauth_token: Required[str]
-    """The OAuth 1.0a token."""
-
-    oauth_token_secret: Required[str]
-    """The OAuth 1.0a token."""
 
 
 class CredentialsBasicCredentials(TypedDict, total=False):
@@ -67,9 +61,4 @@ class CredentialsAPIKeyCredentials(TypedDict, total=False):
     """The API key."""
 
 
-Credentials: TypeAlias = Union[
-    CredentialsOAuth2Credentials,
-    CredentialsOAuth1Credentials,
-    CredentialsBasicCredentials,
-    CredentialsAPIKeyCredentials,
-]
+Credentials: TypeAlias = Union[CredentialsOAuth2Credentials, CredentialsBasicCredentials, CredentialsAPIKeyCredentials]

@@ -262,6 +262,7 @@ class ConnectedAccountsResource(SyncAPIResource):
         integration: str,
         configuration: Optional[Dict[str, object]] | NotGiven = NOT_GIVEN,
         metadata: Optional[Dict[str, object]] | NotGiven = NOT_GIVEN,
+        name: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -289,6 +290,8 @@ class ConnectedAccountsResource(SyncAPIResource):
 
           metadata: Additional metadata for the connected account.
 
+          name: The display name of the connected account.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -307,6 +310,7 @@ class ConnectedAccountsResource(SyncAPIResource):
                     "integration": integration,
                     "configuration": configuration,
                     "metadata": metadata,
+                    "name": name,
                 },
                 connected_account_upsert_params.ConnectedAccountUpsertParams,
             ),
@@ -544,6 +548,7 @@ class AsyncConnectedAccountsResource(AsyncAPIResource):
         integration: str,
         configuration: Optional[Dict[str, object]] | NotGiven = NOT_GIVEN,
         metadata: Optional[Dict[str, object]] | NotGiven = NOT_GIVEN,
+        name: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -571,6 +576,8 @@ class AsyncConnectedAccountsResource(AsyncAPIResource):
 
           metadata: Additional metadata for the connected account.
 
+          name: The display name of the connected account.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -589,6 +596,7 @@ class AsyncConnectedAccountsResource(AsyncAPIResource):
                     "integration": integration,
                     "configuration": configuration,
                     "metadata": metadata,
+                    "name": name,
                 },
                 connected_account_upsert_params.ConnectedAccountUpsertParams,
             ),
