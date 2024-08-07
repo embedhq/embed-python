@@ -8,6 +8,14 @@ from .proxy import (
     ProxyResourceWithStreamingResponse,
     AsyncProxyResourceWithStreamingResponse,
 )
+from .query import (
+    QueryResource,
+    AsyncQueryResource,
+    QueryResourceWithRawResponse,
+    AsyncQueryResourceWithRawResponse,
+    QueryResourceWithStreamingResponse,
+    AsyncQueryResourceWithStreamingResponse,
+)
 from .syncs import (
     SyncsResource,
     AsyncSyncsResource,
@@ -56,6 +64,14 @@ from .integrations import (
     IntegrationsResourceWithStreamingResponse,
     AsyncIntegrationsResourceWithStreamingResponse,
 )
+from .session_tokens import (
+    SessionTokensResource,
+    AsyncSessionTokensResource,
+    SessionTokensResourceWithRawResponse,
+    AsyncSessionTokensResourceWithRawResponse,
+    SessionTokensResourceWithStreamingResponse,
+    AsyncSessionTokensResourceWithStreamingResponse,
+)
 from .connected_accounts import (
     ConnectedAccountsResource,
     AsyncConnectedAccountsResource,
@@ -78,6 +94,12 @@ __all__ = [
     "AsyncConnectedAccountsResourceWithRawResponse",
     "ConnectedAccountsResourceWithStreamingResponse",
     "AsyncConnectedAccountsResourceWithStreamingResponse",
+    "SessionTokensResource",
+    "AsyncSessionTokensResource",
+    "SessionTokensResourceWithRawResponse",
+    "AsyncSessionTokensResourceWithRawResponse",
+    "SessionTokensResourceWithStreamingResponse",
+    "AsyncSessionTokensResourceWithStreamingResponse",
     "ProvidersResource",
     "AsyncProvidersResource",
     "ProvidersResourceWithRawResponse",
@@ -96,6 +118,12 @@ __all__ = [
     "AsyncSyncsResourceWithRawResponse",
     "SyncsResourceWithStreamingResponse",
     "AsyncSyncsResourceWithStreamingResponse",
+    "QueryResource",
+    "AsyncQueryResource",
+    "QueryResourceWithRawResponse",
+    "AsyncQueryResourceWithRawResponse",
+    "QueryResourceWithStreamingResponse",
+    "AsyncQueryResourceWithStreamingResponse",
     "ActionsResource",
     "AsyncActionsResource",
     "ActionsResourceWithRawResponse",
