@@ -34,21 +34,6 @@ Methods:
 - <code title="delete /connected-accounts/{connected_account_id}">client.connected_accounts.<a href="./src/embedhq/resources/connected_accounts.py">delete</a>(\*, connected_account_id, \*\*<a href="src/embedhq/types/connected_account_delete_params.py">params</a>) -> <a href="./src/embedhq/types/connected_account_delete_response.py">ConnectedAccountDeleteResponse</a></code>
 - <code title="post /connected-accounts">client.connected_accounts.<a href="./src/embedhq/resources/connected_accounts.py">upsert</a>(\*\*<a href="src/embedhq/types/connected_account_upsert_params.py">params</a>) -> <a href="./src/embedhq/types/connected_account.py">ConnectedAccount</a></code>
 
-# ConnectSessions
-
-Types:
-
-```python
-from embedhq.types import ConnectSession, ConnectSessionListResponse, ConnectSessionDeleteResponse
-```
-
-Methods:
-
-- <code title="post /connect-sessions">client.connect_sessions.<a href="./src/embedhq/resources/connect_sessions.py">create</a>(\*\*<a href="src/embedhq/types/connect_session_create_params.py">params</a>) -> <a href="./src/embedhq/types/connect_session.py">ConnectSession</a></code>
-- <code title="get /connect-sessions/{connect_session_id}">client.connect_sessions.<a href="./src/embedhq/resources/connect_sessions.py">retrieve</a>(connect_session_id) -> <a href="./src/embedhq/types/connect_session.py">ConnectSession</a></code>
-- <code title="get /connect-sessions">client.connect_sessions.<a href="./src/embedhq/resources/connect_sessions.py">list</a>() -> <a href="./src/embedhq/types/connect_session_list_response.py">ConnectSessionListResponse</a></code>
-- <code title="delete /connect-sessions/{connect_session_id}">client.connect_sessions.<a href="./src/embedhq/resources/connect_sessions.py">delete</a>(connect_session_id) -> <a href="./src/embedhq/types/connect_session_delete_response.py">ConnectSessionDeleteResponse</a></code>
-
 # Providers
 
 Types:

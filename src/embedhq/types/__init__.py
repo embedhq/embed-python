@@ -8,7 +8,6 @@ from .webhook import Webhook as Webhook
 from .provider import Provider as Provider
 from .collection import Collection as Collection
 from .integration import Integration as Integration
-from .connect_session import ConnectSession as ConnectSession
 from .proxy_put_params import ProxyPutParams as ProxyPutParams
 from .sync_list_params import SyncListParams as SyncListParams
 from .sync_stop_params import SyncStopParams as SyncStopParams
@@ -55,10 +54,7 @@ from .integration_update_params import IntegrationUpdateParams as IntegrationUpd
 from .collection_delete_response import CollectionDeleteResponse as CollectionDeleteResponse
 from .collection_retrieve_params import CollectionRetrieveParams as CollectionRetrieveParams
 from .integration_delete_response import IntegrationDeleteResponse as IntegrationDeleteResponse
-from .connect_session_create_params import ConnectSessionCreateParams as ConnectSessionCreateParams
-from .connect_session_list_response import ConnectSessionListResponse as ConnectSessionListResponse
 from .connected_account_list_params import ConnectedAccountListParams as ConnectedAccountListParams
-from .connect_session_delete_response import ConnectSessionDeleteResponse as ConnectSessionDeleteResponse
 from .connected_account_delete_params import ConnectedAccountDeleteParams as ConnectedAccountDeleteParams
 from .connected_account_list_response import ConnectedAccountListResponse as ConnectedAccountListResponse
 from .connected_account_update_params import ConnectedAccountUpdateParams as ConnectedAccountUpdateParams
