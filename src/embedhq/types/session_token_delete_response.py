@@ -4,12 +4,12 @@ from typing_extensions import Literal
 
 from .._models import BaseModel
 
-__all__ = ["ConnectSessionDeleteResponse"]
+__all__ = ["SessionTokenDeleteResponse"]
 
 
-class ConnectSessionDeleteResponse(BaseModel):
+class SessionTokenDeleteResponse(BaseModel):
     id: str
 
     deleted: bool
 
-    object: Literal["connect_session"]
+    object: Literal["session_token"]

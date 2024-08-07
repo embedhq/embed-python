@@ -198,6 +198,7 @@ class IntegrationsResource(SyncAPIResource):
         *,
         after: str | NotGiven = NOT_GIVEN,
         before: str | NotGiven = NOT_GIVEN,
+        connected_account_id: str | NotGiven = NOT_GIVEN,
         limit: int | NotGiven = NOT_GIVEN,
         order: Literal["asc", "desc"] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -217,6 +218,8 @@ class IntegrationsResource(SyncAPIResource):
 
           before: A cursor for use in pagination. `before` is an object ID or slug that defines
               your place in the list.
+
+          connected_account_id: Filter for integrations associated with a connected account.
 
           limit: A limit on the number of objects to be returned.
 
@@ -241,6 +244,7 @@ class IntegrationsResource(SyncAPIResource):
                     {
                         "after": after,
                         "before": before,
+                        "connected_account_id": connected_account_id,
                         "limit": limit,
                         "order": order,
                     },
@@ -453,6 +457,7 @@ class AsyncIntegrationsResource(AsyncAPIResource):
         *,
         after: str | NotGiven = NOT_GIVEN,
         before: str | NotGiven = NOT_GIVEN,
+        connected_account_id: str | NotGiven = NOT_GIVEN,
         limit: int | NotGiven = NOT_GIVEN,
         order: Literal["asc", "desc"] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -472,6 +477,8 @@ class AsyncIntegrationsResource(AsyncAPIResource):
 
           before: A cursor for use in pagination. `before` is an object ID or slug that defines
               your place in the list.
+
+          connected_account_id: Filter for integrations associated with a connected account.
 
           limit: A limit on the number of objects to be returned.
 
@@ -496,6 +503,7 @@ class AsyncIntegrationsResource(AsyncAPIResource):
                     {
                         "after": after,
                         "before": before,
+                        "connected_account_id": connected_account_id,
                         "limit": limit,
                         "order": order,
                     },

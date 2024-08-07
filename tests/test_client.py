@@ -17,6 +17,7 @@ from respx import MockRouter
 from pydantic import ValidationError
 
 from embedhq import Embed, AsyncEmbed, APIResponseValidationError
+from embedhq._types import Omit
 from embedhq._models import BaseModel, FinalRequestOptions
 from embedhq._constants import RAW_RESPONSE_HEADER
 from embedhq._exceptions import EmbedError, APIStatusError, APITimeoutError, APIResponseValidationError
@@ -332,7 +333,8 @@ class TestEmbed:
         assert request.headers.get("Authorization") == f"Bearer {api_key}"
 
         with pytest.raises(EmbedError):
-            client2 = Embed(base_url=base_url, api_key=None, _strict_response_validation=True)
+            with update_env(**{"EMBED_API_KEY": Omit()}):
+                client2 = Embed(base_url=base_url, api_key=None, _strict_response_validation=True)
             _ = client2
 
     def test_default_query_option(self) -> None:
@@ -729,6 +731,27 @@ class TestEmbed:
 
         assert _get_open_connections(self.client) == 0
 
+    @pytest.mark.parametrize("failures_before_success", [0, 2, 4])
+    @mock.patch("embedhq._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
+    @pytest.mark.respx(base_url=base_url)
+    def test_retries_taken(self, client: Embed, failures_before_success: int, respx_mock: MockRouter) -> None:
+        client = client.with_options(max_retries=4)
+
+        nb_retries = 0
+
+        def retry_handler(_request: httpx.Request) -> httpx.Response:
+            nonlocal nb_retries
+            if nb_retries < failures_before_success:
+                nb_retries += 1
+                return httpx.Response(500)
+            return httpx.Response(200)
+
+        respx_mock.post("/integrations").mock(side_effect=retry_handler)
+
+        response = client.integrations.with_raw_response.create(provider="github")
+
+        assert response.retries_taken == failures_before_success
+
 
 class TestAsyncEmbed:
     client = AsyncEmbed(base_url=base_url, api_key=api_key, _strict_response_validation=True)
@@ -1015,7 +1038,8 @@ class TestAsyncEmbed:
         assert request.headers.get("Authorization") == f"Bearer {api_key}"
 
         with pytest.raises(EmbedError):
-            client2 = AsyncEmbed(base_url=base_url, api_key=None, _strict_response_validation=True)
+            with update_env(**{"EMBED_API_KEY": Omit()}):
+                client2 = AsyncEmbed(base_url=base_url, api_key=None, _strict_response_validation=True)
             _ = client2
 
     def test_default_query_option(self) -> None:
@@ -1423,3 +1447,27 @@ class TestAsyncEmbed:
             )
 
         assert _get_open_connections(self.client) == 0
+
+    @pytest.mark.parametrize("failures_before_success", [0, 2, 4])
+    @mock.patch("embedhq._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
+    @pytest.mark.respx(base_url=base_url)
+    @pytest.mark.asyncio
+    async def test_retries_taken(
+        self, async_client: AsyncEmbed, failures_before_success: int, respx_mock: MockRouter
+    ) -> None:
+        client = async_client.with_options(max_retries=4)
+
+        nb_retries = 0
+
+        def retry_handler(_request: httpx.Request) -> httpx.Response:
+            nonlocal nb_retries
+            if nb_retries < failures_before_success:
+                nb_retries += 1
+                return httpx.Response(500)
+            return httpx.Response(200)
+
+        respx_mock.post("/integrations").mock(side_effect=retry_handler)
+
+        response = await client.integrations.with_raw_response.create(provider="github")
+
+        assert response.retries_taken == failures_before_success

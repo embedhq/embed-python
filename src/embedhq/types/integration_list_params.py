@@ -20,6 +20,9 @@ class IntegrationListParams(TypedDict, total=False):
     `before` is an object ID or slug that defines your place in the list.
     """
 
+    connected_account_id: str
+    """Filter for integrations associated with a connected account."""
+
     limit: int
     """A limit on the number of objects to be returned."""
 

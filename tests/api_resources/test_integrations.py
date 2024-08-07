@@ -162,6 +162,7 @@ class TestIntegrations:
         integration = client.integrations.list(
             after="after",
             before="before",
+            connected_account_id="connected_account_id",
             limit=20,
             order="desc",
         )
@@ -370,6 +371,7 @@ class TestAsyncIntegrations:
         integration = await async_client.integrations.list(
             after="after",
             before="before",
+            connected_account_id="connected_account_id",
             limit=20,
             order="desc",
         )

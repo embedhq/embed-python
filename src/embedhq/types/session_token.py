@@ -5,24 +5,24 @@ from typing_extensions import Literal
 
 from .._models import BaseModel
 
-__all__ = ["ConnectSession"]
+__all__ = ["SessionToken"]
 
 
-class ConnectSession(BaseModel):
-    id: str
-    """The unique identifier for the connect session."""
+class SessionToken(BaseModel):
+    token: str
+    """The unique token for the session."""
 
     configuration: Optional[Dict[str, object]] = None
     """Configuration options to assign to the connected account."""
 
     connected_account_id: str
-    """The unique identifier for the connected account."""
+    """The unique identifier to assign to the connected account."""
 
     created_at: int
     """The Unix timestamp (in seconds) for when the session token was created."""
 
     expires_at: int
-    """The Unix timestamp (in seconds) for when the connect session expires."""
+    """The Unix timestamp (in seconds) for when the session token expires."""
 
     integration: str
     """The unique slug of the integration to connect the account to."""
@@ -31,10 +31,10 @@ class ConnectSession(BaseModel):
     """Additional metadata to assign to the connected account."""
 
     name: Optional[str] = None
-    """The display name of the connected account."""
+    """The display name to assign to the connected account."""
 
-    object: Literal["connect_session"]
-    """The object type, which is always `connect_session`."""
+    object: Literal["session_token"]
+    """The object type, which is always `session_token`."""
 
     redirect_url: Optional[str] = None
     """The URL to redirect to after the authorization flow is complete."""

@@ -34,20 +34,20 @@ Methods:
 - <code title="delete /connected-accounts/{connected_account_id}">client.connected_accounts.<a href="./src/embedhq/resources/connected_accounts.py">delete</a>(\*, connected_account_id, \*\*<a href="src/embedhq/types/connected_account_delete_params.py">params</a>) -> <a href="./src/embedhq/types/connected_account_delete_response.py">ConnectedAccountDeleteResponse</a></code>
 - <code title="post /connected-accounts">client.connected_accounts.<a href="./src/embedhq/resources/connected_accounts.py">upsert</a>(\*\*<a href="src/embedhq/types/connected_account_upsert_params.py">params</a>) -> <a href="./src/embedhq/types/connected_account.py">ConnectedAccount</a></code>
 
-# ConnectSessions
+# SessionTokens
 
 Types:
 
 ```python
-from embedhq.types import ConnectSession, ConnectSessionListResponse, ConnectSessionDeleteResponse
+from embedhq.types import SessionToken, SessionTokenListResponse, SessionTokenDeleteResponse
 ```
 
 Methods:
 
-- <code title="post /connect-sessions">client.connect_sessions.<a href="./src/embedhq/resources/connect_sessions.py">create</a>(\*\*<a href="src/embedhq/types/connect_session_create_params.py">params</a>) -> <a href="./src/embedhq/types/connect_session.py">ConnectSession</a></code>
-- <code title="get /connect-sessions/{connect_session_id}">client.connect_sessions.<a href="./src/embedhq/resources/connect_sessions.py">retrieve</a>(connect_session_id) -> <a href="./src/embedhq/types/connect_session.py">ConnectSession</a></code>
-- <code title="get /connect-sessions">client.connect_sessions.<a href="./src/embedhq/resources/connect_sessions.py">list</a>() -> <a href="./src/embedhq/types/connect_session_list_response.py">ConnectSessionListResponse</a></code>
-- <code title="delete /connect-sessions/{connect_session_id}">client.connect_sessions.<a href="./src/embedhq/resources/connect_sessions.py">delete</a>(connect_session_id) -> <a href="./src/embedhq/types/connect_session_delete_response.py">ConnectSessionDeleteResponse</a></code>
+- <code title="post /session-tokens">client.session_tokens.<a href="./src/embedhq/resources/session_tokens.py">create</a>(\*\*<a href="src/embedhq/types/session_token_create_params.py">params</a>) -> <a href="./src/embedhq/types/session_token.py">SessionToken</a></code>
+- <code title="get /session-tokens/{token}">client.session_tokens.<a href="./src/embedhq/resources/session_tokens.py">retrieve</a>(token) -> <a href="./src/embedhq/types/session_token.py">SessionToken</a></code>
+- <code title="get /session-tokens">client.session_tokens.<a href="./src/embedhq/resources/session_tokens.py">list</a>(\*\*<a href="src/embedhq/types/session_token_list_params.py">params</a>) -> <a href="./src/embedhq/types/session_token_list_response.py">SessionTokenListResponse</a></code>
+- <code title="delete /session-tokens/{token}">client.session_tokens.<a href="./src/embedhq/resources/session_tokens.py">delete</a>(token) -> <a href="./src/embedhq/types/session_token_delete_response.py">SessionTokenDeleteResponse</a></code>
 
 # Providers
 
@@ -138,6 +138,19 @@ Methods:
 
 - <code title="get /syncs/{collection}/runs/{sync_run_id}">client.syncs.runs.<a href="./src/embedhq/resources/syncs/runs.py">retrieve</a>(\*, collection, sync_run_id, \*\*<a href="src/embedhq/types/syncs/run_retrieve_params.py">params</a>) -> <a href="./src/embedhq/types/syncs/sync_run.py">SyncRun</a></code>
 - <code title="get /syncs/{collection}/runs">client.syncs.runs.<a href="./src/embedhq/resources/syncs/runs.py">list</a>(\*, collection, \*\*<a href="src/embedhq/types/syncs/run_list_params.py">params</a>) -> <a href="./src/embedhq/types/syncs/run_list_response.py">RunListResponse</a></code>
+
+# Query
+
+Types:
+
+```python
+from embedhq.types import QueryExecResponse, QueryMultiResponse
+```
+
+Methods:
+
+- <code title="post /query">client.query.<a href="./src/embedhq/resources/query.py">exec</a>(\*\*<a href="src/embedhq/types/query_exec_params.py">params</a>) -> <a href="./src/embedhq/types/query_exec_response.py">QueryExecResponse</a></code>
+- <code title="post /multi-query">client.query.<a href="./src/embedhq/resources/query.py">multi</a>(\*\*<a href="src/embedhq/types/query_multi_params.py">params</a>) -> <a href="./src/embedhq/types/query_multi_response.py">QueryMultiResponse</a></code>
 
 # Actions
 

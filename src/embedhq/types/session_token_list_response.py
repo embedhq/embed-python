@@ -4,12 +4,12 @@ from typing import List
 from typing_extensions import Literal
 
 from .._models import BaseModel
-from .connect_session import ConnectSession
+from .session_token import SessionToken
 
-__all__ = ["ConnectSessionListResponse"]
+__all__ = ["SessionTokenListResponse"]
 
 
-class ConnectSessionListResponse(BaseModel):
-    data: List[ConnectSession]
+class SessionTokenListResponse(BaseModel):
+    data: List[SessionToken]
 
     object: Literal["list"]

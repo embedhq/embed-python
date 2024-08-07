@@ -48,10 +48,11 @@ __all__ = [
 class Embed(SyncAPIClient):
     integrations: resources.IntegrationsResource
     connected_accounts: resources.ConnectedAccountsResource
-    connect_sessions: resources.ConnectSessionsResource
+    session_tokens: resources.SessionTokensResource
     providers: resources.ProvidersResource
     collections: resources.CollectionsResource
     syncs: resources.SyncsResource
+    query: resources.QueryResource
     actions: resources.ActionsResource
     proxy: resources.ProxyResource
     webhooks: resources.WebhooksResource
@@ -114,10 +115,11 @@ class Embed(SyncAPIClient):
 
         self.integrations = resources.IntegrationsResource(self)
         self.connected_accounts = resources.ConnectedAccountsResource(self)
-        self.connect_sessions = resources.ConnectSessionsResource(self)
+        self.session_tokens = resources.SessionTokensResource(self)
         self.providers = resources.ProvidersResource(self)
         self.collections = resources.CollectionsResource(self)
         self.syncs = resources.SyncsResource(self)
+        self.query = resources.QueryResource(self)
         self.actions = resources.ActionsResource(self)
         self.proxy = resources.ProxyResource(self)
         self.webhooks = resources.WebhooksResource(self)
@@ -232,10 +234,11 @@ class Embed(SyncAPIClient):
 class AsyncEmbed(AsyncAPIClient):
     integrations: resources.AsyncIntegrationsResource
     connected_accounts: resources.AsyncConnectedAccountsResource
-    connect_sessions: resources.AsyncConnectSessionsResource
+    session_tokens: resources.AsyncSessionTokensResource
     providers: resources.AsyncProvidersResource
     collections: resources.AsyncCollectionsResource
     syncs: resources.AsyncSyncsResource
+    query: resources.AsyncQueryResource
     actions: resources.AsyncActionsResource
     proxy: resources.AsyncProxyResource
     webhooks: resources.AsyncWebhooksResource
@@ -298,10 +301,11 @@ class AsyncEmbed(AsyncAPIClient):
 
         self.integrations = resources.AsyncIntegrationsResource(self)
         self.connected_accounts = resources.AsyncConnectedAccountsResource(self)
-        self.connect_sessions = resources.AsyncConnectSessionsResource(self)
+        self.session_tokens = resources.AsyncSessionTokensResource(self)
         self.providers = resources.AsyncProvidersResource(self)
         self.collections = resources.AsyncCollectionsResource(self)
         self.syncs = resources.AsyncSyncsResource(self)
+        self.query = resources.AsyncQueryResource(self)
         self.actions = resources.AsyncActionsResource(self)
         self.proxy = resources.AsyncProxyResource(self)
         self.webhooks = resources.AsyncWebhooksResource(self)
@@ -417,10 +421,11 @@ class EmbedWithRawResponse:
     def __init__(self, client: Embed) -> None:
         self.integrations = resources.IntegrationsResourceWithRawResponse(client.integrations)
         self.connected_accounts = resources.ConnectedAccountsResourceWithRawResponse(client.connected_accounts)
-        self.connect_sessions = resources.ConnectSessionsResourceWithRawResponse(client.connect_sessions)
+        self.session_tokens = resources.SessionTokensResourceWithRawResponse(client.session_tokens)
         self.providers = resources.ProvidersResourceWithRawResponse(client.providers)
         self.collections = resources.CollectionsResourceWithRawResponse(client.collections)
         self.syncs = resources.SyncsResourceWithRawResponse(client.syncs)
+        self.query = resources.QueryResourceWithRawResponse(client.query)
         self.actions = resources.ActionsResourceWithRawResponse(client.actions)
         self.proxy = resources.ProxyResourceWithRawResponse(client.proxy)
         self.webhooks = resources.WebhooksResourceWithRawResponse(client.webhooks)
@@ -430,10 +435,11 @@ class AsyncEmbedWithRawResponse:
     def __init__(self, client: AsyncEmbed) -> None:
         self.integrations = resources.AsyncIntegrationsResourceWithRawResponse(client.integrations)
         self.connected_accounts = resources.AsyncConnectedAccountsResourceWithRawResponse(client.connected_accounts)
-        self.connect_sessions = resources.AsyncConnectSessionsResourceWithRawResponse(client.connect_sessions)
+        self.session_tokens = resources.AsyncSessionTokensResourceWithRawResponse(client.session_tokens)
         self.providers = resources.AsyncProvidersResourceWithRawResponse(client.providers)
         self.collections = resources.AsyncCollectionsResourceWithRawResponse(client.collections)
         self.syncs = resources.AsyncSyncsResourceWithRawResponse(client.syncs)
+        self.query = resources.AsyncQueryResourceWithRawResponse(client.query)
         self.actions = resources.AsyncActionsResourceWithRawResponse(client.actions)
         self.proxy = resources.AsyncProxyResourceWithRawResponse(client.proxy)
         self.webhooks = resources.AsyncWebhooksResourceWithRawResponse(client.webhooks)
@@ -443,10 +449,11 @@ class EmbedWithStreamedResponse:
     def __init__(self, client: Embed) -> None:
         self.integrations = resources.IntegrationsResourceWithStreamingResponse(client.integrations)
         self.connected_accounts = resources.ConnectedAccountsResourceWithStreamingResponse(client.connected_accounts)
-        self.connect_sessions = resources.ConnectSessionsResourceWithStreamingResponse(client.connect_sessions)
+        self.session_tokens = resources.SessionTokensResourceWithStreamingResponse(client.session_tokens)
         self.providers = resources.ProvidersResourceWithStreamingResponse(client.providers)
         self.collections = resources.CollectionsResourceWithStreamingResponse(client.collections)
         self.syncs = resources.SyncsResourceWithStreamingResponse(client.syncs)
+        self.query = resources.QueryResourceWithStreamingResponse(client.query)
         self.actions = resources.ActionsResourceWithStreamingResponse(client.actions)
         self.proxy = resources.ProxyResourceWithStreamingResponse(client.proxy)
         self.webhooks = resources.WebhooksResourceWithStreamingResponse(client.webhooks)
@@ -458,10 +465,11 @@ class AsyncEmbedWithStreamedResponse:
         self.connected_accounts = resources.AsyncConnectedAccountsResourceWithStreamingResponse(
             client.connected_accounts
         )
-        self.connect_sessions = resources.AsyncConnectSessionsResourceWithStreamingResponse(client.connect_sessions)
+        self.session_tokens = resources.AsyncSessionTokensResourceWithStreamingResponse(client.session_tokens)
         self.providers = resources.AsyncProvidersResourceWithStreamingResponse(client.providers)
         self.collections = resources.AsyncCollectionsResourceWithStreamingResponse(client.collections)
         self.syncs = resources.AsyncSyncsResourceWithStreamingResponse(client.syncs)
+        self.query = resources.AsyncQueryResourceWithStreamingResponse(client.query)
         self.actions = resources.AsyncActionsResourceWithStreamingResponse(client.actions)
         self.proxy = resources.AsyncProxyResourceWithStreamingResponse(client.proxy)
         self.webhooks = resources.AsyncWebhooksResourceWithStreamingResponse(client.webhooks)

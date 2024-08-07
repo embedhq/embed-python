@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from typing import Dict, Union, Optional
-from typing_extensions import Literal, Required, TypedDict
+from typing_extensions import Literal, Required, TypeAlias, TypedDict
 
 __all__ = [
     "ConnectedAccountUpsertParams",
@@ -67,7 +67,7 @@ class CredentialsAPIKeyCredentials(TypedDict, total=False):
     """The API key."""
 
 
-Credentials = Union[
+Credentials: TypeAlias = Union[
     CredentialsOAuth2Credentials,
     CredentialsOAuth1Credentials,
     CredentialsBasicCredentials,
