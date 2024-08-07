@@ -3,7 +3,9 @@
 from __future__ import annotations
 
 from typing import Dict
-from typing_extensions import Required, TypedDict
+from typing_extensions import Required, Annotated, TypedDict
+
+from .._utils import PropertyInfo
 
 __all__ = ["ActionTriggerParams"]
 
@@ -22,3 +24,6 @@ class ActionTriggerParams(TypedDict, total=False):
 
     action_version: str
     """The version of the action to trigger (defaults to latest)."""
+
+    async_: Annotated[bool, PropertyInfo(alias="async")]
+    """Whether to trigger the action asynchronously."""

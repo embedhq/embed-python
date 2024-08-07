@@ -280,6 +280,7 @@ class TestActions:
                 "body": "bar",
             },
             action_version="1.2",
+            async_=False,
         )
         assert_matches_type(ActionTriggerResponse, action, path=["response"])
 
@@ -594,6 +595,7 @@ class TestAsyncActions:
                 "body": "bar",
             },
             action_version="1.2",
+            async_=False,
         )
         assert_matches_type(ActionTriggerResponse, action, path=["response"])
 

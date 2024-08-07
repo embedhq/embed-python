@@ -220,6 +220,7 @@ class TestConnectedAccounts:
             integration="integration",
             configuration={"foo": "bar"},
             metadata={"foo": "bar"},
+            name="Octocat",
         )
         assert_matches_type(ConnectedAccount, connected_account, path=["response"])
 
@@ -462,6 +463,7 @@ class TestAsyncConnectedAccounts:
             integration="integration",
             configuration={"foo": "bar"},
             metadata={"foo": "bar"},
+            name="Octocat",
         )
         assert_matches_type(ConnectedAccount, connected_account, path=["response"])
 

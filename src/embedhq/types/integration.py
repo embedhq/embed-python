@@ -9,6 +9,9 @@ __all__ = ["Integration"]
 
 
 class Integration(BaseModel):
+    auth_method: Literal["oauth2", "basic", "api_key", "none"]
+    """The authentication method the integration uses."""
+
     created_at: int
     """The Unix timestamp (in seconds) for when the integration was created."""
 
@@ -40,14 +43,11 @@ class Integration(BaseModel):
     provider: str
     """The unique slug of the provider."""
 
+    slug: str
+    """The unique slug of the integration."""
+
     updated_at: int
     """The Unix timestamp (in seconds) for when the integration was updated."""
 
-    auth_methods: Optional[List[Literal["oauth1", "oauth2", "basic", "api_key"]]] = None
-    """The authentication methods the integration supports."""
-
     logo_url_dark_mode: Optional[str] = None
     """The URL of the integration provider's logo suitable for dark mode."""
-
-    slug: Optional[str] = None
-    """The unique slug of the integration."""

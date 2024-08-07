@@ -115,6 +115,7 @@ class TestIntegrations:
         integration = client.integrations.update(
             integration="github-123",
             is_using_test_credentials=False,
+            name="GitHub",
             oauth_client_id="oauth_client_id",
             oauth_client_secret="oauth_client_secret",
             oauth_scopes=["string", "string", "string"],
@@ -324,6 +325,7 @@ class TestAsyncIntegrations:
         integration = await async_client.integrations.update(
             integration="github-123",
             is_using_test_credentials=False,
+            name="GitHub",
             oauth_client_id="oauth_client_id",
             oauth_client_secret="oauth_client_secret",
             oauth_scopes=["string", "string", "string"],

@@ -21,6 +21,9 @@ class SessionTokenCreateParams(TypedDict, total=False):
     expires_in_mins: int
     """The number of minutes until the session token expires."""
 
+    language: Optional[str]
+    """The language to use for the authorization flow."""
+
     metadata: Optional[Dict[str, object]]
     """Additional metadata to assign to the connected account."""
 

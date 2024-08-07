@@ -330,6 +330,7 @@ class ActionsResource(SyncAPIResource):
         integration: str,
         input: Dict[str, object],
         action_version: str | NotGiven = NOT_GIVEN,
+        async_: bool | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -349,6 +350,8 @@ class ActionsResource(SyncAPIResource):
 
           action_version: The version of the action to trigger (defaults to latest).
 
+          async_: Whether to trigger the action asynchronously.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -361,7 +364,13 @@ class ActionsResource(SyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `action` but received {action!r}")
         return self._post(
             f"/actions/{action}/trigger",
-            body=maybe_transform({"input": input}, action_trigger_params.ActionTriggerParams),
+            body=maybe_transform(
+                {
+                    "input": input,
+                    "async_": async_,
+                },
+                action_trigger_params.ActionTriggerParams,
+            ),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -666,6 +675,7 @@ class AsyncActionsResource(AsyncAPIResource):
         integration: str,
         input: Dict[str, object],
         action_version: str | NotGiven = NOT_GIVEN,
+        async_: bool | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -685,6 +695,8 @@ class AsyncActionsResource(AsyncAPIResource):
 
           action_version: The version of the action to trigger (defaults to latest).
 
+          async_: Whether to trigger the action asynchronously.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -697,7 +709,13 @@ class AsyncActionsResource(AsyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `action` but received {action!r}")
         return await self._post(
             f"/actions/{action}/trigger",
-            body=await async_maybe_transform({"input": input}, action_trigger_params.ActionTriggerParams),
+            body=await async_maybe_transform(
+                {
+                    "input": input,
+                    "async_": async_,
+                },
+                action_trigger_params.ActionTriggerParams,
+            ),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,

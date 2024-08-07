@@ -8,8 +8,6 @@ __all__ = ["SyncDeleteResponse"]
 
 
 class SyncDeleteResponse(BaseModel):
-    collection: str
-
     deleted: bool
 
     object: Literal["sync"]

@@ -21,6 +21,9 @@ class Webhook(BaseModel):
     object: Literal["webhook"]
     """The object type, which is always `webhook`."""
 
+    signing_secret: str
+    """The secret used to sign the webhook payload."""
+
     updated_at: int
     """The Unix timestamp (in seconds) for when the webhook was updated."""
 
@@ -29,6 +32,3 @@ class Webhook(BaseModel):
 
     events: Optional[List[str]] = None
     """The events to send to the webhook."""
-
-    signing_secret: Optional[str] = None
-    """The secret used to sign the webhook payload."""

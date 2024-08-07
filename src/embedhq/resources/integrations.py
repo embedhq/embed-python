@@ -141,6 +141,7 @@ class IntegrationsResource(SyncAPIResource):
         integration: str,
         *,
         is_using_test_credentials: bool | NotGiven = NOT_GIVEN,
+        name: str | NotGiven = NOT_GIVEN,
         oauth_client_id: Optional[str] | NotGiven = NOT_GIVEN,
         oauth_client_secret: Optional[str] | NotGiven = NOT_GIVEN,
         oauth_scopes: List[str] | NotGiven = NOT_GIVEN,
@@ -156,6 +157,8 @@ class IntegrationsResource(SyncAPIResource):
 
         Args:
           is_using_test_credentials: Whether the integration is using test credentials provided by Embed.
+
+          name: The display name of the integration (defaults to provider name).
 
           oauth_client_id: The OAuth Client ID. Required for integrations that use OAuth authentication.
 
@@ -181,6 +184,7 @@ class IntegrationsResource(SyncAPIResource):
             body=maybe_transform(
                 {
                     "is_using_test_credentials": is_using_test_credentials,
+                    "name": name,
                     "oauth_client_id": oauth_client_id,
                     "oauth_client_secret": oauth_client_secret,
                     "oauth_scopes": oauth_scopes,
@@ -400,6 +404,7 @@ class AsyncIntegrationsResource(AsyncAPIResource):
         integration: str,
         *,
         is_using_test_credentials: bool | NotGiven = NOT_GIVEN,
+        name: str | NotGiven = NOT_GIVEN,
         oauth_client_id: Optional[str] | NotGiven = NOT_GIVEN,
         oauth_client_secret: Optional[str] | NotGiven = NOT_GIVEN,
         oauth_scopes: List[str] | NotGiven = NOT_GIVEN,
@@ -415,6 +420,8 @@ class AsyncIntegrationsResource(AsyncAPIResource):
 
         Args:
           is_using_test_credentials: Whether the integration is using test credentials provided by Embed.
+
+          name: The display name of the integration (defaults to provider name).
 
           oauth_client_id: The OAuth Client ID. Required for integrations that use OAuth authentication.
 
@@ -440,6 +447,7 @@ class AsyncIntegrationsResource(AsyncAPIResource):
             body=await async_maybe_transform(
                 {
                     "is_using_test_credentials": is_using_test_credentials,
+                    "name": name,
                     "oauth_client_id": oauth_client_id,
                     "oauth_client_secret": oauth_client_secret,
                     "oauth_scopes": oauth_scopes,
