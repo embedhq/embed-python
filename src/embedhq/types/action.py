@@ -1,7 +1,10 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import builtins
 from typing import Dict, List, Optional
 from typing_extensions import Literal
+
+from pydantic import Field as FieldInfo
 
 from .._models import BaseModel
 
@@ -26,6 +29,9 @@ class Action(BaseModel):
 
     object: Literal["action"]
     """The object type, which is always `action`."""
+
+    schema_: Dict[str, builtins.object] = FieldInfo(alias="schema")
+    """The action schema."""
 
     slug: str
     """The unique slug of the action."""

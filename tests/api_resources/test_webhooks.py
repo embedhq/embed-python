@@ -105,6 +105,7 @@ class TestWebhooks:
         webhook = client.webhooks.update(
             webhook_id="wh_1a2b3c",
             events=["sync_run.succeeded", "sync_run.failed"],
+            is_enabled=True,
             url="https://my-app.com/webhook",
         )
         assert_matches_type(Webhook, webhook, path=["response"])
@@ -291,6 +292,7 @@ class TestAsyncWebhooks:
         webhook = await async_client.webhooks.update(
             webhook_id="wh_1a2b3c",
             events=["sync_run.succeeded", "sync_run.failed"],
+            is_enabled=True,
             url="https://my-app.com/webhook",
         )
         assert_matches_type(Webhook, webhook, path=["response"])
