@@ -40,6 +40,7 @@ class TestProxy:
             connected_account_id="connected_account_id",
             integration="integration",
             base_url_override="base_url_override",
+            response_type="arraybuffer",
             retries=0,
         )
         assert_matches_type(ProxyDeleteResponse, proxy, path=["response"])
@@ -100,6 +101,7 @@ class TestProxy:
             connected_account_id="connected_account_id",
             integration="integration",
             base_url_override="base_url_override",
+            response_type="arraybuffer",
             retries=0,
         )
         assert_matches_type(ProxyGetResponse, proxy, path=["response"])
@@ -159,6 +161,7 @@ class TestProxy:
             connected_account_id="connected_account_id",
             integration="integration",
             base_url_override="base_url_override",
+            response_type="arraybuffer",
             retries=0,
         )
         assert_matches_type(ProxyPostResponse, proxy, path=["response"])
@@ -221,6 +224,7 @@ class TestProxy:
             connected_account_id="connected_account_id",
             integration="integration",
             base_url_override="base_url_override",
+            response_type="arraybuffer",
             retries=0,
         )
         assert_matches_type(ProxyPutResponse, proxy, path=["response"])
@@ -287,6 +291,7 @@ class TestAsyncProxy:
             connected_account_id="connected_account_id",
             integration="integration",
             base_url_override="base_url_override",
+            response_type="arraybuffer",
             retries=0,
         )
         assert_matches_type(ProxyDeleteResponse, proxy, path=["response"])
@@ -347,6 +352,7 @@ class TestAsyncProxy:
             connected_account_id="connected_account_id",
             integration="integration",
             base_url_override="base_url_override",
+            response_type="arraybuffer",
             retries=0,
         )
         assert_matches_type(ProxyGetResponse, proxy, path=["response"])
@@ -406,6 +412,7 @@ class TestAsyncProxy:
             connected_account_id="connected_account_id",
             integration="integration",
             base_url_override="base_url_override",
+            response_type="arraybuffer",
             retries=0,
         )
         assert_matches_type(ProxyPostResponse, proxy, path=["response"])
@@ -468,6 +475,7 @@ class TestAsyncProxy:
             connected_account_id="connected_account_id",
             integration="integration",
             base_url_override="base_url_override",
+            response_type="arraybuffer",
             retries=0,
         )
         assert_matches_type(ProxyPutResponse, proxy, path=["response"])
