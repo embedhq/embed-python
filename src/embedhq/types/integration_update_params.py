@@ -12,6 +12,9 @@ class IntegrationUpdateParams(TypedDict, total=False):
     is_using_test_credentials: bool
     """Whether the integration is using test credentials provided by Embed."""
 
+    name: str
+    """The display name of the integration (defaults to provider name)."""
+
     oauth_client_id: Optional[str]
     """The OAuth Client ID. Required for integrations that use OAuth authentication."""
 

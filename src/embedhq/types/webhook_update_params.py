@@ -12,5 +12,8 @@ class WebhookUpdateParams(TypedDict, total=False):
     events: List[str]
     """The events to send to the webhook."""
 
+    is_enabled: bool
+    """Whether the webhook is enabled."""
+
     url: str
     """The URL to send events to."""

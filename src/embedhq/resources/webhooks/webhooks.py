@@ -130,6 +130,7 @@ class WebhooksResource(SyncAPIResource):
         webhook_id: str,
         *,
         events: List[str] | NotGiven = NOT_GIVEN,
+        is_enabled: bool | NotGiven = NOT_GIVEN,
         url: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -143,6 +144,8 @@ class WebhooksResource(SyncAPIResource):
 
         Args:
           events: The events to send to the webhook.
+
+          is_enabled: Whether the webhook is enabled.
 
           url: The URL to send events to.
 
@@ -161,6 +164,7 @@ class WebhooksResource(SyncAPIResource):
             body=maybe_transform(
                 {
                     "events": events,
+                    "is_enabled": is_enabled,
                     "url": url,
                 },
                 webhook_update_params.WebhookUpdateParams,
@@ -318,6 +322,7 @@ class AsyncWebhooksResource(AsyncAPIResource):
         webhook_id: str,
         *,
         events: List[str] | NotGiven = NOT_GIVEN,
+        is_enabled: bool | NotGiven = NOT_GIVEN,
         url: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -331,6 +336,8 @@ class AsyncWebhooksResource(AsyncAPIResource):
 
         Args:
           events: The events to send to the webhook.
+
+          is_enabled: Whether the webhook is enabled.
 
           url: The URL to send events to.
 
@@ -349,6 +356,7 @@ class AsyncWebhooksResource(AsyncAPIResource):
             body=await async_maybe_transform(
                 {
                     "events": events,
+                    "is_enabled": is_enabled,
                     "url": url,
                 },
                 webhook_update_params.WebhookUpdateParams,

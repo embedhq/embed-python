@@ -44,6 +44,7 @@ class SessionTokensResource(SyncAPIResource):
         integration: str,
         configuration: Optional[Dict[str, object]] | NotGiven = NOT_GIVEN,
         expires_in_mins: int | NotGiven = NOT_GIVEN,
+        language: Optional[str] | NotGiven = NOT_GIVEN,
         metadata: Optional[Dict[str, object]] | NotGiven = NOT_GIVEN,
         name: Optional[str] | NotGiven = NOT_GIVEN,
         redirect_url: Optional[str] | NotGiven = NOT_GIVEN,
@@ -65,6 +66,8 @@ class SessionTokensResource(SyncAPIResource):
           configuration: Configuration options to assign to the connected account.
 
           expires_in_mins: The number of minutes until the session token expires.
+
+          language: The language to use for the authorization flow.
 
           metadata: Additional metadata to assign to the connected account.
 
@@ -88,6 +91,7 @@ class SessionTokensResource(SyncAPIResource):
                     "integration": integration,
                     "configuration": configuration,
                     "expires_in_mins": expires_in_mins,
+                    "language": language,
                     "metadata": metadata,
                     "name": name,
                     "redirect_url": redirect_url,
@@ -229,6 +233,7 @@ class AsyncSessionTokensResource(AsyncAPIResource):
         integration: str,
         configuration: Optional[Dict[str, object]] | NotGiven = NOT_GIVEN,
         expires_in_mins: int | NotGiven = NOT_GIVEN,
+        language: Optional[str] | NotGiven = NOT_GIVEN,
         metadata: Optional[Dict[str, object]] | NotGiven = NOT_GIVEN,
         name: Optional[str] | NotGiven = NOT_GIVEN,
         redirect_url: Optional[str] | NotGiven = NOT_GIVEN,
@@ -250,6 +255,8 @@ class AsyncSessionTokensResource(AsyncAPIResource):
           configuration: Configuration options to assign to the connected account.
 
           expires_in_mins: The number of minutes until the session token expires.
+
+          language: The language to use for the authorization flow.
 
           metadata: Additional metadata to assign to the connected account.
 
@@ -273,6 +280,7 @@ class AsyncSessionTokensResource(AsyncAPIResource):
                     "integration": integration,
                     "configuration": configuration,
                     "expires_in_mins": expires_in_mins,
+                    "language": language,
                     "metadata": metadata,
                     "name": name,
                     "redirect_url": redirect_url,

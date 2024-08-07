@@ -15,6 +15,9 @@ class SessionToken(BaseModel):
     configuration: Optional[Dict[str, object]] = None
     """Configuration options to assign to the connected account."""
 
+    connect_url: str
+    """The URL used to connect an account."""
+
     connected_account_id: str
     """The unique identifier to assign to the connected account."""
 
@@ -27,6 +30,9 @@ class SessionToken(BaseModel):
     integration: str
     """The unique slug of the integration to connect the account to."""
 
+    language: Optional[str] = None
+    """The language to use for the authorization flow."""
+
     metadata: Optional[Dict[str, object]] = None
     """Additional metadata to assign to the connected account."""
 
@@ -38,6 +44,3 @@ class SessionToken(BaseModel):
 
     redirect_url: Optional[str] = None
     """The URL to redirect to after the authorization flow is complete."""
-
-    url: str
-    """The magic link used to connect an account."""
