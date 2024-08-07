@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from typing import Dict
-from typing_extensions import Required, TypedDict
+from typing_extensions import Literal, Required, TypedDict
 
 __all__ = ["ProxyPutParams"]
 
@@ -21,6 +21,9 @@ class ProxyPutParams(TypedDict, total=False):
     """The slug of the integration to use for the request."""
 
     base_url_override: str
+    """Override the base URL for the request."""
+
+    response_type: Literal["arraybuffer", "json", "text", "stream"]
     """Override the base URL for the request."""
 
     retries: int
